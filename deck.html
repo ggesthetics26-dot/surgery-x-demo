@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head><meta name="robots" content="noindex,nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Surgery X · מצגת</title>
+<link rel="icon" href="brand/emblem.svg">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0C2A35;--petrol:#2C5F6E;--gold:#B08A45;--bronze:#9A7B4F;--champ:#D9C79E;--ivory:#F6F4EF;--ink:#0C2A35;--ink2:#4A5D65;--line:rgba(12,42,53,.12)}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:#0B1F27;overflow:hidden}
+body{font-family:'Heebo',Arial,sans-serif;color:var(--ink)}
+.deck{position:fixed;left:50%;top:50%;width:1920px;height:1080px;transform-origin:center}
+.sl{position:absolute;inset:0;background:var(--ivory);padding:110px 130px 120px;display:flex;flex-direction:column;justify-content:center;opacity:0;pointer-events:none;transition:opacity .45s;overflow:hidden}
+.sl.on{opacity:1;pointer-events:auto}
+.sl.dark{background:var(--navy);color:#F3EEE4}
+.k{font-size:22px;font-weight:700;letter-spacing:.32em;color:var(--gold);text-transform:uppercase;margin-bottom:22px}
+.dark .k{color:var(--champ)}
+h1{font-size:96px;font-weight:800;line-height:1.08;margin:0 0 28px}
+h2{font-size:68px;font-weight:800;line-height:1.12;margin:0 0 26px}
+.lead{font-size:32px;line-height:1.5;color:var(--ink2);max-width:1640px;margin:0}
+.dark .lead{color:#D8D2C4}
+.num{position:absolute;bottom:44px;left:130px;font-size:18px;color:var(--ink2);direction:ltr;letter-spacing:.1em}
+.dark .num{color:#9DB0B6}
+.brandline{position:absolute;bottom:44px;right:130px;font-size:18px;font-weight:800;letter-spacing:.3em;direction:ltr;color:var(--ink2)}
+.brandline b{color:var(--gold)}
+.dark .brandline{color:#9DB0B6}
+.wm{direction:ltr;font-weight:800;letter-spacing:.3em;font-size:44px}
+.wm b{color:var(--gold)}
+/* cover */
+.cover .bgimg{position:absolute;left:-40px;top:50%;transform:translateY(-50%);height:1180px;opacity:.16;filter:sepia(.4)}
+.cover .em{width:150px;height:150px;margin-bottom:36px}
+/* cards */
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:34px;margin-top:70px}
+.card{background:#fff;border-radius:26px;padding:42px 40px;box-shadow:0 24px 60px -34px rgba(12,42,53,.35)}
+.card .n{font-size:22px;font-weight:700;color:var(--gold);letter-spacing:.2em;direction:ltr;text-align:right}
+.card h3{font-size:36px;margin:14px 0 14px}
+.card p{font-size:25px;line-height:1.5;color:var(--ink2);margin:0}
+/* screen slides */
+.split{display:grid;grid-template-columns:640px 1fr;gap:70px;align-items:center;flex:1}
+.split .txt h2{font-size:60px}
+.pts{list-style:none;margin:34px 0 0;padding:0}
+.pts li{display:flex;gap:18px;align-items:flex-start;font-size:28px;line-height:1.42;margin-bottom:24px}
+.pts li i{flex:none;width:40px;height:40px;border-radius:50%;background:var(--gold);color:#fff;font-style:normal;font-weight:800;font-size:20px;display:grid;place-items:center;margin-top:2px}
+.note{margin-top:20px;font-size:23px;color:var(--gold);font-weight:500}
+.tag{display:inline-block;font-size:19px;font-weight:700;letter-spacing:.24em;direction:ltr;color:#fff;background:var(--navy);border-radius:999px;padding:7px 18px;margin-bottom:22px}
+.tag.c1{background:var(--gold)}.tag.c2{background:var(--petrol)}.tag.c3{background:var(--bronze)}.tag.c4{background:var(--navy)}
+.lap{position:relative;background:#1A1F22;border-radius:22px;padding:16px;box-shadow:0 50px 90px -40px rgba(12,42,53,.55)}
+.lap img{display:block;width:100%;border-radius:8px}
+.lap:after{content:'';position:absolute;left:-5%;right:-5%;bottom:-22px;height:16px;background:#D5D8DA;border-radius:0 0 14px 14px}
+.duo{position:relative;height:760px}
+.duo .lap{position:absolute;width:880px}
+.duo .lap.a{top:0;left:0}.duo .lap.b{bottom:0;right:0;width:760px}
+.phones{display:flex;gap:46px;justify-content:center;align-items:center}
+.ph{width:330px;background:#111;border-radius:52px;padding:14px;box-shadow:0 50px 90px -40px rgba(12,42,53,.6)}
+.ph img{display:block;width:100%;border-radius:40px}
+.ph.up{transform:translateY(-34px)}
+.mix{display:flex;gap:40px;align-items:center}
+.mix .lap{flex:1}
+.mix .ph{width:280px;flex:none}
+/* circles */
+.rings{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;margin-top:60px}
+.ring{border-radius:26px;padding:34px 30px;background:#fff;border-top:6px solid var(--gold);box-shadow:0 24px 60px -34px rgba(12,42,53,.35)}
+.ring.c2{border-color:var(--petrol)}.ring.c3{border-color:var(--bronze)}.ring.c4{border-color:var(--navy)}
+.ring .rn{font-size:20px;font-weight:700;color:var(--ink2);letter-spacing:.1em}
+.ring h3{font-size:36px;margin:8px 0 20px}
+.ring ul{list-style:none;margin:0;padding:0}
+.ring li{font-size:23px;line-height:1.35;margin-bottom:12px;color:var(--ink2)}
+.ring li b{display:inline-block;min-width:118px;direction:ltr;text-align:right;color:var(--ink);font-weight:800;letter-spacing:.06em;font-size:20px;margin-left:10px}
+.flow{margin-top:44px;font-size:27px;line-height:1.5;color:var(--ink2);max-width:1500px}
+.flow b{color:var(--ink)}
+/* table */
+.tbl{width:100%;border-collapse:collapse;margin-top:50px;font-size:26px}
+.tbl th{text-align:right;font-size:21px;letter-spacing:.12em;color:var(--gold);font-weight:700;padding:0 20px 18px;border-bottom:2px solid var(--gold)}
+.tbl td{padding:24px 20px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.4}
+.tbl td:first-child{font-weight:800;width:330px}
+.tbl td:last-child{direction:ltr;text-align:right;color:var(--petrol);font-weight:700;width:420px}
+.grid6{display:grid;grid-template-columns:repeat(3,1fr);gap:28px 40px;margin-top:60px}
+.grid6 div{border-top:2px solid var(--champ);padding-top:20px;font-size:27px;line-height:1.45}
+.grid6 div b{display:block;font-size:32px;margin-bottom:8px}
+.dark .grid6 div{border-color:rgba(217,199,158,.5)}
+.dark .grid6 b{color:#fff}
+.end{display:grid;place-items:center;text-align:center;flex:1}
+.end .em{width:130px;height:130px;margin:0 auto 34px}
+/* controls */
+.nav{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);display:flex;gap:10px;z-index:5;opacity:.0;transition:opacity .3s}
+body:hover .nav{opacity:1}
+.nav button{border:1px solid rgba(217,199,158,.45);background:rgba(11,31,39,.7);color:#F3EEE4;border-radius:999px;height:40px;min-width:40px;padding:0 16px;font:inherit;font-size:14px;cursor:pointer}
+@media print{
+  @page{size:1920px 1080px;margin:0}
+  html,body{overflow:visible;height:auto;background:none}
+  .deck{position:static;transform:none!important;width:1920px;height:auto}
+  .sl{position:relative;opacity:1;width:1920px;height:1080px;page-break-after:always;break-after:page}
+  .nav{display:none}
+}
+</style>
+</head>
+<body>
+<div class="deck" id="deck">
+
+<section class="sl dark cover">
+  <img class="bgimg" src="ops/art/vestorso.webp" alt="">
+  <div style="position:relative;max-width:1180px">
+    <img class="em" src="brand/emblem.svg" alt="">
+    <div class="wm" style="margin-bottom:40px">SURGERY <b>X</b></div>
+    <div class="k">The operating system of the surgical department</div>
+    <h1>מהשיבוץ של הבוקר ועד המכתב לרופא המשפחה. מערכת אחת.</h1>
+    <p class="lead" style="max-width:1100px">ליבה אחת שמנהלת את כל המערך הכירורגי, ומסביבה אפליקציות שמחברות את המטופל, את הקהילה, את הפתולוגיה ואת ההכשרה.</p>
+  </div>
+</section>
+
+<section class="sl">
+  <div class="k">הבעיה</div>
+  <h2>המערך הכירורגי עובד על וואטסאפ, אקסל וזיכרון</h2>
+  <p class="lead">המידע קיים, אבל הוא מפוזר בין עשרה מקומות. ומה שנופל בין הכיסאות הוא בדיוק מה שהכי חשוב.</p>
+  <div class="cards">
+    <div class="card"><div class="n">01</div><h3>תכנון שגוזל שעות</h3><p>תוכנית שבועית, תורנויות, כוננויות וחדרי ניתוח נבנים ידנית, ומשתנים כל יום.</p></div>
+    <div class="card"><div class="n">02</div><h3>מטופל שלא יודע מה קורה</h3><p>מה יש לי, מה התוכנית, מתי אשתחרר. שביעות רצון המטופלים נמדדת, מדורגת ומתוגמלת.</p></div>
+    <div class="card"><div class="n">03</div><h3>דברים שנופלים</h3><p>תשובת פתולוגיה שלא נמסרה, מכתב שלא הגיע לרופא המשפחה, מתמחה שלא נפגש עם החונך חודשיים.</p></div>
+  </div>
+</section>
+
+<section class="sl">
+  <div class="k">הפתרון</div>
+  <h2>ליבה אחת. 13 אפליקציות שמדברות זו עם זו.</h2>
+  <div class="rings">
+    <div class="ring"><div class="rn">מעגל 1</div><h3>המערך</h3><ul><li><b>CORE</b>תוכנית שבועית, תורנויות, צוות</li><li><b>PULSE</b>תמונת מצב והתראות</li><li><b>ORBIT</b>תכנון ניתוחי</li><li><b>FLOW</b>בנק הניתוחים</li><li><b>FORGE</b>המתמחים</li><li><b>GATE</b>ועדות קבלה</li><li><b>RELAY</b>הודעות ואוטומציות</li><li><b>WARD</b>הסיעוד</li></ul></div>
+    <div class="ring c2"><div class="rn">מעגל 2</div><h3>בתוך בית החולים</h3><ul><li><b>TRACE</b>פתולוגיה</li><li><b>MIRROR</b>סיבוכים ו־M&amp;M</li><li><b>CAMPUS</b>סטודנטים</li><li><b>STAGE</b>סטאז׳רים</li></ul></div>
+    <div class="ring c3"><div class="rn">מעגל 3</div><h3>המטופל</h3><ul><li><b>NEST</b>קישור אישי בטלפון: מה יש לי, איפה אני בדרך ושאלה לצוות</li></ul></div>
+    <div class="ring c4"><div class="rn">מעגל 4</div><h3>הקהילה</h3><ul><li><b>LUMEN</b>רופא המשפחה מעודכן באותו יום, והפניה חזרה למערך</li></ul></div>
+  </div>
+  <p class="flow">הכוח הוא בזרימה: <b>תוכנית ב־ORBIT</b> עוברת לבנק, <b>ניתוח ששובץ</b> שולח למטופל הכנות, <b>ניתוח שבוצע</b> פותח מעקב פתולוגיה, ו<b>תשובה</b> מגיעה לרופא המשפחה רק אחרי שיחה עם המטופל.</p>
+</section>
+
+<section class="sl"><div class="split">
+  <div class="txt"><span class="tag c1">PULSE</span><h2>כל המערך במבט אחד</h2>
+    <ul class="pts"><li><i>1</i>ציון בריאות לכל תחום: בנק הניתוחים, פתולוגיה, תורנויות ומתמחים</li><li><i>2</i>מה דחוף היום, לפי סדר עדיפות</li><li><i>3</i>שאלה בשפה חופשית: "מי תורן הלילה?"</li></ul>
+    <div class="note">גם כמסך קיר במחלקה, מתעדכן כל 30 שניות.</div></div>
+  <div class="lap"><img src="film/shots/orbit.jpg" alt=""></div>
+</div></section>
+
+<section class="sl"><div class="split">
+  <div class="txt"><span class="tag c1">CORE</span><h2>התורנויות של החודש נבנות בדקות</h2>
+    <ul class="pts"><li><i>1</i>שיבוץ אוטומטי לפי כל החוקים של המערך</li><li><i>2</i>חלוקה הוגנת של סופי שבוע וחגים</li><li><i>3</i>תוכנית שבועית, חדרי ניתוח, בקשות וחופשות במקום אחד</li><li><i>4</i>כל שינוי מגיע לטלפון של כל רופא</li></ul></div>
+  <div class="lap"><img src="film/shots/duty.jpg" alt=""></div>
+</div></section>
+
+<section class="sl"><div class="split">
+  <div class="txt"><span class="tag c1">FLOW</span><h2>אף מטופל לא נשכח ברשימה</h2>
+    <ul class="pts"><li><i>1</i>כמה ממתינים בכל צוות ומי כבר עבר את היעד</li><li><i>2</i>זמן ההמתנה מול היעד לכל עדיפות</li><li><i>3</i>ההכנות לניתוח ושיבוץ ישיר לחדר בתוכנית השבועית</li></ul>
+    <div class="note">שיבוץ שולח למטופל קישור Nest עם ההכנות.</div></div>
+  <div class="lap"><img src="film/shots/bank.jpg" alt=""></div>
+</div></section>
+
+<section class="sl"><div class="split">
+  <div class="txt"><span class="tag c1">ORBIT · חדש</span><h2>תוכנית ניתוח לפי הספרות העדכנית</h2>
+    <ul class="pts"><li><i>1</i>בקע דופן בטן ובקע מפשעתי: סיווג EHS על מפה אנטומית, כולל משולשי הסכנה במפשעה</li><li><i>2</i>גישה, רשת, קיבוע וסגירה לפי ההנחיות האירופיות והבינלאומיות (EHS, HerniaSurge), עם המקורות</li><li><i>3</i>ציוד לחדר הניתוח ומי מהמתמחים מנתח, עם יעד עצמאות</li><li><i>4</i>תוכנית מאושרת עוברת לתיק בבנק הניתוחים</li></ul>
+    <div class="note">תומך החלטה. ההחלטה של המנתח. בהמשך: כיס מרה ומעי, ובתוך חדר הניתוח.</div></div>
+  <div class="lap"><img src="film/shots/plan.jpg" alt=""></div>
+</div></section>
+
+<section class="sl"><div class="split">
+  <div class="txt"><span class="tag c1">FORGE</span><h2>המתמחים, מהיום הראשון ועד הבחינה</h2>
+    <ul class="pts"><li><i>1</i>לוג ניתוחים מול יעדי ההתמחות</li><li><i>2</i>הבכיר מאשר מהטלפון ומדרג עצמאות (Zwisch)</li><li><i>3</i>תיק מתמחה: בחינות, קורסים, מחקר, משובים וחונכות</li></ul></div>
+  <div class="mix"><div class="lap"><img src="film/shots/forge.jpg" alt=""></div><div class="ph"><img src="film/shots/doctor-approve.jpg" alt=""></div></div>
+</div></section>
+
+<section class="sl"><div class="split">
+  <div class="txt"><span class="tag c1">WARD · חדש</span><h2>הסיעוד באותה מערכת</h2>
+    <ul class="pts"><li><i>1</i>לוח המיטות של המחלקה: מי לניתוח, מי משתחרר ומי צריך תשומת לב</li><li><i>2</i>מטלות לכל משמרת נבנות לבד; כאב 7 ושאלה ב־Nest הופכים למטלה לאחות</li><li><i>3</i>מסירת משמרת דיגיטלית (SBAR), עם הדפסה</li><li><i>4</i>מסך קיר במחלקה עם חדרי הניתוח של היום</li></ul></div>
+  <div class="duo"><div class="lap a"><img src="film/shots/ward.jpg" alt=""></div><div class="lap b"><img src="film/shots/wall.jpg" alt=""></div></div>
+</div></section>
+
+<section class="sl"><div class="split">
+  <div class="txt"><span class="tag c2">TRACE · MIRROR</span><h2>כל דגימה עד התשובה. לומדים מכל סיבוך.</h2>
+    <ul class="pts"><li><i>1</i>רישום דגימה בסריקת המדבקה ומעקב עד שהתשובה נמסרה למטופל</li><li><i>2</i>ישיבה רב־תחומית בלי לחפש תיקים</li><li><i>3</i>סיבוכים לפי Clavien-Dindo, ישיבת M&amp;M ולקחים</li></ul></div>
+  <div class="duo"><div class="lap a"><img src="film/shots/trace-scan.jpg" alt=""></div><div class="lap b"><img src="film/shots/mirror.jpg" alt=""></div></div>
+</div></section>
+
+
+<section class="sl"><div class="split">
+  <div class="txt"><span class="tag c2">CAMPUS · STAGE</span><h2>הוראה, סטודנטים וסטאז׳רים</h2>
+    <ul class="pts"><li><i>1</i>קבוצות סטודנטים, תוכנית שבועית ושיבוץ מלמדים</li><li><i>2</i>סבב הסטאז׳רים: שיבוץ, תורנויות, דיווח ונוכחות</li><li><i>3</i>משוב ושיחות, ואפליקציה אישית לכל סטאז׳ר</li></ul></div>
+  <div class="duo"><div class="lap a"><img src="film/shots/campus.jpg" alt=""></div><div class="lap b"><img src="film/shots/stage.jpg" alt=""></div></div>
+</div></section>
+
+<section class="sl"><div class="split">
+  <div class="txt"><span class="tag c3">NEST</span><h2>המטופל יודע מה קורה איתו</h2>
+    <ul class="pts"><li><i>1</i>קישור אישי בטלפון, בלי להתקין כלום</li><li><i>2</i>איפה אני בתהליך ומה הצעד הבא</li><li><i>3</i>הסבר בשפה פשוטה, טקסט גדול והקראה בקול, בכמה שפות</li><li><i>4</i>שאלה לצוות, בלי לחפש מי במשמרת</li></ul>
+    <div class="note">הצוות מחליט מה נחשף ומתי.</div></div>
+  <div class="phones"><div class="ph up"><img src="film/shots/lumen-1.jpg" alt=""></div><div class="ph"><img src="film/shots/lumen-3.jpg" alt=""></div></div>
+</div></section>
+
+<section class="sl"><div class="split">
+  <div class="txt"><span class="tag c4">LUMEN</span><h2>רופאת המשפחה, סוף סוף בתמונה</h2>
+    <ul class="pts"><li><i>1</i>המטופלים שלה שמאושפזים עכשיו</li><li><i>2</i>איפה כל אחד בתהליך ומה נשלח אליה מהמערך</li><li><i>3</i>שיחה עם הצוות והפניה חזרה למערך</li></ul>
+    <div class="note">היום אין שום ערוץ בין המערך לרופא המשפחה.</div></div>
+  <div class="lap"><img src="film/shots/link-gp.jpg" alt=""></div>
+</div></section>
+
+<section class="sl dark">
+  <div class="k">למה זה שונה</div>
+  <h2>נבנה מתוך המערך, לא בשבילו</h2>
+  <div class="grid6">
+    <div><b>מהשטח</b>פותח מתוך עבודה יומיומית במערך כירורגי, על ידי רופא, ונבדק ברמת כל כפתור.</div>
+    <div><b>הצוות בשליטה</b>"גז וברקס" לכל סוג מידע שנמסר למטופל.</div>
+    <div><b>בלי תשתית יקרה</b>דפדפן וטלפון, ומתחבר למה שקיים.</div>
+    <div><b>נגיש</b>עברית, ערבית, רוסית ואנגלית. טקסט גדול והקראה.</div>
+    <div><b>מודולרי</b>מתחילים מאפליקציה אחת ומתרחבים.</div>
+    <div><b>כל המערך</b>מנהלים, מתמחים, סיעוד, סטאז׳רים, סטודנטים ומזכירות.</div>
+  </div>
+</section>
+
+<section class="sl">
+  <div class="k">המודל</div>
+  <h2>רישיון למחלקה, הרחבה לבית החולים</h2>
+  <p class="lead">מתחילים בליבה במחלקה אחת, מוסיפים אפליקציות לפי הצורך ומתרחבים למחלקות ולבתי חולים נוספים.</p>
+  <table class="tbl"><tr><th>מי משלם</th><th>למה</th><th>מה מקבל</th></tr>
+    <tr><td>בתי חולים</td><td>שביעות רצון מטופלים ומדדי איכות נמדדים ומתוגמלים; זמן של צוות בכיר</td><td>Core · Pulse · ORBIT · Ward · Nest · Trace · Mirror</td></tr>
+    <tr><td>בתי חולים פרטיים</td><td>חוויית המטופל היא חלק מהמוצר</td><td>Nest · Flow · ORBIT</td></tr>
+    <tr><td>ארגוני בריאות עם קהילה</td><td>הרצף בין האשפוז לקהילה וחזרה</td><td>Lumen</td></tr>
+    <tr><td>תוכניות התמחות</td><td>תיעוד, עצמאות וחונכות לוועדות</td><td>Forge · Stage · Campus</td></tr>
+  </table>
+</section>
+
+<section class="sl">
+  <div class="k">הצעד הבא</div>
+  <h2>פיילוט: מחלקה אחת, שלושה חודשים, שלושה מדדים</h2>
+  <p class="lead">מגדירים מראש מה מודדים, ומציגים מספרים בסוף.</p>
+  <div class="cards">
+    <div class="card"><div class="n">01</div><h3>חוויית המטופל</h3><p>שאלון קצר לפני ואחרי, ושיעור המטופלים שפתחו את Nest.</p></div>
+    <div class="card"><div class="n">02</div><h3>זמן של הצוות</h3><p>שעות תכנון בשבוע, ושיחות טלפון שנחסכו.</p></div>
+    <div class="card"><div class="n">03</div><h3>שום דבר לא נופל</h3><p>תשובות פתולוגיה שנמסרו בזמן, ומכתבים שהגיעו לקהילה.</p></div>
+  </div>
+</section>
+
+<section class="sl dark"><div class="end"><div>
+  <img class="em" src="brand/emblem.svg" alt="">
+  <div class="wm" style="margin-bottom:44px">SURGERY <b>X</b></div>
+  <h1 style="font-size:84px">בואו נראה את זה עובד</h1>
+  <p class="lead" style="margin:0 auto">הדגמה חיה על מערך כירורגי בדוי. כל השמות והנתונים בהדגמה בדויים.</p>
+</div></div></section>
+
+</div>
+<div class="nav"><button id="nx">הבאה ›</button><button id="pv">‹ הקודמת</button><button id="fs">מסך מלא</button><button id="pr">PDF</button><a href="index.html"><button>דף הבית</button></a></div>
+<script>
+const SL = [...document.querySelectorAll('.sl')], deck = document.getElementById('deck');
+SL.forEach((s, i) => { if (!s.classList.contains('cover')) s.insertAdjacentHTML('beforeend', '<div class="num">' + (i + 1) + ' / ' + SL.length + '</div><div class="brandline">SURGERY <b>X</b></div>'); });
+let cur = Math.max(0, Math.min(SL.length - 1, (+location.hash.slice(1) || 1) - 1));
+function show(i) { cur = Math.max(0, Math.min(SL.length - 1, i)); SL.forEach((s, k) => s.classList.toggle('on', k === cur)); history.replaceState(null, '', '#' + (cur + 1)); }
+function fit() { const k = Math.min(innerWidth / 1920, innerHeight / 1080); deck.style.transform = 'translate(-50%,-50%) scale(' + k + ')'; }
+addEventListener('resize', fit); fit(); show(cur);
+addEventListener('keydown', e => { if (['ArrowLeft', 'PageDown', ' ', 'Enter'].indexOf(e.key) >= 0) { e.preventDefault(); show(cur + 1); } else if (['ArrowRight', 'PageUp', 'Backspace'].indexOf(e.key) >= 0) { e.preventDefault(); show(cur - 1); } else if (e.key === 'Home') show(0); else if (e.key === 'End') show(SL.length - 1); else if (e.key === 'f') document.documentElement.requestFullscreen(); });
+deck.addEventListener('click', e => show(cur + (e.clientX < innerWidth / 2 ? 1 : -1)));
+let tx = null; addEventListener('touchstart', e => { tx = e.touches[0].clientX; }); addEventListener('touchend', e => { if (tx == null) return; const d = e.changedTouches[0].clientX - tx; if (Math.abs(d) > 40) show(cur + (d > 0 ? 1 : -1)); tx = null; });
+document.getElementById('nx').onclick = () => show(cur + 1); document.getElementById('pv').onclick = () => show(cur - 1);
+document.getElementById('fs').onclick = () => document.documentElement.requestFullscreen(); document.getElementById('pr').onclick = () => print();
+</script>
+</body>
+</html>

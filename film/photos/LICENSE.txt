@@ -1,0 +1,2 @@
+Photos: Unsplash (unsplash.com/license), free to use, commercial included, no attribution required.
+Music (../music.mp3): two Pixabay tracks (pixabay.com/service/license-summary), mixed low: "Documentary" by Tatamusic under the opening and the problem, then a crossfade at the platform into "Inspiring Cinematic" by lNPLUSMUSIC (looped with crossfades). Both are Content ID registered: fine for the local demo; uploading the film to YouTube may raise a claim that the track owner clears. Sources in ../music-src (not in git).

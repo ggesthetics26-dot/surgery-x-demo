@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head><meta name="robots" content="noindex,nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Surgery X · יום אחד במערך</title>
+<link rel="icon" href="brand/emblem.svg">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:#0B1F27;overflow:hidden}
+body{font-family:'Heebo',Arial,sans-serif;color:#0C2A35}
+#cv,#vid{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);background:#F6F4EF}
+.ui{position:fixed;inset-inline:0;bottom:0;padding:18px 26px 22px;display:flex;align-items:center;gap:14px;background:linear-gradient(0deg,rgba(11,31,39,.8),rgba(11,31,39,0));transition:opacity .5s;z-index:5}
+.ui.hide{opacity:0}
+.ui button,.ui a{border:1px solid rgba(217,199,158,.45);background:rgba(11,31,39,.55);color:#F3EEE4;border-radius:999px;height:38px;min-width:38px;padding:0 14px;font:inherit;font-size:13.5px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center}
+.bar{flex:1;height:30px;position:relative;cursor:pointer;direction:ltr}
+.bar .tr{position:absolute;left:0;right:0;top:14px;height:2px;background:rgba(243,238,228,.25)}
+.bar .fi{position:absolute;left:0;top:14px;height:2px;background:#D9C79E}
+.bar i{position:absolute;top:10px;width:1px;height:10px;background:rgba(243,238,228,.35)}
+.time{font-variant-numeric:tabular-nums;font-size:13px;color:#E8E2D4;min-width:84px;text-align:center;direction:ltr}
+.start{position:fixed;inset:0;z-index:10;display:grid;place-items:center;cursor:pointer;background:#F6F4EF}
+.start .in{text-align:center}
+.start .w{font-weight:800;letter-spacing:.3em;font-size:40px;direction:ltr;padding-left:.3em;color:#0C2A35}
+.start .w b{color:#B08A45}
+.start .s{color:#4A5D65;margin:8px 0 34px;font-size:18px}
+.start .play{width:92px;height:92px;border-radius:50%;background:#0C2A35;display:grid;place-items:center;margin:0 auto;box-shadow:0 20px 50px -20px rgba(12,42,53,.6);transition:transform .3s}
+.start:hover .play{transform:scale(1.06)}
+.start .play svg{width:28px;height:28px;margin-left:5px}
+.start .hint{margin-top:20px;font-size:13px;color:#7A878D}
+.endc{position:fixed;left:0;right:0;bottom:12vh;z-index:6;display:none;justify-content:center;gap:12px}
+.endc a,.endc button{font:inherit;font-size:15px;border-radius:999px;padding:11px 22px;border:1px solid #0C2A35;background:#fff;color:#0C2A35;text-decoration:none;cursor:pointer}
+.endc a.pri{background:#0C2A35;color:#fff}
+.back{position:fixed;top:16px;inset-inline-start:18px;z-index:6;color:#F3EEE4;font-size:13px;text-decoration:none;border:1px solid rgba(217,199,158,.45);border-radius:999px;padding:7px 14px;background:rgba(11,31,39,.5);transition:opacity .5s}
+.ui.hide~.back{opacity:0}
+</style>
+</head>
+<body>
+<canvas id="cv" width="1920" height="1080"></canvas>
+<video id="vid" playsinline preload="auto" style="display:none"></video>
+<audio id="mus" src="film/music.mp3" preload="auto"></audio>
+<div class="ui" id="ui"><button id="bPlay">❚❚</button><button id="bSnd" title="מוזיקה">♪</button><div class="time" id="tm">0:00 / 0:00</div><div class="bar" id="bar"><div class="tr"></div><div class="fi" id="fi"></div></div><button id="bFs">מסך מלא</button></div>
+<a class="back" href="index.html">← דף הבית</a>
+<div class="start" id="start"><div class="in"><div class="w">SURGERY <b>X</b></div><div class="s">יום אחד במערך · סרט קצר</div><div class="play"><svg viewBox="0 0 24 24" fill="#fff"><path d="M6 4l14 8-14 8z"/></svg></div><div class="hint">כשתי דקות · עם מוזיקה · לחיצה בכל מקום</div></div></div>
+<div class="endc" id="endc"><a class="pri" href="index.html">להדגמה החיה</a><button id="bAgain">לצפות שוב</button></div>
+<script>
+const cv = document.getElementById('cv'), X = cv.getContext('2d'), W = 1920, H = 1080;
+const C = { navy: '#0C2A35', navy2: '#1C4250', petrol: '#2C5F6E', gold: '#B08A45', champ: '#D9C79E', ivory: '#F6F4EF', ink: '#0C2A35', ink2: '#4A5D65', mute: '#7A878D', red: '#A3402E', white: '#FFFFFF' };
+const F = "'Heebo', Arial, sans-serif";
+const Q = new URLSearchParams(location.search);
+// render scale: ?res=2 draws the same 1920x1080 film at 3840x2160
+const RS = +Q.get('res') || 1; if (RS !== 1) { cv.width = W * RS; cv.height = H * RS; }
+
+// helpers: easing, timing and drawing; every frame is a pure function of time
+function rng(s) { return function () { s = s + 0x6D2B79F5 | 0; let t = Math.imul(s ^ s >>> 15, 1 | s); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+const cl = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
+const eo = t => 1 - Math.pow(1 - cl(t), 3), eio = t => { t = cl(t); return t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; };
+const seg = (t, a, b) => cl((t - a) / (b - a)), lerp = (a, b, k) => a + (b - a) * k;
+const mk = (w, h) => { const c = document.createElement('canvas'); c.width = w; c.height = h; return c; };
+const IMG = {}, PH = {}, PL = {};
+const SHOTS = ['trace-scan', 'orbit', 'plan', 'plan-kit', 'bank', 'duty', 'link-gp', 'lumen-1', 'lumen-3', 'doctor-app', 'doctor-approve', 'trace', 'mirror', 'forge', 'gate', 'stage', 'campus', 'wall'];
+const PHOTOS = ['chief-young', 'nurse', 'lab', 'teach', 'or-team', 'stress', 'morning-hall', 'chief', 'secretary', 'patient', 'senior', 'gp', 'night', 'or-bright', 'ward'];
+const load = src => new Promise(r => { const i = new Image(); i.onload = () => r(i); i.onerror = () => r(null); i.src = src; });
+function inkify(img) { const c = mk(img.width, img.height), x = c.getContext('2d'); x.drawImage(img, 0, 0); const d = x.getImageData(0, 0, c.width, c.height), p = d.data; for (let i = 0; i < p.length; i += 4) { const l = Math.max(p[i], p[i + 1], p[i + 2]) / 255 * p[i + 3] / 255; p[i] = 40; p[i + 1] = 34; p[i + 2] = 28; p[i + 3] = Math.pow(cl((l - .08) / .92), .85) * 255; } x.putImageData(d, 0, 0); return c; }
+async function loadAll() {
+  await Promise.all([].concat(SHOTS.map(async s => { IMG[s] = await load('film/shots/' + s + '.jpg'); }), PHOTOS.map(async s => { PH[s] = await load('film/photos/' + s + '.jpg'); }),
+    [load('ops/art/vestorso.webp').then(i => { if (i) PL.vestorso = inkify(i); }), load('brand/emblem.svg').then(i => { IMG.emblem = i; })]));
+  try { await Promise.all([300, 400, 500, 700, 800].map(w => document.fonts.load(w + ' 40px Heebo', 'אבג ABC'))); } catch (e) {}
+}
+function rr(x, y, w, h, r, c) { c = c || X; r = Math.min(r, w / 2, h / 2); c.beginPath(); c.moveTo(x + r, y); c.arcTo(x + w, y, x + w, y + h, r); c.arcTo(x + w, y + h, x, y + h, r); c.arcTo(x, y + h, x, y, r); c.arcTo(x, y, x + w, y, r); c.closePath(); }
+function cover(img, x, y, w, h, z, px, py) { if (!img) return; const s = Math.max(w / img.width, h / img.height) * (z || 1), iw = img.width * s, ih = img.height * s; X.drawImage(img, x + (w - iw) * (px == null ? .5 : px), y + (h - ih) * (py == null ? .5 : py), iw, ih); }
+function txt(s, x, y, o) {
+  o = o || {}; const a = o.a == null ? 1 : o.a; if (a <= .003) return; X.save(); X.globalAlpha *= a; X.font = `${o.w || 400} ${o.s || 32}px ${F}`; X.fillStyle = o.c || C.ink; X.textAlign = o.al || 'right'; X.textBaseline = 'middle'; X.direction = o.dir || 'rtl'; X.letterSpacing = (o.ls || 0) + 'px';
+  if (o.sh) { X.shadowColor = 'rgba(0,0,0,.35)'; X.shadowBlur = 18; } if (o.blur > .3) X.filter = `blur(${o.blur.toFixed(1)}px)`; X.fillText(s, x, y + (o.dy || 0)); X.restore();
+}
+function measure(s, o) { X.save(); X.font = `${o.w || 400} ${o.s || 32}px ${F}`; X.letterSpacing = (o.ls || 0) + 'px'; const w = X.measureText(s).width; X.restore(); return w; }
+function wrap(s, mw, o) { const out = []; let line = ''; s.split(' ').forEach(w => { const t = line ? line + ' ' + w : w; if (measure(t, o) > mw && line) { out.push(line); line = w; } else line = t; }); if (line) out.push(line); return out; }
+// a line that writes itself word by word
+function words(s, x, y, k, o) {
+  if (k <= 0) return; o = o || {}; const ws = s.split(' '), sp = measure(' ', o), wd = ws.map(w => measure(w, o)), tot = wd.reduce((a, b) => a + b, 0) + sp * (ws.length - 1), st = Math.min(.08, .6 / ws.length), span = 1 - st * (ws.length - 1);
+  let cx = o.al === 'center' ? x + tot / 2 : o.al === 'left' ? x + tot : x;
+  ws.forEach((w, i) => { const q = eo(seg(k, i * st, i * st + span)); txt(w, cx, y, Object.assign({}, o, { al: 'right', a: (o.a == null ? 1 : o.a) * q, dy: (1 - q) * 16, blur: (1 - q) * 8 })); cx -= wd[i] + sp; });
+}
+function para(s, x, y, mw, k, o) { const L = wrap(s, mw, o), lh = (o.lh || 1.3) * (o.s || 32); L.forEach((l, i) => words(l, x, y + i * lh, seg(k, i * .12, i * .12 + .88), o)); return L.length * lh; }
+function shadowBox(x, y, w, h, r, blur, oy, a) { X.save(); X.shadowColor = `rgba(12,42,53,${a || .25})`; X.shadowBlur = blur; X.shadowOffsetY = oy; rr(x, y, w, h, r); X.fillStyle = '#fff'; X.fill(); X.restore(); }
+function photo(name, x, y, w, h, sec, o) { o = o || {}; const img = PH[name]; if (!img) return; X.save(); rr(x, y, w, h, o.r || 0); X.clip(); cover(img, x, y, w, h, (o.z0 || 1.04) + (o.zk || .0045) * sec, o.px, o.py); X.restore(); }
+function overlay(dir, a0, a1, x, y, w, h) { const g = dir === 'r' ? X.createLinearGradient(x + w, 0, x, 0) : dir === 'l' ? X.createLinearGradient(x, 0, x + w, 0) : X.createLinearGradient(0, y + h, 0, y); g.addColorStop(0, `rgba(10,30,38,${a0})`); g.addColorStop(1, `rgba(10,30,38,${a1})`); X.fillStyle = g; X.fillRect(x, y, w, h); }
+function kicker(s, x, y, a, c) { if (a <= 0) return; txt(s, x, y, { s: 22, w: 500, c: c || C.gold, ls: 2, a }); const w = measure(s, { s: 22, w: 500, ls: 2 }); X.save(); X.globalAlpha *= a; X.fillStyle = c || C.gold; X.fillRect(x - w - 56, y - 1, 40 * a, 2); X.restore(); }
+// the devices: a thin laptop and a phone, with a camera that can lean towards a point of the screen
+function laptop(img, cx, cy, w, a, fz, fx, fy) {
+  if (a <= 0 || !img) return null; const h = w * .625, x = cx - w / 2, y = cy - h / 2, b = 14;
+  X.save(); X.globalAlpha *= a;
+  X.save(); X.shadowColor = 'rgba(12,42,53,.3)'; X.shadowBlur = 60; X.shadowOffsetY = 28; rr(x - b, y - b, w + b * 2, h + b * 2, 18); X.fillStyle = '#1A1F22'; X.fill(); X.restore();
+  const iw = img.width, ih = img.height, vw = iw / fz, vh = ih / fz, ox = cl(fx * iw - vw / 2, 0, iw - vw), oy = cl(fy * ih - vh / 2, 0, ih - vh);
+  X.save(); rr(x, y, w, h, 4); X.clip(); X.drawImage(img, ox, oy, vw, vh, x, y, w, h); X.restore();
+  X.fillStyle = '#D5D8DA'; rr(cx - w * .56, y + h + b, w * 1.12, 16, 8); X.fill(); X.fillStyle = '#B9BDC0'; rr(cx - 80, y + h + b, 160, 7, 3); X.fill();
+  X.restore();
+  return (u, v) => { const p = { x: x + (u * iw - ox) / vw * w, y: y + (v * ih - oy) / vh * h }; return p.x < x + 10 || p.x > x + w - 10 || p.y < y + 10 || p.y > y + h - 10 ? null : p; };
+}
+function phone(img, cx, cy, h, a, py, rot) {
+  if (a <= 0 || !img) return null; const w = h * .462, x = cx - w / 2, y = cy - h / 2, b = 11;
+  X.save(); X.globalAlpha *= a; X.translate(cx, cy); X.rotate(rot || 0); X.translate(-cx, -cy);
+  X.save(); X.shadowColor = 'rgba(12,42,53,.32)'; X.shadowBlur = 50; X.shadowOffsetY = 26; rr(x - b, y - b, w + b * 2, h + b * 2, 54); X.fillStyle = '#16191B'; X.fill(); X.restore();
+  const vh = img.width / w * h, oy = (img.height - vh) * (py || 0);
+  X.save(); rr(x, y, w, h, 44); X.clip(); X.drawImage(img, 0, oy, img.width, vh, x, y, w, h); X.restore();
+  X.fillStyle = '#16191B'; rr(cx - 50, y + 10, 100, 26, 13); X.fill(); X.restore();
+  return (u, v) => ({ x: x + u * w, y: y + (v * img.height - oy) / vh * h });
+}
+function spot(p, n, k, on) {
+  if (!p || k <= 0) return; const a = eo(k); X.save(); X.globalAlpha *= a;
+  if (on) { const q = (performance && FRAME_T * 1.2) % 1; X.strokeStyle = `rgba(176,138,69,${.7 * (1 - q)})`; X.lineWidth = 3; X.beginPath(); X.arc(p.x, p.y, 22 + 26 * q, 0, 7); X.stroke(); }
+  X.shadowColor = 'rgba(12,42,53,.35)'; X.shadowBlur = 12; X.fillStyle = C.gold; X.beginPath(); X.arc(p.x, p.y, 20 * (.6 + .4 * a), 0, 7); X.fill(); X.shadowColor = 'transparent'; X.strokeStyle = '#fff'; X.lineWidth = 3; X.stroke();
+  txt(String(n), p.x, p.y + 1, { s: 22, w: 800, c: '#fff', al: 'center', dir: 'ltr' }); X.restore();
+}
+function item(n, s, x, y, mw, k, on) {
+  if (k <= 0) return 0; const a = eo(k); X.save(); X.globalAlpha *= a * (on ? 1 : .55);
+  X.fillStyle = on ? C.gold : 'rgba(176,138,69,.7)'; X.beginPath(); X.arc(x - 20, y + 4, 20, 0, 7); X.fill(); txt(String(n), x - 20, y + 5, { s: 21, w: 800, c: '#fff', al: 'center', dir: 'ltr' });
+  const h = para(s, x - 58, y + 4, mw - 58, seg(k, 0, 1), { s: 29, w: on ? 500 : 400, c: C.ink, lh: 1.32 }); X.restore(); return Math.max(56, h + 18);
+}
+let FRAME_T = 0;
+
+// the story
+// the day, in four circles that grow outwards: the department, the hospital, the patient, the community
+const PARTS = ['המערך', 'בתוך בית החולים', 'המטופל', 'הקהילה'];
+const STN = [
+  { p: 0, tm: '07:00', who: 'פרופ׳ דניאל אלמוג', role: 'מנהל המערך', ph: 'chief', pain: 'פעם: עשרות הודעות עוד לפני שבע בבוקר.', head: 'כל המערך במבט אחד', dev: { t: 'laptop', img: ['orbit'] },
+    it: [['ציון בריאות לכל תחום: בנק הניתוחים, פתולוגיה, תורנויות ומתמחים', 0, .955, .3], ['מה דחוף היום, לפי סדר עדיפות', 0, .78, .86], ['שאלה בשפה חופשית: "מי תורן הלילה?"', 0, .62, .655]] },
+  { p: 0, tm: '07:30', who: 'ד״ר עמית ברנע', role: 'הצ׳יף, אחראי התורנויות', ph: 'chief-young', pain: 'פעם: ימים של טבלאות והחלפות בוואטסאפ.', head: 'התורנויות של החודש נבנות בדקות', dev: { t: 'laptop', img: ['duty'] },
+    it: [['שיבוץ אוטומטי לפי כל החוקים של המערך', 0, .66, .6], ['חלוקה הוגנת של סופי שבוע וחגים', 0, .14, .35], ['כל שינוי מגיע לטלפון של כל רופא', 0, .83, .88]] },
+  { p: 0, tm: '08:30', who: 'ד״ר מיכל שחר', role: 'סגנית מנהל המערך', ph: 'secretary', pain: 'פעם: רשימת המתנה באקסל ומטופלים שנשכחו בה.', head: 'אף מטופל לא נשכח ברשימה', dev: { t: 'laptop', img: ['bank'] },
+    it: [['כמה ממתינים בכל צוות ומי כבר עבר את היעד', 0, .85, .33], ['זמן ההמתנה מול היעד לכל עדיפות', 0, .34, .565], ['ההכנות לניתוח ושיבוץ ישיר לחדר', 0, .22, .555]] },
+  { p: 0, tm: '09:30', who: 'ד״ר תמר וייס', role: 'ראש אגף, מתכננת ניתוח בקע', ph: 'night', pain: 'פעם: כל מנתח בחר גישה ורשת לפי ההרגל.', head: 'תוכנית ניתוח לפי הספרות העדכנית', dev: { t: 'laptop', img: ['plan', 'plan-kit'] }, note: 'ORBIT תומך בהחלטה. ההחלטה של המנתח.',
+    it: [['סיווג הבקע על מפה אנטומית של הבטן', 0, .59, .62], ['גישה, רשת, קיבוע וסגירה לפי ההנחיות העדכניות', 0, .21, .5], ['רשימת ציוד לחדר הניתוח, והתוכנית עוברת לבנק', 1, .21, .82]] },
+  { p: 0, tm: '11:00', who: 'ד״ר לנדאו', role: 'ראש צוות כבד ולבלב', ph: 'senior', pain: 'פעם: טפסים על נייר ותשובות שהלכו לאיבוד.', head: 'הבכיר והמתמחים, ישר מהטלפון', dev: { t: 'phones', img: ['doctor-app', 'doctor-approve'] },
+    it: [['כל מה שמחכה לו היום, במקום אחד', 0, .5, .3], ['מאשר את הניתוחים של המתמחים', 1, .27, .3], ['דירוג העצמאות של המתמחה בכל ניתוח', 1, .6, .44]] },
+  { p: 0, tm: '12:00', who: 'רונית', role: 'האחות האחראית במחלקה', ph: 'nurse', pain: 'פעם: הסיעוד שמע על שינויים במסדרון.', head: 'הסיעוד רואה את אותה תמונה', dev: { t: 'laptop', img: ['wall'] }, note: 'בקרוב: Ward, אפליקציה לסיעוד על אותה ליבה.',
+    it: [['מסך קיר במחלקה: חדרי הניתוח של היום', 0, .9, .2], ['המטופלים המחוברים ומה הם שואלים', 0, .66, .22], ['מה דורש טיפול עכשיו', 0, .55, .8]] },
+  { p: 1, tm: '13:30', who: 'ד״ר נועה ברק', role: 'מכון הפתולוגיה', ph: 'lab', pain: 'פעם: תשובות שחיכו בתיבה, בלי שאף אחד ידע.', head: 'כל דגימה עד התשובה', dev: { t: 'laptop', img: ['trace-scan'] },
+    it: [['רישום הדגימה בסריקת המדבקה', 0, .56, .4], ['מעקב עד שהתשובה מגיעה למערך', 0, .3, .5], ['וידוא שהמטופל קיבל את התשובה', 0, .8, .62]] },
+  { p: 1, tm: '15:00', who: 'ד״ר אורי קדוש', role: 'אחראי הסטודנטים וההוראה', ph: 'teach', pain: 'פעם: לוח הוראה על הקיר ורשימות ביד.', head: 'הוראה, סטודנטים וסטאז׳רים', dev: { t: 'laptop', img: ['campus', 'stage'] },
+    it: [['הסטודנטים בקבוצות ועם מדריכים', 0, .14, .35], ['צוות ההוראה של השבוע', 0, .14, .78], ['סבב הסטאז׳רים: שיבוץ, משוב ונוכחות', 1, .62, .58]] },
+  { p: 2, tm: '16:00', who: 'עידן, בן 72', role: 'מאושפז במחלקה, יום שלישי', ph: 'patient', pain: 'פעם: לא ידע מה התוכנית ולמי לפנות.', head: 'המטופל יודע מה קורה איתו', dev: { t: 'phones', img: ['lumen-1', 'lumen-3'] }, note: 'הצוות מחליט מה נחשף ומתי.',
+    it: [['קישור אישי בטלפון, בלי להתקין כלום', 0, .6, .2], ['איפה אני בתהליך ומה הצעד הבא', 0, .6, .53], ['הסבר על המחלה והתוכנית בשפה פשוטה, עם הקראה בקול', 1, .55, .3]] },
+  { p: 3, tm: '17:00', who: 'ד״ר רינה אבירם', role: 'רופאת משפחה בקהילה', ph: 'gp', pain: 'היום: אין שום ערוץ בין המערך לרופא המשפחה.', head: 'רופאת המשפחה, סוף סוף בתמונה', dev: { t: 'laptop', img: ['link-gp'] },
+    it: [['המטופלים שלה שמאושפזים עכשיו', 0, .86, .33], ['איפה כל אחד בתהליך ומה נשלח אליה מהמערך', 0, .5, .36], ['שיחה עם הצוות והפניה חזרה למערך', 0, .21, .68]] }
+];
+const T_IT = [4.2, 5.9, 7.6];
+// where the face is, for portrait photos shown in a wide frame
+const PFX = {};
+const PFOC = { night: .38, nurse: .3, senior: .12, 'chief-young': .2, lab: .3, teach: .3 };
+function station(i) {
+  const s = STN[i];
+  return { n: s.tm, d: 10.5, st: i, f(sec, d) {
+    X.fillStyle = C.ivory; X.fillRect(0, 0, W, H);
+    // the person: full screen first, then the photo becomes a portrait next to the name
+    const m = eio(seg(sec, 2.7, 3.7)), ax = 1745, ay = 178, ar = 64;
+    const px = lerp(0, ax - ar, m), py = lerp(0, ay - ar, m), pw = lerp(W, ar * 2, m), phh = lerp(H, ar * 2, m), prad = lerp(0, ar, m);
+    if (m < 1) { X.save(); rr(px, py, pw, phh, prad); X.clip(); photo(s.ph, px, py, pw, phh, sec, { py: PFOC[s.ph], px: PFX[s.ph] }); overlay('r', .82 * (1 - m), 0, px, py, pw, phh); X.restore(); }
+    else { photo(s.ph, ax - ar, ay - ar, ar * 2, ar * 2, sec, { r: ar, py: PFOC[s.ph], px: PFX[s.ph] }); X.save(); X.strokeStyle = C.gold; X.lineWidth = 3; X.beginPath(); X.arc(ax, ay, ar + 4, 0, 7); X.stroke(); X.restore(); }
+    const aA = 1 - eo(seg(sec, 2.4, 2.9));
+    if (aA > 0) { kicker('חלק ' + (s.p + 1) + ' · ' + PARTS[s.p], W - 140, 190, aA * eo(seg(sec, .1, .7)), C.champ); txt(s.tm, W - 140, 330, { s: 150, w: 800, c: '#fff', a: aA * eo(seg(sec, .2, .9)), ls: 2, dir: 'ltr', al: 'right' }); words(s.who, W - 140, 470, seg(sec, .5, 1.4), { s: 56, w: 700, c: '#fff', a: aA }); words(s.role, W - 140, 535, seg(sec, .7, 1.6), { s: 34, w: 300, c: '#E8E2D4', a: aA }); words(s.pain, W - 140, 640, seg(sec, 1.1, 2.1), { s: 34, w: 400, c: C.champ, a: aA }); }
+    if (sec < 2.75) return;
+    // the column on the right: who, the headline, three numbered points
+    const aB = eo(seg(sec, 3.2, 3.9)), X0 = 1650;
+    txt(s.who, X0, 158, { s: 34, w: 700, a: aB }); txt(s.role + '  ·  ' + s.tm, X0, 202, { s: 24, w: 400, c: C.ink2, a: aB });
+    let y = 330; const hl = wrap(s.head, 560, { s: 54, w: 800 }); hl.forEach((l, k) => words(l, W - 120, y + k * 66, seg(sec, 3.4 + k * .2, 4.3 + k * .2), { s: 54, w: 800 })); y += hl.length * 66 + 40;
+    const cur = sec < T_IT[1] ? 0 : sec < T_IT[2] ? 1 : 2;
+    s.it.forEach((it, k) => { y += item(k + 1, it[0], W - 120, y, 600, seg(sec, T_IT[k], T_IT[k] + .8), k === cur); });
+    if (s.note) txt(s.note, W - 120, y + 20, { s: 26, w: 500, c: C.gold, a: eo(seg(sec, 8.4, 9.2)) });
+    // the device, leaning towards the point that is being explained
+    const dA = eo(seg(sec, 2.9, 3.8)), slide = (1 - dA) * -80, foc = s.it[cur], fk = eio(seg(sec, T_IT[cur] - .3, T_IT[cur] + .9));
+    if (s.dev.t === 'laptop') {
+      const prev = s.it[Math.max(0, cur - 1)], swap = prev[1] !== foc[1], fz = 1 + .5 * (sec > T_IT[0] - .3 ? 1 : eio(seg(sec, T_IT[0] - .3, T_IT[0] + .9))) * (cur === 0 ? fk : 1);
+      const fx = cur === 0 || swap ? lerp(.5, foc[2], fk) : lerp(prev[2], foc[2], fk), fy = cur === 0 || swap ? lerp(.5, foc[3], fk) : lerp(prev[3], foc[3], fk);
+      if (swap && fk < 1) laptop(IMG[s.dev.img[prev[1]]], 640 + slide, 520, 1060, dA, 1.5, prev[2], prev[3]);
+      const map = laptop(IMG[s.dev.img[foc[1]]], 640 + slide, 520, 1060, dA * (swap ? eo(fk * 1.6) : 1), fz, fx, fy);
+      if (map) s.it.forEach((it, k) => { if (it[1] === foc[1]) spot(map(it[2], it[3]), k + 1, seg(sec, T_IT[k] + .2, T_IT[k] + .7), k === cur); });
+    } else {
+      const maps = [phone(IMG[s.dev.img[0]], 420 + slide, 540, 800, dA, 0, -.02), phone(IMG[s.dev.img[1]], 880 + slide, 560, 800, eo(seg(sec, 3.3, 4.2)), 0, .02)];
+      s.it.forEach((it, k) => spot(maps[it[1]] && maps[it[1]](it[2], it[3]), k + 1, seg(sec, T_IT[k] + .2, T_IT[k] + .7), k === cur));
+    }
+  } };
+}
+// the four circles along the bottom: where in the story we are
+function partline(gt) {
+  const a0 = S.find(s => s.st === 0), a1 = S.find(s => s.st === STN.length - 1); if (gt < a0.t0 || gt > a1.t0 + a1.d) return;
+  const a = eo(seg(gt, a0.t0 + realT(a0, 2.6), a0.t0 + realT(a0, 3.6))) * (1 - eo(seg(gt, a1.t0 + a1.d - .6, a1.t0 + a1.d))); if (a <= 0) return;
+  let cur = STN[0]; S.forEach(s => { if (s.st != null && gt >= s.t0) cur = STN[s.st]; });
+  const y = 1030, w = 190, xR = 1800; X.save(); X.globalAlpha = a;
+  PARTS.forEach((p, i) => { const x = xR - i * (w + 14), on = i === cur.p, done = i < cur.p; X.fillStyle = on ? C.gold : done ? 'rgba(176,138,69,.45)' : 'rgba(12,42,53,.12)'; rr(x - w, y + 14, w, 4, 2); X.fill(); txt((i + 1) + '  ' + p, x, y - 6, { s: 19, w: on ? 700 : 400, c: on ? C.ink : C.mute }); });
+  X.restore();
+}
+const BUBBLES = ['מי תורן מחר בלילה?', 'המטופל מחדר 12 שואל מתי הניתוח', 'איפה התשובה של הפתולוגיה מיום ראשון?', 'מישהו יכול להחליף אותי בשישי?', 'רופאת המשפחה מחפשת את מכתב השחרור', 'חדר 3 מתפנה, מי נכנס?', 'הרשימה באקסל לא מעודכנת', 'מה הוחלט בישיבה אתמול?', 'המתמחה צריך אישור על הניתוח', 'מי מדבר עם המשפחה?', 'יש מקום בחדר ניתוח מחר?', 'הלו? מישהו ראה את ההודעה שלי?'];
+const SATS = [['PULSE', 'תמונת מצב', 'מה דחוף בכל המערך', 0], ['ORBIT', 'תכנון ניתוחי', 'תוכנית לפי הספרות', 0], ['FLOW', 'בנק ניתוחים', 'אף מטופל לא נשכח', 0], ['FORGE', 'מתמחים', 'לוג ניתוחים וחונכות', 0], ['GATE', 'ועדות קבלה', 'מועמדים ותורני חוץ', 0], ['RELAY', 'הודעות', 'תזכורות אוטומטיות', 0], ['WARD', 'סיעוד', 'בקרוב, על אותה ליבה', 0], ['TRACE', 'פתולוגיה', 'כל דגימה, עד התשובה', 1], ['MIRROR', 'סיבוכים ו־M&M', 'לומדים מכל סיבוך', 1], ['CAMPUS', 'סטודנטים', 'קבוצות והוראה', 1], ['STAGE', 'סטאז׳רים', 'הסבב מקצה לקצה', 1], ['NEST', 'המטופל', 'יודע מה קורה איתו', 2], ['LUMEN', 'רופא המשפחה', 'מעודכן באותו יום', 3]];
+const RING_C = ['#B08A45', '#2C5F6E', '#9A7B4F', '#0C2A35'];
+function emblem(cx, cy, r, a) { if (!IMG.emblem || a <= 0) return; X.save(); X.globalAlpha *= a; X.shadowColor = 'rgba(12,42,53,.3)'; X.shadowBlur = r * .5; X.shadowOffsetY = r * .18; X.drawImage(IMG.emblem, cx - r, cy - r, r * 2, r * 2); X.restore(); }
+function wordmark(cx, cy, s, a, c) { if (a <= 0) return; X.save(); X.globalAlpha *= a; X.font = `800 ${s}px ${F}`; X.letterSpacing = s * .3 + 'px'; X.direction = 'ltr'; X.textBaseline = 'middle'; X.textAlign = 'left'; const w1 = X.measureText('SURGERY ').width, w2 = X.measureText('X').width, x0 = cx - (w1 + w2 - s * .3) / 2; X.fillStyle = c || C.navy; X.fillText('SURGERY ', x0, cy); X.fillStyle = C.gold; X.fillText('X', x0 + w1, cy); X.restore(); }
+
+const S = [
+  { n: 'פתיחה', d: 8, f(sec) {
+    X.fillStyle = C.ivory; X.fillRect(0, 0, W, H);
+    const c = PL.vestorso; if (c) { const h = 960, w = c.width * h / c.height, k = eio(seg(sec, .2, 4)); X.save(); X.globalAlpha = .85 * k; X.translate(560, 545); X.scale(1 + .02 * sec / 8, 1 + .02 * sec / 8); X.drawImage(c, -w / 2, -h / 2, w, h); X.restore(); const g = X.createRadialGradient(560, 545, 300 * k, 560, 545, 300 + 520 * k); g.addColorStop(0, 'rgba(246,244,239,0)'); g.addColorStop(1, 'rgba(246,244,239,1)'); X.fillStyle = g; X.fillRect(0, 0, W, H); }
+    txt('המרכז הרפואי אופק · המערך לכירורגיה כללית', W - 170, 380, { s: 22, w: 500, c: C.gold, ls: 1, a: eo(seg(sec, 1.4, 2.4)) });
+    X.save(); X.globalAlpha = eo(seg(sec, 1.8, 3)); X.translate(0, (1 - eo(seg(sec, 1.8, 3))) * 16); wordmark(1395, 470, 84, 1); X.restore();
+    words('מערכת ההפעלה של המערך הכירורגי', W - 170, 565, seg(sec, 2.6, 4), { s: 40, w: 400, c: C.ink2 });
+    X.fillStyle = C.gold; X.fillRect(W - 170 - 80 * eo(seg(sec, 3.6, 4.4)), 630, 80 * eo(seg(sec, 3.6, 4.4)), 3);
+    words('סרט קצר: מה זה, למי זה ואיך זה נראה ביום אמיתי.', W - 170, 690, seg(sec, 4.2, 5.6), { s: 30, w: 300, c: C.ink2 }); } },
+  { n: 'מה זה', d: 10, f(sec) {
+    photo('or-team', 0, 0, W, H, sec, { z0: 1.06 }); overlay('r', .9, .15, 0, 0, W, H);
+    kicker('מה זה מערך כירורגי?', W - 140, 250, eo(seg(sec, .3, 1)), C.champ);
+    words('עולם שלם שצריך לעבוד יחד, כל יום.', W - 140, 340, seg(sec, .7, 2.2), { s: 62, w: 800, c: '#fff' });
+    const ST = [[67, 'אנשי צוות: בכירים, מתמחים, רופאי בית ועוזרי רופא'], [7, 'צוותי ניתוח, מכבד ולבלב ועד שד'], [109, 'מטופלים שממתינים עכשיו לניתוח'], [365, 'לילות תורנות בשנה, עם כונן בכל לילה']];
+    ST.forEach(([n, l], i) => { const k = seg(sec, 2 + i * .55, 3 + i * .55), x = W - 140 - (i % 2) * 450, y = 470 + Math.floor(i / 2) * 190, a = eo(k);
+      X.save(); X.globalAlpha = a; X.fillStyle = 'rgba(255,255,255,.08)'; rr(x - 410, y - 20, 410, 160, 18); X.fill(); X.strokeStyle = 'rgba(217,199,158,.35)'; X.stroke(); X.restore();
+      txt(String(Math.round(n * eo(seg(sec, 2.1 + i * .55, 3.6 + i * .55)))), x - 28, y + 38, { s: 64, w: 800, c: C.champ, a, al: 'right' }); para(l, x - 28, y + 98, 360, k, { s: 22, w: 400, c: '#E8E2D4', lh: 1.25 }); });
+    words('כל זה מתנהל היום בעשרות ערוצים שונים.', W - 140, 900, seg(sec, 6.4, 7.8), { s: 34, w: 400, c: '#fff' }); } },
+  { n: 'הבעיה', d: 15, f(sec) {
+    X.fillStyle = C.ivory; X.fillRect(0, 0, W, H); photo('stress', 0, 0, 820, H, sec, { px: .5 }); const g = X.createLinearGradient(640, 0, 820, 0); g.addColorStop(0, 'rgba(246,244,239,0)'); g.addColorStop(1, 'rgba(246,244,239,1)'); X.fillStyle = g; X.fillRect(640, 0, 182, H);
+    kicker('הבעיה', W - 140, 170, eo(seg(sec, .2, .9)));
+    para('היום המערך רץ על וואטסאפ, אקסל וטלפונים.', W - 140, 250, 900, seg(sec, .4, 1.8), { s: 56, w: 800, lh: 1.2 });
+    const fade = 1 - eo(seg(sec, 7.6, 8.4));
+    if (fade > 0) { BUBBLES.forEach((b, i) => { const t0 = 1.2 + i * .5, k = eo(seg(sec, t0, t0 + .35)), r = rng(50 + i), x = W - 140 - (i % 2) * 560 - r() * 60, y = 500 + Math.floor(i / 2) * 84 + (1 - k) * 18; if (k <= 0) return; const w = measure(b, { s: 25 }) + 48;
+      X.save(); X.globalAlpha = k * fade; X.shadowColor = 'rgba(12,42,53,.18)'; X.shadowBlur = 16; X.shadowOffsetY = 6; rr(x - w, y - 30, w, 60, 22); X.fillStyle = i % 3 === 1 ? '#E9F2EC' : '#fff'; X.fill(); X.restore(); txt(b, x - 24, y, { s: 25, c: C.ink, a: k * fade }); });
+      const cnt = Math.round(127 * eo(seg(sec, 1.2, 7.2))); X.save(); X.globalAlpha = eo(seg(sec, 1, 1.4)) * fade; X.fillStyle = C.red; rr(W - 420, 395, 280, 50, 25); X.fill(); X.restore(); txt(cnt + ' הודעות שלא נקראו', W - 280, 421, { s: 23, w: 700, c: '#fff', al: 'center', a: eo(seg(sec, 1, 1.4)) * fade }); }
+    const P = ['המידע של המערך מפוזר בין עשרות קבוצות וקבצים', 'אף אחד לא רואה את התמונה המלאה', 'המטופל לא יודע מה קורה איתו', 'מול הקהילה אין היום שום ערוץ'];
+    P.forEach((p, i) => { const k = seg(sec, 8.4 + i * 1.3, 9.4 + i * 1.3), y = 450 + i * 110, a = eo(k); if (a <= 0) return; X.save(); X.globalAlpha = a; X.strokeStyle = C.red; X.lineWidth = 3; X.beginPath(); X.arc(W - 160, y, 18, 0, 7); X.stroke(); X.beginPath(); X.moveTo(W - 168, y - 8); X.lineTo(W - 152, y + 8); X.moveTo(W - 152, y - 8); X.lineTo(W - 168, y + 8); X.stroke(); X.restore(); words(p, W - 200, y, k, { s: 38, w: i === 3 ? 700 : 400 }); }); } },
+  { n: 'הפלטפורמה', d: 20, f(sec) {
+    X.fillStyle = C.ivory; X.fillRect(0, 0, W, H); const cx = 600, cy = 570, R = [150, 245, 340, 435];
+    const T = [['המערך', 'ניהול, תורנויות, בנק ניתוחים, תכנון ניתוחי, מתמחים וסיעוד.'], ['בתוך בית החולים', 'פתולוגיה, הוראה, סטאז׳רים וישיבות M&M.'], ['המטופל', 'קישור אישי למטופל ולמשפחה, באשפוז ואחריו.'], ['הקהילה', 'רופא המשפחה, שהיום מנותק מהמערך.']];
+    kicker('הפלטפורמה', W - 120, 150, eo(seg(sec, .2, .9)));
+    words('הכול מתחיל במערך עצמו.', W - 120, 230, seg(sec, .4, 1.8), { s: 56, w: 800 }); words('משם היא מתרחבת, זרוע אחרי זרוע, לכל מי שנוגע במטופל.', W - 120, 300, seg(sec, 1.2, 2.6), { s: 32, w: 400, c: C.ink2 });
+    const cur = sec < 5.5 ? 0 : sec < 8.5 ? 1 : sec < 11.5 ? 2 : 3;
+    for (let k = 3; k >= 0; k--) { const t0 = 2.5 + k * 3, a = eo(seg(sec, t0, t0 + 1.2)); if (a <= 0) continue; const on = k === cur && sec < 14.5;
+      X.save(); X.globalAlpha = a; X.beginPath(); X.arc(cx, cy, R[k], 0, Math.PI * 2); X.fillStyle = k === 0 ? 'rgba(176,138,69,.08)' : 'rgba(12,42,53,.025)'; X.fill(); X.restore();
+      X.save(); X.strokeStyle = RING_C[k]; X.globalAlpha = on ? 1 : .45; X.lineWidth = on ? 3 : 1.5; X.beginPath(); X.arc(cx, cy, R[k], -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * eio(seg(sec, t0, t0 + 1.4))); X.stroke(); X.restore();
+      const lw = measure(T[k][0], { s: 22, w: 700 }) + 34; X.save(); X.globalAlpha = a; rr(cx - lw / 2, cy - R[k] - 19, lw, 38, 19); X.fillStyle = on ? RING_C[k] : '#fff'; X.fill(); X.strokeStyle = RING_C[k]; X.lineWidth = 1.5; X.stroke(); X.restore(); txt(T[k][0], cx, cy - R[k] + 1, { s: 22, w: 700, c: on ? '#fff' : RING_C[k], al: 'center', a });
+      const y = 430 + k * 140; X.save(); X.globalAlpha = a; X.fillStyle = RING_C[k]; X.beginPath(); X.arc(W - 140, y, 22, 0, 7); X.fill(); X.restore(); txt(String(k + 1), W - 140, y + 1, { s: 22, w: 800, c: '#fff', al: 'center', dir: 'ltr', a });
+      X.save(); X.globalAlpha = on || sec > 14.5 ? 1 : .5; words(T[k][0], W - 180, y - 2, seg(sec, t0 + .2, t0 + 1.2), { s: 38, w: 800 }); para(T[k][1], W - 180, y + 46, 760, seg(sec, t0 + .5, t0 + 1.6), { s: 26, w: 400, c: C.ink2 }); X.restore(); }
+    emblem(cx, cy, 62, eo(seg(sec, .4, 1.4))); } },
+  { n: 'הפתרון', d: 17, f(sec) {
+    X.fillStyle = C.ivory; X.fillRect(0, 0, W, H); const cx = W / 2, cy = 560, RX = 720, RY = 330;
+    words('Surgery X מחבר את כל המערך למערכת אחת.', W / 2, 120, seg(sec, .3, 1.8), { s: 52, w: 800, al: 'center' });
+    X.save(); X.strokeStyle = 'rgba(12,42,53,.1)'; X.lineWidth = 1.5; X.beginPath(); X.ellipse(cx, cy, RX, RY, 0, 0, Math.PI * 2 * eio(seg(sec, .8, 2.6))); X.stroke(); X.restore();
+    SATS.forEach((s, i) => { const an = -Math.PI / 2 + (i + .5) / SATS.length * Math.PI * 2, p = { x: cx + Math.cos(an) * RX, y: cy + Math.sin(an) * RY }, k = seg(sec, 1.4 + i * .14, 2.2 + i * .14), a = eo(k);
+      X.save(); X.globalAlpha = a * .6; X.strokeStyle = C.gold; X.lineWidth = 1.5; X.beginPath(); X.moveTo(cx + (p.x - cx) * .22, cy + (p.y - cy) * .22); X.lineTo(lerp(cx, p.x, .22 + .66 * a), lerp(cy, p.y, .22 + .66 * a)); X.stroke(); X.restore();
+      if (sec > 3.5) { const u = ((sec - 3.5) * .45 + i * .083) % 1, q = i % 2 ? 1 - u : u, d = { x: lerp(cx + (p.x - cx) * .22, p.x - (p.x - cx) * .1, q), y: lerp(cy + (p.y - cy) * .22, p.y - (p.y - cy) * .1, q) }; X.save(); X.globalAlpha = Math.sin(u * Math.PI); X.fillStyle = C.gold; X.beginPath(); X.arc(d.x, d.y, 5, 0, 7); X.fill(); X.restore(); }
+      const hi = sec > 5 ? Math.max(0, 1 - Math.abs((sec - 5) / .83 - i) * .9) : 0;
+      X.save(); X.globalAlpha = a; X.shadowColor = `rgba(12,42,53,${.18 + .2 * hi})`; X.shadowBlur = 20 + 16 * hi; X.shadowOffsetY = 8; rr(p.x - 122, p.y - 50, 244, 100, 22); X.fillStyle = '#fff'; X.fill(); X.shadowColor = 'transparent'; X.fillStyle = RING_C[s[3]]; X.fillRect(p.x - 40, p.y - 50, 80, 4); if (hi > 0) { X.strokeStyle = `rgba(176,138,69,${hi})`; X.lineWidth = 2.5; X.stroke(); } X.restore();
+      txt(s[0], p.x, p.y - 26, { s: 13, w: 700, c: RING_C[s[3]], ls: 3, al: 'center', dir: 'ltr', a }); txt(s[1], p.x, p.y + 2, { s: 26, w: 800, al: 'center', a }); txt(s[2], p.x, p.y + 32, { s: 18, w: 400, c: C.ink2, al: 'center', a }); });
+    emblem(cx, cy - 34, 82, eo(seg(sec, .6, 1.6))); wordmark(cx, cy + 82, 30, eo(seg(sec, 1, 2)));
+    PARTS.forEach((p, k) => { const x = W / 2 + 560 - k * 330, a = eo(seg(sec, 3 + k * .3, 3.8 + k * .3)); X.save(); X.globalAlpha = a; X.fillStyle = RING_C[k]; X.beginPath(); X.arc(x, 1000, 9, 0, 7); X.fill(); X.restore(); txt(p, x - 22, 1000, { s: 26, w: 500, c: C.ink2, a }); }); } },
+  { n: 'יום אחד', d: 4.5, f(sec) {
+    photo('morning-hall', 0, 0, W, H, sec, { z0: 1.05, zk: .01 }); X.fillStyle = 'rgba(10,30,38,.5)'; X.fillRect(0, 0, W, H);
+    words('יום אחד במערך', W / 2, 480, seg(sec, .3, 1.4), { s: 110, w: 800, c: '#fff', al: 'center' }); words('מהניהול, דרך בית החולים, אל המטופל והקהילה.', W / 2, 600, seg(sec, 1.1, 2.2), { s: 40, w: 300, c: C.champ, al: 'center' }); } }
+];
+STN.forEach((s, i) => S.push(station(i)));
+S.push(
+  { n: 'עקרונות', d: 9, f(sec) {
+    photo('or-bright', 0, 0, W, H, sec, { z0: 1.05 }); X.fillStyle = 'rgba(10,30,38,.86)'; X.fillRect(0, 0, W, H);
+    kicker('למה זה עובד', W / 2 + 90, 220, eo(seg(sec, .2, .9)), C.champ);
+    const P = [['מקום אחד', 'כל מידע נרשם פעם אחת ומגיע לכל מי שצריך אותו.'], ['המטופל בתוך התהליך', 'יודע מה קורה איתו, בשפה שלו ובטלפון שלו.'], ['הצוות בשליטה', 'שום מידע לא יוצא בלי שהצוות החליט.']];
+    P.forEach(([h, b], i) => { const x = W - 300 - i * 560, k = seg(sec, .8 + i * .9, 1.8 + i * .9), a = eo(k); X.save(); X.globalAlpha = a; X.strokeStyle = C.champ; X.lineWidth = 2; X.beginPath(); X.arc(x - 160, 420, 46, 0, 7); X.stroke(); X.restore(); txt(String(i + 1), x - 160, 422, { s: 40, w: 300, c: C.champ, al: 'center', dir: 'ltr', a });
+      words(h, x, 540, k, { s: 46, w: 800, c: '#fff' }); para(b, x, 610, 420, seg(sec, 1.3 + i * .9, 2.5 + i * .9), { s: 28, w: 300, c: '#E8E2D4', lh: 1.35 }); });
+    words('עובד בדפדפן, בטלפון ובמסך קיר. בלי התקנה.', W / 2, 860, seg(sec, 4.6, 6), { s: 32, w: 400, c: C.champ, al: 'center' }); } },
+  { n: 'סיום', d: 9, f(sec) {
+    X.fillStyle = C.ivory; X.fillRect(0, 0, W, H);
+    emblem(W / 2, 330, 96, eo(seg(sec, .2, 1.2))); X.save(); X.globalAlpha = eo(seg(sec, .8, 1.8)); X.translate(0, (1 - eo(seg(sec, .8, 1.8))) * 14); wordmark(W / 2, 520, 76, 1); X.restore();
+    words('מערכת ההפעלה של המערך הכירורגי', W / 2, 605, seg(sec, 1.4, 2.6), { s: 36, w: 400, c: C.ink2, al: 'center' });
+    X.fillStyle = C.gold; const k = eo(seg(sec, 2.4, 3.2)); X.fillRect(W / 2 - 50 * k, 665, 100 * k, 3);
+    words('בואו נראה את זה חי.', W / 2, 740, seg(sec, 2.8, 4), { s: 48, w: 800, al: 'center' });
+    txt('הצעד הבא: פיילוט במחלקה אחת · שלושה חודשים · שלושה מדדים', W / 2, 820, { s: 26, w: 400, c: C.mute, al: 'center', a: eo(seg(sec, 3.8, 4.8)) }); } }
+);
+// the pace, tuned per part: the person and the move to the screen get time to breathe, the explanations move on
+const PACE = { 'פתיחה': 1.25, 'מה זה': 1.3, 'הבעיה': 1.15, 'הפלטפורמה': 1.2, 'הפתרון': 1.2, 'יום אחד': 1.35, 'עקרונות': 1.3, 'סיום': 1.25 }, ST_PACE = [[2.1, 2.05], [2.4, 8.7], [4.4, 1.95], [10.5, 1.15]], GP = +Q.get('slow') || 1;
+let acc = 0; S.forEach(s => { s.d0 = s.d; const w = s.st != null ? ST_PACE : [[s.d, PACE[s.n] || 1.25]]; let b = 0, r = 0; s.wr = w.map(([e, f]) => { const q = { b0: b, b1: e, r0: r, f: f * GP }; r += (e - b) * f * GP; b = e; return q; }); s.d = r; s.t0 = acc; acc += s.d; }); const TOTAL = acc;
+const baseT = (s, sec) => { for (const q of s.wr) if (sec <= q.r0 + (q.b1 - q.b0) * q.f) return q.b0 + (sec - q.r0) / q.f; return s.d0; };
+const realT = (s, b) => { for (const q of s.wr) if (b <= q.b1) return q.r0 + (b - q.b0) * q.f; return s.d; };
+
+function renderAt(gt) {
+  gt = cl(gt, 0, TOTAL); FRAME_T = gt; X.setTransform(RS, 0, 0, RS, 0, 0); X.globalAlpha = 1; X.filter = 'none'; X.fillStyle = C.ivory; X.fillRect(0, 0, W, H);
+  let i = S.findIndex(s => gt >= s.t0 && gt < s.t0 + s.d); if (i < 0) i = S.length - 1; const s = S[i], sec = gt - s.t0;
+  X.save(); s.f(baseT(s, sec), s.d0); X.restore();
+  partline(gt);
+  // soft cuts: a short dip at each scene change, and a fade from and to white at the ends
+  const into = seg(sec, 0, .7), out = seg(sec, s.d - .6, s.d), dip = i === 0 ? 0 : (1 - eo(into)) * .9, dip2 = i === S.length - 1 ? 0 : eo(out) * .9;
+  const isSt = s.st != null, nx = S[i + 1], same = isSt && nx && nx.st != null;
+  const d = same ? 0 : Math.max(dip, dip2); if (d > 0) { X.fillStyle = `rgba(246,244,239,${d})`; X.fillRect(0, 0, W, H); }
+  if (same && sec > s.d - .6) { X.fillStyle = `rgba(246,244,239,${eo(out) * .9})`; X.fillRect(0, 0, W, H); }
+  if (gt < 1) { X.fillStyle = `rgba(246,244,239,${1 - eo(gt)})`; X.fillRect(0, 0, W, H); }
+  if (gt > TOTAL - 1.2) { X.fillStyle = `rgba(246,244,239,${eo(seg(gt, TOTAL - 1.2, TOTAL)) * .0})`; X.fillRect(0, 0, W, H); }
+}
+
+// playback: the music file is the clock when it plays
+const P = { t: 0, playing: false, p0: 0, sound: true };
+const V = document.getElementById('vid'), M = document.getElementById('mus'); let useV = false;
+const clock = () => useV ? V.currentTime : P.playing ? (P.sound && !M.paused && !M.ended && M.currentTime > 0 ? M.currentTime : (performance.now() - P.p0) / 1000) : P.t;
+function play(from) {
+  P.t = from == null ? P.t : from; if (P.t >= TOTAL - .05) P.t = 0; document.getElementById('endc').style.display = 'none';
+  if (useV) { V.currentTime = P.t; V.muted = !P.sound; V.play(); }
+  else { try { M.currentTime = Math.min(P.t, (M.duration || 999) - .05); M.muted = !P.sound; M.volume = 1; if (P.t < (M.duration || 999)) M.play().catch(() => {}); } catch (e) {} }
+  P.p0 = performance.now() - P.t * 1000; P.playing = true; document.getElementById('bPlay').textContent = '❚❚';
+}
+function pause() { P.t = clock(); P.playing = false; M.pause(); V.pause(); document.getElementById('bPlay').textContent = '▶'; }
+function end() { P.playing = false; P.t = TOTAL; M.pause(); document.getElementById('bPlay').textContent = '↺'; document.getElementById('endc').style.display = 'flex'; }
+const fmt = x => Math.floor(x / 60) + ':' + String(Math.floor(x % 60)).padStart(2, '0');
+function loop() {
+  if (P.playing) { P.t = clock(); if (!useV) M.volume = cl((TOTAL - P.t) / 4); if (P.t >= TOTAL - .02) end(); }
+  if (!useV) renderAt(P.t); document.getElementById('fi').style.width = (P.t / TOTAL * 100) + '%'; document.getElementById('tm').textContent = fmt(P.t) + ' / ' + fmt(TOTAL);
+  requestAnimationFrame(loop);
+}
+function fit() { const s = Math.min(innerWidth / W, innerHeight / H); [cv, V].forEach(e => { e.style.width = W * s + 'px'; e.style.height = H * s + 'px'; }); }
+addEventListener('resize', fit); fit();
+const barEl = document.getElementById('bar'); S.forEach(s => { const i = document.createElement('i'); i.style.left = (s.t0 / TOTAL * 100) + '%'; i.title = s.n; barEl.appendChild(i); });
+barEl.onclick = e => { const r = barEl.getBoundingClientRect(), t = (e.clientX - r.left) / r.width * TOTAL; if (P.playing) play(t); else P.t = t; };
+document.getElementById('bPlay').onclick = () => P.playing ? pause() : play();
+document.getElementById('bSnd').onclick = e => { P.sound = !P.sound; e.currentTarget.style.opacity = P.sound ? 1 : .4; M.muted = V.muted = !P.sound; };
+document.getElementById('bFs').onclick = () => { try { document.documentElement.requestFullscreen(); } catch (e) {} };
+document.getElementById('bAgain').onclick = () => play(0);
+let hideT = 0; const ui = document.getElementById('ui'); addEventListener('mousemove', () => { ui.classList.remove('hide'); clearTimeout(hideT); hideT = setTimeout(() => ui.classList.add('hide'), 2600); });
+addEventListener('keydown', e => { if (e.key === ' ') { e.preventDefault(); P.playing ? pause() : play(); } if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') { const i = Math.max(0, S.findIndex(s => P.t >= s.t0 && P.t < s.t0 + s.d)), n = cl(i + (e.key === 'ArrowLeft' ? 1 : -1), 0, S.length - 1); play(S[n].t0); } });
+window.FILM = { TOTAL, S, renderAt, music: 'film/music.mp3', ready: loadAll() };
+// when the rendered film sits next to the page, play it: the same picture, smooth on any laptop
+const probe = Q.has('export') || Q.has('live') ? Promise.resolve(false) : fetch('film/SurgeryX-film.mp4', { method: 'HEAD' }).then(r => r.ok).catch(() => false);
+Promise.all([FILM.ready, probe]).then(([, hasV]) => {
+  if (Q.has('export')) { document.querySelectorAll('.ui,.back,.start').forEach(x => x.remove()); renderAt(+Q.get('t') || 0); return; }
+  if (hasV) { useV = true; V.src = 'film/SurgeryX-film.mp4'; V.style.display = 'block'; cv.style.visibility = 'hidden'; V.onended = end; const a = document.createElement('a'); a.href = V.src; a.download = 'SurgeryX-film.mp4'; a.textContent = 'הורדת הסרט'; ui.appendChild(a); }
+  if (Q.has('t')) P.t = +Q.get('t'); loop();
+  const st = document.getElementById('start'); st.onclick = () => { st.remove(); play(); hideT = setTimeout(() => ui.classList.add('hide'), 2600); }; if (Q.has('auto')) st.onclick();
+});
+</script>
+</body>
+</html>

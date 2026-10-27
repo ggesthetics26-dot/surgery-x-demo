@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head><meta name="robots" content="noindex,nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#F5F2EB">
+<title>Surgery X · מערכת ההפעלה של המערך הכירורגי</title>
+<link rel="icon" href="brand/emblem.svg">
+<link rel="apple-touch-icon" href="brand/apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#0C2A35">
+<meta name="apple-mobile-web-app-title" content="Surgery X">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;800;900&family=Frank+Ruhl+Libre:wght@500;700;900&display=swap" rel="stylesheet">
+<script src="ops/WebApp.js?v=1793110123"></script>
+<script src="ops/dev/mock.js?v=1793110123"></script>
+<style>
+:root{--ink:#0C2A35;--ink2:#4A5D65;--mist:#7A878D;--gold:#B08A45;--gold2:#C9A66B;--line:rgba(12,42,53,.10);--R:330px;--core:340px}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}html{overflow-x:hidden;background:#F5F2EB}
+body{background:radial-gradient(1200px 820px at 50% 46%,#FFFFFF 0%,#FBF9F4 38%,#F3EFE6 70%,#E8EDF0 100%);color:var(--ink);font-family:'Heebo','Segoe UI',Arial,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.bgart{position:fixed;inset:0;pointer-events:none;overflow:hidden;contain:paint}
+.bgart img{position:absolute;opacity:.055;filter:invert(1) sepia(.6) saturate(.7);mix-blend-mode:multiply}
+.bgart .l{left:-4%;top:8%;height:94%}.bgart .r{right:-4%;top:8%;height:94%}
+.bgart:after{content:"";position:absolute;inset:0;background:radial-gradient(760px 560px at 50% 50%,rgba(255,255,255,.9) 20%,rgba(255,255,255,0) 75%)}
+.grain{display:none}
+.top{position:fixed;top:0;inset-inline:0;z-index:30;display:flex;align-items:center;gap:14px;padding:calc(22px + env(safe-area-inset-top)) 36px 12px}
+.word{white-space:nowrap;font-family:'Frank Ruhl Libre',Georgia,serif;font-weight:600;font-size:28px;letter-spacing:.26em;direction:ltr;color:var(--ink)}.word b{color:var(--gold);font-weight:700}
+.tag{color:var(--ink2);font-size:15px;font-weight:500;letter-spacing:.06em;margin-top:2px}
+.sp{flex:1}
+.tb{display:flex;gap:10px}
+.tb a{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(12,42,53,.25);background:rgba(255,255,255,.6);color:var(--ink);border-radius:999px;padding:10px 20px;font-size:14.5px;font-weight:600;letter-spacing:.04em;text-decoration:none;transition:background .3s,border-color .3s;backdrop-filter:blur(6px)}
+.tb a:hover{border-color:var(--gold);background:#fff}
+.tb a.pri{background:var(--ink);color:#fff;border-color:var(--ink);font-weight:600}.tb a.pri:hover{background:#163E4C}
+.stage{position:relative;width:100%;height:100vh;min-height:760px}
+svg.flows{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.orbit{position:absolute;left:50%;top:53%;border-radius:50%;border:1px solid rgba(12,42,53,.09);transform:translate(-50%,-50%);pointer-events:none}
+.orbit.o2{border-style:dashed;border-color:rgba(176,138,69,.28)}
+.core{position:absolute;left:50%;top:53%;width:var(--core);height:var(--core);transform:translate(-50%,-50%);border-radius:50%;cursor:pointer;border:0;padding:0;background:none;color:inherit;z-index:5;transition:transform .8s cubic-bezier(.2,.8,.2,1)}
+.core:hover{transform:translate(-50%,-50%) scale(1.02)}
+.core .ring{position:absolute;inset:-14px;border-radius:50%;border:1px solid rgba(176,138,69,.6)}
+.core .ring2{position:absolute;inset:-26px;border-radius:50%;border:1px solid rgba(176,138,69,.2)}
+.core .ticks{position:absolute;inset:-26px;border-radius:50%;background:repeating-conic-gradient(from 0deg,rgba(176,138,69,.55) 0 .25deg,transparent .25deg 6deg);-webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 8px),#000 calc(100% - 7px));mask:radial-gradient(farthest-side,transparent calc(100% - 8px),#000 calc(100% - 7px));animation:spin2 240s linear infinite;opacity:.8}
+@keyframes spin2{to{transform:rotate(360deg)}}
+.core .glow{position:absolute;inset:-110px;border-radius:50%;background:radial-gradient(circle,rgba(201,166,107,.20),rgba(201,166,107,.06) 45%,transparent 70%)}
+.core .disc{position:absolute;inset:0;border-radius:50%;overflow:hidden;background:radial-gradient(circle at 50% 38%,#FFFFFF 0%,#FBF8F2 55%,#F1ECE1 100%);box-shadow:0 0 0 1px rgba(176,138,69,.25),0 40px 90px -36px rgba(12,42,53,.45),0 10px 30px -16px rgba(12,42,53,.25)}
+.core .disc img.art{position:absolute;left:50%;top:50%;height:112%;transform:translate(-50%,-50%);opacity:.86;filter:invert(1) sepia(.7) saturate(.8) brightness(.86) contrast(1.18);mix-blend-mode:multiply}
+.core .disc:after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 46%,transparent 40%,rgba(251,248,242,.55) 66%,rgba(245,241,233,.95) 100%)}
+.core .lbl{position:absolute;inset:auto 0 12%;text-align:center;z-index:2}
+.core .lbl b{white-space:nowrap;display:table;margin:0 auto;font-family:'Frank Ruhl Libre',Georgia,serif;font-weight:700;font-size:34px;letter-spacing:.3em;direction:ltr;color:var(--ink);padding:4px 10px 4px calc(10px + .3em);background:rgba(255,255,255,.78);border-radius:2px}.core .lbl b span{color:var(--gold);font-weight:700}
+.core .lbl small{display:inline-block;margin-top:6px;font-size:13px;font-weight:700;letter-spacing:.42em;color:var(--gold);padding:3px 10px 3px calc(10px + .42em);background:rgba(255,255,255,.85);border-radius:999px;font-weight:600}
+.sat{position:absolute;width:160px;margin:-38px 0 0 -80px;transform:scale(var(--ss,1));transform-origin:50% 38px;display:flex;flex-direction:column;align-items:center;gap:8px;border:0;background:none;color:inherit;font:inherit;cursor:pointer;z-index:6;padding:0;transition:opacity .4s}
+.sat .pl{position:relative;width:76px;height:76px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 50% 30%,#FFFFFF,#F8F5EE);border:1px solid rgba(176,138,69,.5);box-shadow:inset 0 0 0 4px #fff,inset 0 0 0 5px rgba(12,42,53,.06),0 14px 30px -16px rgba(12,42,53,.45);transition:border-color .4s,box-shadow .4s,transform .5s cubic-bezier(.2,.8,.2,1)}
+.sat .pl svg{width:34px;height:34px;stroke:var(--ink);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.sat:hover .pl,.sat.hl .pl{border-color:var(--gold);box-shadow:inset 0 0 0 4px #fff,inset 0 0 0 5px rgba(176,138,69,.35),0 18px 40px -14px rgba(176,138,69,.6);transform:scale(1.07)}
+.sat b{margin-top:8px;font-family:'Frank Ruhl Libre',Georgia,serif;font-size:16.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;direction:ltr;color:var(--ink);padding-left:.18em}
+.sat small{font-size:14.5px;font-weight:500;color:var(--ink);text-align:center;line-height:1.3;max-width:160px}
+.sat .kpi{position:absolute;top:66px;left:50%;transform:translateX(-50%);z-index:2;white-space:nowrap;background:#fff;border:1px solid rgba(176,138,69,.55);border-radius:999px;padding:2px 10px;font-size:12px;font-weight:700;color:#8C6B2E;font-variant-numeric:tabular-nums;box-shadow:0 6px 14px -8px rgba(12,42,53,.35)}
+.sat .st{position:absolute;top:4px;right:38px;width:7px;height:7px;border-radius:50%}
+.st.live{background:var(--gold)}.st.beta{background:#fff;border:1.5px solid var(--gold)}.st.idea{background:#fff;border:1.5px solid var(--mist)}
+.sat.dim{opacity:.25}
+.legend{position:absolute;bottom:26px;inset-inline-start:36px;display:flex;gap:18px;font-size:13.5px;font-weight:500;letter-spacing:.06em;color:var(--ink2);z-index:10;flex-wrap:wrap}
+.legend span{display:inline-flex;align-items:center;gap:7px}.legend i{width:7px;height:7px;border-radius:50%;display:inline-block}
+.hint{position:absolute;bottom:26px;inset-inline-end:36px;font-size:13.5px;color:var(--ink2);z-index:10;max-width:360px;text-align:left}
+.panel{position:fixed;top:0;bottom:0;inset-inline-end:0;width:min(460px,100%);z-index:40;background:rgba(255,255,255,.97);backdrop-filter:blur(14px);border-inline-start:1px solid rgba(176,138,69,.3);box-shadow:-30px 0 80px rgba(12,42,53,.18);transform:translateX(-110%);transition:transform .6s cubic-bezier(.2,.8,.2,1);overflow:auto;padding:34px}
+.panel.on{transform:translateX(0)}
+.panel .x{position:absolute;top:20px;inset-inline-end:20px;border:1px solid rgba(12,42,53,.18);background:#fff;color:var(--ink);border-radius:50%;width:34px;height:34px;cursor:pointer;font-size:14px}
+.panel .pl{width:86px;height:86px;border-radius:50%;display:grid;place-items:center;border:1px solid rgba(176,138,69,.55);background:#fff;box-shadow:inset 0 0 0 5px #fff,inset 0 0 0 6px rgba(176,138,69,.2),0 18px 40px -20px rgba(12,42,53,.4);margin:8px 0 18px}
+.panel .pl svg{width:40px;height:40px;stroke:var(--ink);fill:none;stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round}
+.panel h2{margin:4px 0 0;font-family:'Frank Ruhl Libre',Georgia,serif;font-weight:500;font-size:34px;letter-spacing:.14em;text-transform:uppercase;direction:ltr;text-align:right;color:var(--ink)}
+.panel .tl{color:var(--gold);margin:6px 0 18px;font-size:14px;font-weight:600}
+.panel p{color:var(--ink2);line-height:1.85;margin:0 0 14px;font-size:15px}
+.panel h4{margin:22px 0 10px;font-size:11px;letter-spacing:.32em;color:var(--gold);font-weight:600}
+.chips{display:flex;flex-wrap:wrap;gap:6px}.chip{display:inline-flex;align-items:center;gap:6px;border:1px solid rgba(12,42,53,.16);border-radius:999px;padding:5px 12px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;background:#fff;color:var(--ink);font-family:inherit}.chip:hover{border-color:var(--gold)}.chip i{display:none}
+.flowl{font-size:13.5px;color:var(--ink2);margin:6px 0;line-height:1.6}.flowl b{color:var(--ink);font-weight:600}
+.go{display:flex;flex-direction:column;gap:8px;margin-top:24px}
+.go a{display:flex;align-items:center;justify-content:space-between;gap:10px;border-radius:12px;padding:14px 18px;text-decoration:none;color:var(--ink);font-weight:500;border:1px solid rgba(12,42,53,.15);background:#fff;transition:border-color .3s,box-shadow .3s}
+.go a.pri{background:var(--ink);color:#fff;border-color:var(--ink);font-weight:600}.go a:hover{border-color:var(--gold);box-shadow:0 10px 24px -14px rgba(12,42,53,.4)}
+.badge{display:inline-block;font-size:10.5px;letter-spacing:.3em;color:var(--gold);border:1px solid rgba(176,138,69,.5);padding:3px 10px;border-radius:999px;font-weight:600}.badge.idea{color:var(--mist);border-color:rgba(122,135,141,.4)}
+.enter{position:fixed;inset:0;z-index:50;display:grid;place-items:center;background:rgba(245,242,235,.78);backdrop-filter:blur(12px);opacity:0;pointer-events:none;transition:opacity .45s}
+.enter.on{opacity:1;pointer-events:auto}
+.ebox{position:relative;width:min(900px,94vw);max-height:90vh;overflow:auto;background:#fff;border:1px solid rgba(176,138,69,.3);border-radius:18px;padding:38px 40px;box-shadow:0 50px 120px -30px rgba(12,42,53,.35);transform:translateY(8px);transition:transform .45s}
+.enter.on .ebox{transform:none}
+.ebox h2{margin:0 0 6px;font-family:'Frank Ruhl Libre',Georgia,serif;font-weight:500;font-size:30px;color:var(--ink)}.ebox>p{color:var(--ink2);margin:0 0 24px}
+.roles{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
+.roles a{display:flex;flex-direction:column;gap:4px;text-decoration:none;color:var(--ink);border:1px solid rgba(12,42,53,.12);border-radius:12px;padding:16px 18px;background:#FBFAF6;transition:border-color .3s,box-shadow .3s,transform .3s}
+.roles a:hover{border-color:var(--gold);box-shadow:0 14px 30px -18px rgba(12,42,53,.4);transform:translateY(-2px)}.roles a b{font-size:15.5px;font-weight:600}.roles a small{color:var(--mist);font-size:12.5px}.roles a span{display:none}
+.ebox h3{margin:28px 0 12px;font-size:11px;letter-spacing:.32em;color:var(--gold);font-weight:600}
+.mx{position:absolute;top:18px;inset-inline-end:18px;border:1px solid rgba(12,42,53,.18)!important;color:var(--ink)!important;background:#fff!important}
+@media (max-width:900px){
+ :root{--core:250px}
+ .top{padding:calc(16px + env(safe-area-inset-top)) 18px 10px}
+ .stage{height:auto;min-height:0;padding:116px 16px 40px;display:flex;flex-direction:column;align-items:center;overflow:hidden}.core .glow{inset:-40px}
+ .core{position:relative;left:auto;top:auto;transform:none;margin:24px auto 56px}.core:hover{transform:scale(1.02)}
+ .orbit,svg.flows,.hint{display:none}
+ .sats{display:grid;grid-template-columns:repeat(3,1fr);gap:28px 6px;width:100%;max-width:520px}
+ .sat{position:relative;left:auto!important;top:auto!important;margin:0;width:auto;transform:none}
+ .legend{position:static;justify-content:center;margin-top:30px}
+ .top .tag{display:none}
+}
+@media (max-width:640px){.tb a.hide-s{display:none}.word{font-size:17px;letter-spacing:.14em}.top{gap:8px}.tb{gap:6px}.tb a{padding:8px 11px;font-size:13px;letter-spacing:0;white-space:nowrap}.tb .hide-w{display:none}}
+@media (max-width:360px){.word{font-size:14px;letter-spacing:.1em}.tb a{padding:7px 9px;font-size:12px}.top{padding-inline:12px}}
+@media (max-width:420px){.sats{grid-template-columns:repeat(2,1fr)}.core .lbl b{font-size:25px;letter-spacing:.2em}}
+</style>
+</head>
+<body>
+<div class="bgart" aria-hidden="true"><img class="l" src="ops/art/muscle1.webp" alt=""><img class="r" src="ops/art/arterman.webp" alt=""></div><div class="grain" aria-hidden="true"></div>
+<header class="top"><div><div class="word">SURGERY <b>X</b></div><div class="tag">מערכת ההפעלה של המערך הכירורגי</div></div><span class="sp"></span><div class="tb"><a href="film.html" class="pri">▶ הסרט</a><a href="deck.html">מצגת</a><a href="demo.html">סיור<span class="hide-w"> מודרך</span></a><a href="vision.html" class="hide-s">החזון</a><a href="entries.html" class="hide-s">כל הכניסות</a></div></header>
+<main class="stage" id="stage">
+  <svg class="flows" id="flows" aria-hidden="true"></svg>
+  <div class="orbit o1"></div><div class="orbit o2"></div>
+  <button class="core" id="core" aria-label="כניסה ל־Surgery X">
+    <span class="glow"></span><span class="ticks"></span><span class="ring2"></span><span class="ring"></span>
+    <span class="disc"><img class="art" src="ops/art/vestorso.webp" alt=""></span>
+    <span class="lbl"><b>SURGERY <span>X</span></b><small>ENTER</small></span>
+  </button>
+  <div class="sats" id="sats"></div>
+  <div class="legend"><span><i class="st live" style="position:static"></i>פועל</span><span><i class="st beta" style="position:static"></i>בפיתוח</span><span><i class="st idea" style="position:static"></i>קונספט</span></div>
+  <div class="hint">כל המערכות חולקות את אותו מידע בזמן אמת. רחפו מעל אפליקציה כדי לראות עם מי היא מדברת.</div>
+</main>
+<aside class="panel" id="panel" aria-live="polite"></aside>
+<div class="enter" id="enter"><div class="ebox"><button class="panel-x x mx" id="ex" style="border-radius:50%;width:36px;height:36px;cursor:pointer">✕</button>
+  <h2>כניסה ל־Surgery X</h2><p>כל תפקיד רואה את המערכת שלו. ההדגמה מלאה בנתונים בדויים של המרכז הרפואי אופק.</p>
+  <div class="roles">
+    <a href="ops/dev/out/index.html?as=1234&v=orbit"><span>🛰️</span><b>מנהל הפרויקט</b><small>הכול, מתחיל ב־Pulse</small></a>
+    <a href="ops/dev/out/index.html?as=2222"><span>🏛️</span><b>מנהל המערך</b><small>תוכנית שבועית, איכות, ועדות</small></a>
+    <a href="ops/dev/out/index.html?as=4444"><span>📟</span><b>סגנית מנהל המערך</b><small>כוננויות, תוכנית לימודים</small></a>
+    <a href="ops/dev/out/index.html?as=3333"><span>🌙</span><b>צ׳יף המתמחים</b><small>תורנויות, Forge, M&amp;M</small></a>
+    <a href="ops/dev/out/index.html?as=5555"><span>🗂️</span><b>מזכירות</b><small>חדרי ניתוח, Flow, Nest</small></a>
+    <a href="ops/dev/out/index.html?as=6666"><span>🎓</span><b>סטודנטים והוראה</b><small>Campus</small></a>
+  </div>
+  <h3>אפליקציות אישיות</h3>
+  <div class="roles">
+    <a href="ops/dev/out/prefs.html?p=as-%D7%9C%D7%A0%D7%93%D7%90%D7%95"><span>👩‍⚕️</span><b>מנתחת בכירה</b><small>ד״ר רונית לנדאו</small></a>
+    <a href="ops/dev/out/prefs.html?p=as-%D7%A0%D7%A1%D7%A8"><span>🧑‍⚕️</span><b>מתמחה</b><small>ד״ר עמית ברנע</small></a>
+    <a href="#" id="ePat"><span>💙</span><b>מטופל/ת · Nest</b><small>הקישור האישי לטלפון</small></a>
+    <a href="#" id="eGp"><span>🏥</span><b>רופאת משפחה · Lumen</b><small>הקהילה</small></a>
+    <a href="hub/dev/out/dash.html?role=owner"><span>📊</span><b>Stage · אחראי הסטאז׳רים</b><small>הסבב כולו</small></a>
+    <a href="#" id="eInt"><span>📱</span><b>Stage · סטאז׳ר/ית</b><small>האפליקציה של הסטאז׳ר</small></a>
+  </div></div></div>
+<script>
+const $ = s => document.querySelector(s);
+const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const O = 'ops/dev/out/index.html?as=1234&v=';
+// the satellites: name, line, color, status, logo (svg inner), what it does, who it talks to, where to open it
+const SATS = [
+  { id: 'plan', n: 'ORBIT', t: 'תכנון ניתוחי', c: '#B08A45', s: 'beta', o: 1, a: -62.31, logo: '<circle cx="24" cy="24" r="4.5"/><ellipse cx="24" cy="24" rx="17" ry="8" transform="rotate(-25 24 24)"/><circle cx="38" cy="15.5" r="2.6"/>', d: 'המערכת שעוזרת לתכנן את הניתוח: נתוני המטופל והבקע נכנסים, ויוצאים סיווג, סיכון, גישה ניתוחית, סוג הרשת וגודלה, ציוד לחדר ומי מנתח, לפי ההנחיות העדכניות ועם המקורות. היום בקע דופן בטן ובקע מפשעתי, ובהמשך עוד ניתוחים ועבודה בתוך חדר הניתוח.', f: ['flow', 'forge', 'orbit'], go: [['ORBIT · בקעים', O + 'plan', 1]] },
+  { id: 'orbit', n: 'Pulse', t: 'המודיעין של המערך', c: '#2C5F6E', s: 'live', o: 1, a: -90.0, logo: '<path d="M4 24h8l4-10 7 22 5-14 3 6h13"/>', d: 'כל המערכות במבט אחד. ציון בריאות לכל תחום, התראות לפי דחיפות, ושאלה בשפה חופשית: מי תורן הלילה, מה דחוף היום. וגם כרטיס "מה מחכה לך" לכל רופא.', f: ['כל האפליקציות'], go: [['Pulse · תמונת מצב', O + 'orbit', 1]] },
+  { id: 'lumen', n: 'Nest', t: 'המטופל במרכז', c: '#B08A45', s: 'live', o: 1, a: 214.62, logo: '<circle cx="24" cy="24" r="6.5"/><circle cx="24" cy="24" r="13" stroke-dasharray="3 4"/><path d="M24 4v4M24 40v4M4 24h4M40 24h4M10 10l3 3M35 35l3 3M10 38l3-3M35 13l3-3"/>', d: 'קישור אישי לטלפון לכל מטופל/ת, מהרגע שנכנסים למערך. מה יש לי בשפה פשוטה, איפה אני בדרך, עדכונים מהביקור, שאלה לצוות, החלמה וחזרה הביתה. ובשליטה מלאה של הצוות: "גז וברקס" לכל סוג מידע.', f: ['flow', 'trace', 'link', 'orbit'], go: [['מסך הצוות', O + 'lumen', 1], ['ככה זה נראה אצל המטופל/ת', '#pat']] },
+  { id: 'link', n: 'Lumen', t: 'הגשר לקהילה', c: '#D9C79E', s: 'live', o: 1, a: 242.31, logo: '<circle cx="17" cy="24" r="9"/><circle cx="31" cy="24" r="9"/><circle cx="24" cy="24" r="2" fill="#fff"/>', d: 'רופא/ת המשפחה יודע/ת באותו רגע: הודעה על אשפוז, מכתב שחרור, תוצאות שמגיעות אחרי השחרור, משימות המשך ושיחה רציפה. והדרך חזרה: הפניה מהקהילה נכנסת ישר לבנק הניתוחים.', f: ['lumen', 'flow', 'trace'], go: [['מסך הקהילה במערך', O + 'link', 1], ['הפורטל של רופאת המשפחה', '#gp']] },
+  { id: 'trace', n: 'Trace', t: 'מעקב פתולוגיה', c: '#9A7B4F', s: 'live', o: 1, a: 103.85, logo: '<path d="M19 6h10M21 6v14l-8 14a3 3 0 0 0 2.6 4.5h16.8A3 3 0 0 0 35 34l-8-14V6"/><path d="M16 30h16M19 36h2M24 36h2M29 36h2"/>', d: 'כל דגימה מהחדר ועד התשובה, עד שהמטופל/ת עודכן/ה ועד הישיבה הרב־תחומית. ניתוח שסומן "נותח" פותח מעקב לבד. בדרך: בוט שסורק את המדבקה ומכניס את הדגימה.', f: ['flow', 'lumen', 'link', 'mirror'], go: [['מעקב פתולוגיה', O + 'path', 1]] },
+  { id: 'forge', n: 'Forge', t: 'פורטל המתמחים', c: '#F2B84B', s: 'live', o: 1, a: -6.92, logo: '<path d="M14 34l20-20M30 12l6 6"/><path d="M10 38l5-1-4-4z" fill="#fff"/><path d="M28 32l4-4 4 4M28 38l4-4 4 4"/>', d: 'המקום שבו מחשלים כירורגים: תיק מתמחה של 72 חודשים, לוג ניתוחים עם אישור בכיר, יעדים לפי תחום, חונכות, נוכחות בלימודים, בחינות ומשובים.', f: ['mirror', 'gate', 'orbit', 'flow'], go: [['תיק מתמחה', O + 'port', 1], ['חונכות והוראה', O + 'mentor']] },
+  { id: 'flow', n: 'Flow', t: 'בנק הניתוחים', c: '#3DD6A3', s: 'live', o: 1, a: -34.62, logo: '<path d="M8 14h14M8 24h22M8 34h14"/><path d="M30 18l8 6-8 6"/>', d: 'רשימת ההמתנה של כל הצוותים מול יעדי ההמתנה, 6 הכנות לניתוח, ושיבוץ שנכנס ישר לחדר בתוכנית השבועית. המטופל/ת מקבל/ת קישור Nest עם ההכנות.', f: ['lumen', 'trace', 'link', 'orbit'], go: [['בנק הניתוחים', O + 'bank', 1]] },
+  { id: 'mirror', n: 'Mirror', t: 'סיבוכים ו־M&M', c: '#F07B6B', s: 'live', o: 1, a: 131.54, logo: '<path d="M24 6v36" stroke-dasharray="2 3"/><path d="M8 14l8 10 6-5"/><path d="M40 14l-8 10-6-5" opacity=".55"/><path d="M8 38h32"/>', d: 'כל סיבוך לפי Clavien-Dindo, סדר היום של ישיבת יום שני ומי מציג, מגמות לפי צוות וסוג, והלקח שנשמר. מראה, כי לומדים מעצמנו.', f: ['forge', 'trace', 'orbit'], go: [['סיבוכים ו־M&M', O + 'mm', 1]] },
+  { id: 'gate', n: 'Gate', t: 'ועדות קבלה ותורני חוץ', c: '#B7DAE2', s: 'live', o: 1, a: 20.77, logo: '<path d="M10 40V20a14 14 0 0 1 28 0v20"/><path d="M17 40V22a7 7 0 0 1 14 0v18"/><path d="M6 40h36"/>', d: 'תורני החוץ, חוזים ומסמכים, מועמדים להתמחות, ציוני ראיונות, ועדות והחלטות. הדרך מתורן חוץ להתמחות.', f: ['forge', 'orbit'], go: [['תורני חוץ וועדות', O + 'ext', 1]] },
+  { id: 'stage', n: 'Stage', t: 'סבב הסטאז׳רים', c: '#5EC8F2', s: 'live', o: 1, a: 186.92, logo: '<path d="M8 38h10V30h10V22h10V14"/><path d="M34 8l2 3.5 4 .6-3 2.8.8 4-3.8-2-3.8 2 .8-4-3-2.8 4-.6z"/>', d: 'כל סבב הסטאז׳רים: הרשמה, שיבוץ שבועי, תורנויות, יומן, משובים, שיחות אמצע וסיכום. ואפליקציה לכל סטאז׳ר/ית.', f: ['campus', 'forge', 'orbit'], go: [['הדשבורד של הסבב', 'hub/dev/out/dash.html?role=owner', 1], ['האפליקציה של הסטאז׳ר/ית', '#int']] },
+  { id: 'campus', n: 'Campus', t: 'סטודנטים והוראה', c: '#D7C3A5', s: 'live', o: 1, a: 159.23, logo: '<path d="M4 18l20-9 20 9-20 9z"/><path d="M12 22v9c6 5 18 5 24 0v-9"/><path d="M44 18v10"/>', d: 'קבוצות הסטודנטים, תוכנית ההוראה השבועית, שיבוץ מתמחים מלמדים, נוכחות ומשוב.', f: ['stage', 'forge'], go: [['כניסה כאחראי הסטודנטים', 'ops/dev/out/index.html?as=6666', 1]] },
+  { id: 'relay', n: 'Relay', t: 'הודעות ואוטומציות', c: '#6FA8FF', s: 'beta', o: 1, a: 48.46, logo: '<path d="M8 12h22a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4H18l-7 6v-6H8a4 4 0 0 1-4-4V16a4 4 0 0 1 4-4z"/><path d="M38 18a8 8 0 0 1 0 12M42 14a14 14 0 0 1 0 20"/>', d: 'רשימות תפוצה, הודעות לצוות, תזכורות ואוטומציות שנשלחות לבד: בקשות לחודש, תזכורת לכונן של מחר, השבוע של כל רופא.', f: ['orbit', 'forge', 'lumen'], go: [['שליחה לצוות', O + 'dlists', 1]] },
+  { id: 'הסיעוד באותה מערכת: לוח מיטות של המחלקה, מטלות לכל משמרת שנבנות לבד מהתיק של המטופל, דיווחי כאב ושאלות מ־Nest שמגיעים ישר לאחות, ומסירת משמרת דיגיטלית (SBAR) עם הדפסה.', n: 'Ward', t: 'הסיעוד', c: '#FF9EB5', s: 'beta', o: 1, a: 76.15, logo: '<path d="M24 40s-14-8-14-19a8 8 0 0 1 14-5 8 8 0 0 1 14 5c0 11-14 19-14 19z"/><path d="M14 24h6l2-4 3 8 2-4h7"/>', d: 'הבא בתור: הצוות הסיעודי באותה מערכת. משמרות, מטלות ליד המיטה, דיווחי כאב מ־Nest שמגיעים ישר לאחות, ומסירת משמרת דיגיטלית.', f: ['lumen', 'orbit', 'relay'], go: [['Ward · המחלקה עכשיו', O + 'ward', 1]] }
+];
+const LIVE = { live: 'פועל', beta: 'בפיתוח', idea: 'קונספט' };
+let KPI = {};
+// live numbers from the demo data in this browser, when it is ready
+function readKpi() {
+  try {
+    if (!localStorage.getItem('ops_s_people')) return;
+    const Wd = ops_wardAll('1234'), B = ops_bankAll('1234'), L = ops_lumenAll('1234'), Pa = ops_pathAll('1234'), M = ops_mmAll('1234'), K = ops_linkAll('1234'), E = ops_extAll('1234'), Pt = ops_portAll('1234'), Or = ops_orbit('1234');
+    KPI = { ward: Wd.pts.filter(p => p.st === 'in').length + ' במחלקה', flow: B.cases.filter(c => !c.st).length + ' ממתינים', lumen: L.pts.filter(p => p.st !== 'out').length + ' מחוברים', trace: Pa.cases.filter(c => c.st === 'sent').length + ' דגימות בדרך', mirror: M.cases.length + ' סיבוכים', link: K.gps.length + ' רופאי קהילה', gate: E.data.apps.filter(a => ['new', 'int', 'cmte'].indexOf(a.stage) >= 0).length + ' מועמדים', forge: Pt.res.length + ' מתמחים', orbit: Or.alerts.length + ' התראות', stage: '16 סטאז׳רים', campus: '22 סטודנטים' };
+    drawSats();
+  } catch (e) {}
+}
+function geom() {
+  const st = $('#stage'), w = st.clientWidth, h = st.clientHeight, cx = w / 2, cy = h * .53, RY = Math.max(220, h * .47 - 112), R = Math.min(w * .43, RY * 1.42);
+  const K = [[1, 1], [1.14, 1.14]], core = Math.max(220, Math.min(320, 2 * RY - 210));
+  document.documentElement.style.setProperty('--core', core + 'px');
+  // the apps shrink a little on smaller screens, so neighbours on the ring never cover each other
+  document.documentElement.style.setProperty('--ss', Math.max(.7, Math.min(1, 2 * RY * Math.sin(Math.PI / 13) / 136)).toFixed(3));
+  document.querySelectorAll('.orbit').forEach((o, i) => { o.style.width = 2 * R * K[i][0] + 'px'; o.style.height = 2 * RY * K[i][1] + 'px'; o.style.top = cy + 'px'; });
+  return { cx, cy, R, RY, K };
+}
+function pos(s, g) { const k = g.K[s.o - 1], a = s.a * Math.PI / 180; return { x: g.cx + g.R * k[0] * Math.cos(a), y: g.cy + g.RY * k[1] * Math.sin(a) }; }
+function drawSats() {
+  const g = geom(), mob = innerWidth <= 900;
+  $('#sats').innerHTML = SATS.map((s, i) => { const p = pos(s, g); return `<button class="sat" data-s="${s.id}" style="${mob ? '' : `left:${p.x}px;top:${p.y}px;`}"><span class="pl"><svg viewBox="0 0 48 48">${s.logo}</svg></span><span class="st ${s.s}"></span><b>${esc(s.n)}</b><small>${esc(s.t)}</small>${KPI[s.id] ? `<span class="kpi">${esc(KPI[s.id])}</span>` : ''}</button>`; }).join('');
+  document.querySelectorAll('.sat').forEach(b => { b.onclick = () => openSat(b.dataset.s); b.onmouseenter = () => hl(b.dataset.s); b.onmouseleave = () => hl(''); });
+  drawFlows(g, mob);
+}
+// the data flowing: every satellite to the core, and the satellites that feed each other
+function drawFlows(g, mob) {
+  const sv = $('#flows'); if (mob) { sv.innerHTML = ''; return; }
+  const P = {}; SATS.forEach(s => { P[s.id] = pos(s, g); });
+  const pairs = []; SATS.forEach(s => s.f.forEach(t => { if (P[t] && s.id < t && !pairs.some(q => q[0] === t && q[1] === s.id)) pairs.push([s.id, t]); }));
+  const defs = SATS.map(s => `<linearGradient id="g_${s.id}" gradientUnits="userSpaceOnUse" x1="${P[s.id].x}" y1="${P[s.id].y}" x2="${g.cx}" y2="${g.cy}"><stop offset="0" stop-color="#B08A45" stop-opacity=".6"/><stop offset="1" stop-color="#B08A45" stop-opacity=".04"/></linearGradient>`).join('');
+  const core = SATS.map((s, i) => `<line class="fl" data-a="${s.id}" x1="${P[s.id].x}" y1="${P[s.id].y}" x2="${g.cx}" y2="${g.cy}" stroke="url(#g_${s.id})" stroke-width="1" stroke-dasharray="1 9" style="animation:dash ${3 + i % 4}s linear infinite"/>`).join('');
+  const arcs = pairs.map(([a, b], i) => { const p = P[a], q = P[b], mx = (p.x + q.x) / 2, my = (p.y + q.y) / 2, dx = mx - g.cx, dy = my - g.cy, k = .28; return `<path class="fl arc" data-a="${a}" data-b="${b}" d="M${p.x},${p.y} Q${mx + dx * k},${my + dy * k} ${q.x},${q.y}" fill="none" stroke="rgba(12,42,53,.12)" stroke-width="1" stroke-dasharray="2 10" style="animation:dash ${5 + i % 5}s linear infinite"/>`; }).join('');
+  sv.innerHTML = `<defs>${defs}</defs><style>@keyframes dash{to{stroke-dashoffset:-100}}.fl{transition:opacity .3s,stroke-width .3s}.fl.off{opacity:.08}.fl.on{stroke:rgba(176,138,69,.9)!important;stroke-width:1.6}</style>${arcs}${core}`;
+}
+function hl(id) {
+  document.querySelectorAll('.sat').forEach(b => { const s = SATS.find(x => x.id === b.dataset.s), t = SATS.find(x => x.id === id); b.classList.toggle('dim', !!id && b.dataset.s !== id && !(t && (t.f.indexOf(b.dataset.s) >= 0 || s.f.indexOf(id) >= 0))); b.classList.toggle('hl', b.dataset.s === id); });
+  document.querySelectorAll('#flows .fl').forEach(l => { const on = !!id && (l.dataset.a === id || l.dataset.b === id); l.classList.toggle('on', on && l.classList.contains('arc')); l.classList.toggle('off', !!id && !on); });
+}
+function openSat(id) {
+  const s = SATS.find(x => x.id === id), P = $('#panel');
+  const links = s.f.map(t => SATS.find(x => x.id === t)).filter(Boolean);
+  P.style.setProperty('--c', s.c);
+  P.innerHTML = `<button class="x" id="px" aria-label="סגירה">✕</button><div class="pl"><svg viewBox="0 0 48 48">${s.logo}</svg></div><span class="badge ${s.s}">${{ live: 'LIVE', beta: 'BETA', idea: 'CONCEPT' }[s.s]}</span><h2>${esc(s.n)}</h2><div class="tl">${esc(s.t)}</div><p>${esc(s.d)}</p>${KPI[s.id] ? `<p><b style="color:var(--ink)">${esc(KPI[s.id])}</b> · עכשיו בהדגמה</p>` : ''}<h4>מדבר עם</h4><div class="chips">${links.map(x => `<button class="chip" data-s="${x.id}" style="--c:${x.c}"><i></i>${esc(x.n)}</button>`).join('') || '<span class="flowl">כל האפליקציות</span>'}</div><h4>זרימת המידע</h4>${(FLOW[s.id] || []).map(x => `<div class="flowl">${x}</div>`).join('')}${s.go.length ? `<div class="go">${s.go.map(([l, u, m]) => `<a class="${m ? 'pri' : ''}" href="${u}" data-go="${u}">${esc(l)}<span>←</span></a>`).join('')}</div>` : '<div class="go"><a href="#" onclick="return false">בתכנון · נשמח לבנות אותו איתכם<span>✦</span></a></div>'}`;
+  P.classList.add('on');
+  P.querySelector('#px').onclick = () => P.classList.remove('on');
+  P.querySelectorAll('.chip').forEach(c => c.onclick = () => openSat(c.dataset.s));
+  P.querySelectorAll('[data-go]').forEach(a => { const u = a.dataset.go; if (u[0] === '#') a.onclick = e => { e.preventDefault(); special(u.slice(1)); }; });
+}
+const FLOW = {
+  orbit: ['<b>מקבל מ</b>כל המערכות: המתנה, תשובות, סיבוכים, חונכות, שאלות מטופלים', '<b>מחזיר</b> התראות לפי דחיפות לכל תפקיד'],
+  lumen: ['<b>Flow →</b> ניתוח ששובץ שולח למטופל/ת את ההכנות', '<b>Trace →</b> תשובת פתולוגיה, רק אחרי שיחה פנים אל פנים', '<b>→ Lumen</b> אותו מסע, מנקודת המבט של רופא/ת המשפחה', '<b>→ Pulse</b> כאב גבוה ושאלות שמחכות'],
+  link: ['<b>Nest →</b> אשפוז, ניתוח ושחרור נשלחים לבד', '<b>Trace →</b> תוצאות שמגיעות אחרי השחרור', '<b>→ Flow</b> הפניה מהקהילה נכנסת לרשימת ההמתנה'],
+  trace: ['<b>Flow →</b> "נותח" פותח מעקב דגימה', '<b>→ Nest / Link</b> לפי מדיניות השיתוף', '<b>→ Mirror</b> ממצאים לא צפויים לישיבה'],
+  forge: ['<b>מקבל מ</b>הלוג, מהבכירים שמאשרים, מ־Mirror (הצגות) ומהלימודים', '<b>→ Pulse</b> מתמחים מתחת לקצב'],
+  flow: ['<b>Lumen →</b> הפניות מהקהילה', '<b>→ התוכנית השבועית</b> שיבוץ לחדר', '<b>→ Nest</b> קישור עם הכנות', '<b>→ Trace</b> נותח, דגימה בדרך'],
+  mirror: ['<b>→ Forge</b> מי מציג ומה למדנו', '<b>→ Pulse</b> תמותה וסיבוכים בלי מועד'],
+  gate: ['<b>→ Forge</b> מועמד/ת שהתקבל/ה הופך/ת למתמחה', '<b>→ Pulse</b> חוזים מסתיימים ומסמכים חסרים'],
+  stage: ['<b>↔ Campus / Forge</b> מי מלמד, מי מלווה', '<b>→ Pulse</b> מה קורה בסבב'],
+  campus: ['<b>↔ Stage</b> סטודנטים וסטאז׳רים באותו מערך'],
+  relay: ['<b>מקבל מ</b>הלוחות, התוכנית והבקשות', '<b>שולח</b> לכל רופא את מה שרלוונטי אליו'],
+  ward: ['<b>Nest →</b> דיווח כאב מגיע ישר לאחות', '<b>↔ Pulse</b> עומס במחלקה']
+};
+// the links that need a token from the demo data: a patient, a community doctor, an intern
+function special(k) {
+  try {
+    if (k === 'pat') { const p = ops_lumenAll('1234').pts.find(x => x.st === 'in' && x.stage === 2) || ops_lumenAll('1234').pts[0]; location.href = 'ops/dev/out/lumen.html?t=' + p.tok; }
+    if (k === 'gp') { const d = ops_linkAll('1234'), e = d.eps.find(x => x.notes.length) || d.eps[0]; location.href = 'ops/dev/out/link.html?d=' + d.gps.find(g => g.id === e.gp).tok; }
+    if (k === 'int') { const HM = ['ינואר', 'פברואר', 'מרץ', 'אפריל', 'מאי', 'יוני', 'יולי', 'אוגוסט', 'ספטמבר', 'אוקטובר', 'נובמבר', 'דצמבר'], n = new Date(); location.href = 'hub/dev/out/intern.html?t=' + encodeURIComponent('intern0@example.com|' + HM[n.getMonth()] + ' ' + n.getFullYear()); }
+  } catch (e) { alert('ההדגמה עוד מתמלאת בנתונים. נסו שוב בעוד כמה שניות'); }
+}
+$('#core').onclick = () => $('#enter').classList.add('on');
+$('#ex').onclick = () => $('#enter').classList.remove('on');
+$('#enter').onclick = e => { if (e.target.id === 'enter') $('#enter').classList.remove('on'); };
+$('#ePat').onclick = e => { e.preventDefault(); special('pat'); };
+$('#eGp').onclick = e => { e.preventDefault(); special('gp'); };
+$('#eInt').onclick = e => { e.preventDefault(); special('int'); };
+document.addEventListener('keydown', e => { if (e.key === 'Escape') { $('#enter').classList.remove('on'); $('#panel').classList.remove('on'); } });
+addEventListener('resize', () => { clearTimeout(drawSats.t); drawSats.t = setTimeout(drawSats, 120); });
+drawSats(); readKpi();
+// links from the tour: index.html#pat, #gp, #int open the patient, the community doctor or the intern straight away
+if (/^#(pat|gp|int)$/.test(location.hash)) { const k = location.hash.slice(1); let n = 0; const tryOpen = () => { if (localStorage.getItem('ops_s_people') || n > 12) special(k); else { n++; setTimeout(tryOpen, 2500); } }; setTimeout(tryOpen, 300); }
+// the first visit fills the demo department quietly in the background; the live numbers appear when it is ready
+(() => { let done = false; try { done = !!localStorage.getItem('ops_sxfilled'); } catch (e) { return; } if (done) return;
+  const f = document.createElement('iframe'); f.src = 'ops/dev/out/index.html?as=1234'; f.setAttribute('aria-hidden', 'true'); f.tabIndex = -1;
+  f.style.cssText = 'position:fixed;left:-3000px;top:0;width:1280px;height:800px;opacity:0;pointer-events:none;border:0';
+  document.body.appendChild(f); const t = setInterval(() => { if (localStorage.getItem('ops_s_week:' + (() => { const d = new Date(); d.setDate(d.getDate() - d.getDay()); return d.toISOString().slice(0, 10); })())) { readKpi(); } }, 3000); setTimeout(() => { f.remove(); clearInterval(t); readKpi(); }, 30000); })();
+</script>
+</body>
+</html>

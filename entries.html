@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head><meta name="robots" content="noindex,nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Surgery X · כל הכניסות</title>
+<link rel="icon" href="brand/emblem.svg">
+<link rel="apple-touch-icon" href="brand/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-title" content="Surgery X">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0C2A35;--navy2:#071C24;--ink:#0C2A35;--ink2:#3E5960;--muted:#6B7B80;--bg:#EDF0F6;--card:#fff;--rule:#D9DFEA;--ind:#2C5F6E;--ind2:#1C4250;--cy:#B08A45;--vi:#9A7B4F;--sky:#D9C79E;--red:#A3402E;--grad:linear-gradient(120deg,#0C2A35,#1C4250 60%,#2C5F6E)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ink:#E8EEF8;--ink2:#B5C2D6;--muted:#8A99AE;--bg:#06141B;--card:#0E2530;--rule:#1E3A47}}
+:root[data-theme="dark"]{--ink:#E8EEF8;--ink2:#B5C2D6;--muted:#8A99AE;--bg:#06141B;--card:#0E2530;--rule:#1E3A47}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Heebo','Segoe UI',Arial,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.hero{position:relative;overflow:hidden;background:linear-gradient(125deg,#071C24 0%,#0C2A35 40%,#123C4A 75%,#1B5160 100%);color:#fff;padding:28px 16px 34px}
+.hero::after{content:"";position:absolute;inset:0;background:url(ops/art/organs.webp) left -60px center/auto 130% no-repeat;opacity:.13;pointer-events:none}
+.wrap{max-width:1180px;margin:0 auto;position:relative;z-index:1}
+.top{display:flex;align-items:center;gap:14px}
+.top img{width:52px;height:52px}
+.brand{font-weight:900;font-size:30px;letter-spacing:-.02em;direction:ltr}
+.brand b{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{color:var(--sky);font-size:14px;margin-top:2px}
+.hero h1{font-size:clamp(26px,4.4vw,44px);line-height:1.15;margin:26px 0 10px;font-weight:800;max-width:780px}
+.hero p{color:#C9D6E2;max-width:720px;line-height:1.7;margin:0;font-size:16px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.chip{border:1px solid rgba(217,199,158,.28);background:rgba(255,255,255,.06);border-radius:999px;padding:5px 12px;font-size:13px;color:#DDE8F5}
+.note{margin-top:16px;font-size:12.5px;color:#9FB2C4}
+main{padding:22px 16px 40px}
+.sec{margin:24px 0 10px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.sec h2{margin:0;font-size:20px}
+.sec span{color:var(--muted);font-size:14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.card{background:var(--card);border:1px solid var(--rule);border-radius:18px;padding:18px;display:flex;flex-direction:column;gap:10px;position:relative;overflow:hidden}
+.card::before{content:"";position:absolute;inset:0 0 auto 0;height:4px;background:var(--grad)}
+.card h3{margin:2px 0 0;font-size:18px;display:flex;align-items:center;gap:8px}
+.card p{margin:0;color:var(--ink2);font-size:14px;line-height:1.6}
+.ic{font-size:22px}
+.btns{display:flex;flex-wrap:wrap;gap:7px;margin-top:auto;padding-top:4px}
+.b{display:inline-flex;align-items:center;gap:6px;border-radius:10px;padding:8px 12px;font-size:13.5px;font-weight:600;border:1px solid var(--rule);background:transparent;color:var(--ink);cursor:pointer;font-family:inherit}
+.b:hover{border-color:var(--ind);color:var(--ind)}
+.b.main{background:var(--ind);border-color:var(--ind);color:#fff}
+.b.main:hover{background:var(--ind2);color:#fff}
+.b small{opacity:.7;font-weight:500}
+.soon{opacity:.96}
+.soon .tag{position:absolute;top:14px;left:14px;font-size:11.5px;font-weight:700;color:var(--ind);background:rgba(44,95,110,.1);border-radius:999px;padding:3px 9px}
+.soon ul{margin:0;padding-inline-start:18px;color:var(--ink2);font-size:13.5px;line-height:1.7}
+.people{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:8px}
+.pp{display:flex;gap:10px;align-items:center;background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:9px 12px}
+.av{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:13px;color:#fff;background:var(--grad);flex:none}
+.pp b{display:block;font-size:14px}
+.pp small{color:var(--muted);font-size:12px}
+footer{max-width:1180px;margin:0 auto;padding:10px 16px 34px;color:var(--muted);font-size:12.5px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+@media (max-width:600px){.hero{padding-top:20px}.brand{font-size:24px}.top img{width:42px;height:42px}}
+</style>
+</head>
+<body>
+<header class="hero"><div class="wrap">
+  <div class="top"><img src="brand/emblem.svg" alt=""><div><div class="brand">Surgery <b>X</b></div><div class="sub">מערכת ההפעלה של מערך כירורגי</div></div></div>
+  <h1>כל המערך הכירורגי במקום אחד: מהסטודנט בשנה הרביעית ועד מנהל המערך</h1>
+  <p>תוכנית שבועית, תורנויות וכוננויות עם מנוע שיבוץ, סבב סטאז׳רים מלא, אפליקציה אישית לכל רופא, בקשות, משובים ושיחות, הודעות והתראות. הכול נבנה בתוך מערך פעיל ונבדק בעבודה יומיומית.</p>
+  <div class="chips"><span class="chip">מנהל · סגן · אחראי מתמחים · אחראי סטאז׳רים</span><span class="chip">22 בכירים · 20 מתמחים בשני אגפים</span><span class="chip">14 תורני חוץ · 6 עוזרי רופא · 16 סטאז׳רים · 22 סטודנטים</span><span class="chip">ועדות קבלה · הוראה</span></div>
+  <div class="chips" style="margin-top:14px"><a class="b main" href="demo.html" style="font-size:15px;padding:10px 16px">▶ סיור מודרך · 10 דקות</a></div>
+  <div class="note">הדגמה: המרכז הרפואי אופק הוא בית חולים בדיוני. כל השמות, הצוות והנתונים בדויים.</div>
+</div></header>
+
+<main><div class="wrap">
+  <div class="sec"><h2>פורטל המערך</h2><span>כניסה לפי תפקיד. כל תפקיד רואה את המסכים שלו</span></div>
+  <div class="grid">
+    <a class="card" href="ops/dev/out/index.html?as=1234"><h3><span class="ic">🧭</span>מנהל הפרויקט</h3><p>מבט על הכול: תוכנית שבועית, לוחות, צוות, הגדרות, יומן פעילות חי.</p><div class="btns"><span class="b main">כניסה</span></div></a>
+    <a class="card" href="ops/dev/out/index.html?as=2222"><h3><span class="ic">🏛️</span>מנהל המערך</h3><p>התוכנית השבועית של כל המערך: חדרי ניתוח, ביקורים, מרפאות, ייעוצים ומיון.</p><div class="btns"><span class="b main">כניסה</span></div></a>
+    <a class="card" href="ops/dev/out/index.html?as=4444"><h3><span class="ic">📟</span>סגנית מנהל המערך</h3><p>לוח הכוננויות של הבכירים: פעיל, פסיבי וחצי, עם מנוע שיבוץ ובדיקת חוקים.</p><div class="btns"><span class="b main">כניסה</span></div></a>
+    <a class="card" href="ops/dev/out/index.html?as=3333"><h3><span class="ic">🌙</span>צ׳יף המתמחים</h3><p>לוח התורנויות: מיון 1 ו-2, מחלקה, מיינור ושישי בוקר. בקשות, מכסות ושוויון.</p><div class="btns"><span class="b main">כניסה</span></div></a>
+    <a class="card" href="ops/dev/out/index.html?as=6666"><h3><span class="ic">🎓</span>אחראי הסטודנטים וההוראה</h3><p>תוכנית ההוראה השבועית לסטודנטים, שיבוץ מתמחים מלמדים.</p><div class="btns"><span class="b main">כניסה</span></div></a>
+    <a class="card" href="ops/dev/out/index.html?as=1234&v=port"><h3><span class="ic">📒</span>תיק מתמחה ולוג ניתוחים</h3><p>20 מתמחים: ציר של 72 חודשים, יעדים לפי תחום, לוג ניתוחים עם אישור בכיר, בחינות, קורסים, מחקר ומשובים.</p><div class="btns"><span class="b main">כניסה</span><span class="b">חדש</span></div></a>
+    <a class="card" href="ops/dev/out/index.html?as=5555"><h3><span class="ic">🗂️</span>מזכירות</h3><p>צוות, פרטי קשר, קישורים אישיים והודעות.</p><div class="btns"><span class="b main">כניסה</span></div></a>
+  </div>
+
+  <div class="sec"><h2>האפליקציה האישית של הרופא</h2><span>היום שלי, השבוע, הלוחות, הצוות והבקשות</span></div>
+  <div class="people" id="docs"></div>
+
+  <div class="sec"><h2>סבב הסטאז׳רים</h2><span>דשבורד לאחראים ואפליקציה לכל סטאז׳ר</span></div>
+  <div class="grid">
+    <div class="card"><h3><span class="ic">📊</span>דשבורד הסבב</h3><p>הרשמה, שיבוץ שבועי, תורנויות, יומן סבב, משובים, שיחות אמצע וסיכום לפי טופס משרד הבריאות, אקדמיה.</p>
+      <div class="btns"><a class="b main" href="hub/dev/out/dash.html?role=owner">אחראי הסטאז׳רים</a><a class="b" href="hub/dev/out/dash.html?role=viewer">מתמחה מלווה <small>צפייה</small></a><a class="b" href="hub/dev/out/dash.html?role=director">מנהל המערך</a></div></div>
+    <div class="card"><h3><span class="ic">📱</span>האפליקציה של הסטאז׳ר</h3><p>הסבב שלי, תוכנית שבועית, תורנויות, דיווח יומי, התקדמות במיומנויות, ללמוד וצוות.</p>
+      <div class="btns" id="interns"></div></div>
+  </div>
+
+  <div class="sec"><h2>מודולים חדשים</h2><span>על אותו בסיס נתונים, מחוברים זה לזה</span></div>
+  <div class="grid">
+    <a class="card" href="ops/dev/out/index.html?as=1234&v=orbit"><h3><span class="ic">🛰️</span>Pulse · תמונת מצב</h3><p>כל המודולים במבט אחד: ציון בריאות לכל תחום והתראות לפי דחיפות, עם קישור ישר למסך שמטפל בהן.</p><div class="btns"><span class="b main">כניסה</span></div></a>
+    <div class="card"><h3><span class="ic">🗓️</span>בנק ניתוחים אלקטיביים</h3><p>7 צוותים וכ־150 מטופלים: המתנה מול יעד לפי עדיפות, 6 הכנות לניתוח ושיבוץ לחדר מתוך התוכנית השבועית.</p><div class="btns"><a class="b main" href="ops/dev/out/index.html?as=1234&v=bank">מנהל הפרויקט</a><a class="b" href="ops/dev/out/index.html?as=5555">מזכירות</a></div></div>
+    <div class="card"><h3><span class="ic">🧫</span>מעקב פתולוגיה</h3><p>כל דגימה מהחדר ועד התשובה, עדכון המטופל וישיבה רב־תחומית. ניתוח שמסומן "נותח" בבנק פותח מעקב לבד.</p><div class="btns"><a class="b main" href="ops/dev/out/index.html?as=1234&v=path">כניסה</a><a class="b" href="ops/dev/out/prefs.html?p=as-%D7%92%D7%95%D7%9C%D7%9F&tab=log">האפליקציה של המנתח</a></div></div>
+    <a class="card" href="ops/dev/out/index.html?as=1234&v=mm"><h3><span class="ic">📉</span>סיבוכים וישיבת M&amp;M</h3><p>רישום לפי Clavien-Dindo, חזרה לחדר ואשפוז חוזר, סדר היום של ישיבת יום שני עם מציגים, ומגמות לפי דרגה וצוות.</p><div class="btns"><span class="b main">כניסה</span></div></a>
+    <div class="card"><h3><span class="ic">🤝</span>תורני חוץ וועדות קבלה</h3><p>חוזים, תורנויות מול מכסה ומסמכים חסרים. מועמדים להתמחות, ציוני ראיונות, ועדות והחלטות.</p><div class="btns"><a class="b main" href="ops/dev/out/index.html?as=1234&v=ext">כניסה</a><a class="b" href="ops/dev/out/index.html?as=3333">צ׳יף המתמחים</a></div></div>
+  </div>
+
+  <div class="sec"><h2>בדרך</h2><span>המודולים הבאים</span></div>
+  <div class="grid">
+    <div class="card soon"><span class="tag">בפיתוח</span><h3><span class="ic">🧑‍🏫</span>חונכות והוראה</h3><ul><li>חונך לכל מתמחה וסטאז׳ר, פגישות ויעדים</li><li>הוראה ליד המיטה וסמינרים, נוכחות ומשוב</li><li>סטודנטים: קבוצות, מטלות והערכה</li></ul></div>
+    <div class="card soon"><span class="tag">בפיתוח</span><h3><span class="ic">💬</span>Pulse · עוזר חכם</h3><ul><li>סיכום בוקר אישי לכל רופא</li><li>שאלות על הלוחות בשפה חופשית</li><li>חדשות כירורגיה מותאמות לתחום</li></ul></div>
+  </div>
+</div></main>
+<footer><span>Surgery X · הדגמה מקומית. הנתונים נשמרים רק בדפדפן הזה.</span><button class="b" id="reset">איפוס ההדגמה</button></footer>
+<script>
+const DOCS = [['אלמוג', 'פרופ׳ דניאל אלמוג', 'מנהל המערך'], ['שחר', 'ד״ר מיכל שחר', 'סגנית מנהל המערך'], ['גרינברג', 'ד״ר עמרי גרינברג', 'אחראי המתמחים'], ['רז', 'ד״ר איתן רז', 'אחראי הסטאז׳רים'], ['טל', 'ד״ר יעל טל', 'מתמחה · הלוג שלי', 'log'], ['ברנע', 'ד״ר עמית ברנע', 'צ׳יף · הלוג שלי', 'log'], ['לנדאו', 'ד״ר רונית לנדאו', 'בכירה · אישור ניתוחים', 'log'], ['רוזנטל', 'ד״ר מרינה רוזנטל', 'רופאת בית'], ['ויצמן', 'ד״ר איתי ויצמן', 'תורן חוץ'], ['פולק', 'ד״ר נועם פולק', 'תורן חוץ · ממתין לקבלה'], ['אהרוני', 'אורית אהרוני', 'עוזרת רופא']];
+const ini = n => n.replace(/^(פרופ׳|ד״ר)\s+/, '').split(' ').map(x => x[0]).join('').slice(0, 2);
+document.getElementById('docs').innerHTML = DOCS.map(d => `<a class="pp" href="ops/dev/out/prefs.html?p=as-${encodeURIComponent(d[0])}${d[3] ? '&tab=' + d[3] : ''}"><span class="av">${ini(d[1])}</span><span><b>${d[1]}</b><small>${d[2]}</small></span></a>`).join('');
+const HM = ['ינואר', 'פברואר', 'מרץ', 'אפריל', 'מאי', 'יוני', 'יולי', 'אוגוסט', 'ספטמבר', 'אוקטובר', 'נובמבר', 'דצמבר'], now = new Date(), CUR = HM[now.getMonth()] + ' ' + now.getFullYear();
+const INT = [['נועה כהן', 'רגיל'], ['איתי לוי', 'אלקטיב'], ['אריאל חזן', 'רגיל'], ['דניאל אברהם', 'רק תורנויות']], IDX = [0, 1, 2, 7];
+document.getElementById('interns').innerHTML = INT.map((x, k) => `<a class="b${k ? '' : ' main'}" href="hub/dev/out/intern.html?t=${encodeURIComponent('intern' + IDX[k] + '@example.com|' + CUR)}">${x[0]} <small>${x[1]}</small></a>`).join('');
+// the first visit fills the demo department quietly in the background, so the portal is ready when someone clicks a role
+(() => { let done = false; try { done = !!localStorage.getItem('ops_sxfilled'); } catch (e) { return; } if (done) return;
+  const f = document.createElement('iframe'); f.src = 'ops/dev/out/index.html?as=1234'; f.setAttribute('aria-hidden', 'true'); f.tabIndex = -1;
+  f.style.cssText = 'position:fixed;left:-3000px;top:0;width:1280px;height:800px;opacity:0;pointer-events:none;border:0';
+  document.body.appendChild(f); setTimeout(() => f.remove(), 30000); })();
+document.getElementById('reset').onclick = () => { try { Object.keys(localStorage).forEach(k => localStorage.removeItem(k)); sessionStorage.clear(); } catch (e) {} location.reload(); };
+</script>
+</body>
+</html>
