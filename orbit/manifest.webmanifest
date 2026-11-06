@@ -1,0 +1,21 @@
+{
+  "name": "ORBIT · The Surgical Mentor",
+  "short_name": "ORBIT",
+  "description": "Your surgical mentor: live cases with James, an atlas of ten operations and a skills lab. No patient data.",
+  "lang": "en",
+  "dir": "ltr",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "fullscreen",
+  "display_override": ["fullscreen", "standalone"],
+  "orientation": "any",
+  "background_color": "#F5F0E7",
+  "theme_color": "#F5F0E7",
+  "categories": ["education", "medical"],
+  "icons": [
+    { "src": "art/icon/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "art/icon/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "art/icon/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
+    { "src": "art/icon/icon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}

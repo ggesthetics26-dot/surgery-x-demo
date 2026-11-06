@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head><meta name="robots" content="noindex,nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>הצגת מטופל בביקור · מצגת לדוגמה</title>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;800&family=Frank+Ruhl+Libre:wght@700;900&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0C2A35;--deep:#071C24;--gold:#B08A45;--champ:#D9C79E;--ivory:#EDE6D6;--mist:#C9D6DA}
+*{box-sizing:border-box}html,body{margin:0;height:100%;background:var(--deep);color:var(--ivory);font-family:'Heebo',Arial,sans-serif;overflow:hidden}
+.s{position:absolute;inset:0;display:none;flex-direction:column;justify-content:center;padding:7vh 8vw 12vh}.s.on{display:flex}
+.s .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.13;mix-blend-mode:screen;pointer-events:none}
+.s>*:not(.bg){position:relative;max-width:1000px}
+small.k{letter-spacing:.2em;color:var(--champ);font-weight:700;font-size:clamp(11px,1.2vw,14px)}
+h1{font-family:'Frank Ruhl Libre',serif;font-size:clamp(32px,5.6vw,72px);line-height:1.08;margin:10px 0 14px;color:#fff}
+h2{font-family:'Frank Ruhl Libre',serif;font-size:clamp(26px,4vw,50px);line-height:1.12;margin:8px 0 18px;color:#fff}
+p{font-size:clamp(16px,1.8vw,22px);color:var(--mist);line-height:1.55;margin:0 0 10px}
+ol,ul{font-size:clamp(16px,2vw,25px);line-height:1.65;margin:0;padding-inline-start:1.2em}li::marker{color:var(--gold);font-weight:800}li b{color:var(--champ)}
+.q{border-inline-start:4px solid var(--gold);background:rgba(12,42,53,.6);border-radius:10px;padding:14px 18px;font-size:clamp(17px,2.1vw,26px);color:#fff;margin:6px 0 14px}
+.foot{position:absolute;bottom:0;left:0;right:0;display:flex;align-items:center;gap:12px;padding:10px 4vw calc(10px + env(safe-area-inset-bottom));background:linear-gradient(0deg,rgba(7,28,36,.95),transparent);font-size:12px;color:#9FB2B8}
+.foot span{flex:1}.foot button{border:1px solid rgba(217,199,158,.35);background:transparent;color:var(--ivory);border-radius:8px;min-width:44px;height:36px;font-size:16px;cursor:pointer}
+.bar{position:absolute;top:0;right:0;height:3px;background:var(--gold);transition:width .25s}
+@media (max-width:700px){.s{padding:6vh 6vw 14vh}}
+</style>
+</head>
+<body>
+<div class="bar" id="bar"></div>
+<section class="s on"><img class="bg" src="../art/maker.webp" alt="" onerror="this.remove()"><small class="k">CAMPUS · שבוע 1 · הרצאה</small><h1>הצגת מטופל בביקור</h1><p>דקה וחצי שבהן כל הצוות יודע מה קורה ומה עושים היום</p><p style="margin-top:20px;font-size:14px;color:#9FB2B8">מצגת לדוגמה של Surgery X Academy · תוכן כללי שנכתב להדגמה · המרכז הרפואי אופק (בדוי)</p></section>
+<section class="s"><img class="bg" src="../art/organs.webp" alt="" onerror="this.remove()"><small class="k">למה זה חשוב</small><h2>הביקור זז מהר</h2><ul><li>בביקור עוברים על הרבה מטופלים בזמן קצר</li><li>הצגה מסודרת חוסכת זמן ומונעת טעויות</li><li>זו גם הדרך שלכם להראות שאתם חושבים כמו רופאים</li></ul></section>
+<section class="s"><img class="bg" src="../art/torso.webp" alt="" onerror="this.remove()"><small class="k">המבנה</small><h2>חמישה חלקים, תמיד באותו סדר</h2><ol><li><b>משפט פתיחה:</b> גיל, סיבת האשפוז, היום מהניתוח</li><li><b>מה השתנה</b> מאתמול ומה המטופל/ת מרגיש/ה</li><li><b>סימנים חיוניים ובדיקה</b> ממוקדת</li><li><b>מעבדה ודימות</b> רק מה שחשוב</li><li><b>הערכה ותוכנית</b> לפי בעיות</li></ol></section>
+<section class="s"><img class="bg" src="../art/stomach.webp" alt="" onerror="this.remove()"><small class="k">משפט הפתיחה</small><h2>משפט אחד שאומר הכול</h2><div class="q">בת 58, יום שני אחרי כריתת כיס מרה לפרוסקופית, מרגישה טוב ומתכוננת לשחרור</div><p>דוגמה בדויה. מתחילים מהשורה התחתונה ואז מוסיפים פרטים</p></section>
+<section class="s"><img class="bg" src="../art/liver.webp" alt="" onerror="this.remove()"><small class="k">הערכה ותוכנית</small><h2>מה אתם חושבים ומה עושים היום</h2><ul><li>בעיה אחרי בעיה, לא מערכת אחרי מערכת</li><li>לכל בעיה: מה המצב ומה הצעד הבא</li><li>אומרים מה אתם חושבים. מותר לטעות, אסור לא לחשוב</li></ul></section>
+<section class="s"><img class="bg" src="../art/back.webp" alt="" onerror="this.remove()"><small class="k">טעויות נפוצות</small><h2>מה לא לעשות</h2><ul><li>להקריא את כל התיק</li><li>לדלג על הבדיקה הגופנית</li><li>לסיים בלי הערכה ובלי תוכנית</li><li>להזכיר פרטים מזהים במסדרון</li></ul></section>
+<section class="s"><img class="bg" src="../art/theatre.webp" alt="" onerror="this.remove()"><small class="k">תרגול</small><h2>עכשיו אתם</h2><ol><li>בוחרים מטופל/ת מהביקור של הבוקר (בלי שם)</li><li>דקה וחצי להצגה</li><li>משוב מהמתמחה ומהקבוצה</li></ol></section>
+<section class="s"><img class="bg" src="../art/maker.webp" alt="" onerror="this.remove()"><small class="k">סיכום</small><h2>שלושה דברים לזכור</h2><ol><li>משפט פתיחה אחד שאומר הכול</li><li>תמיד אותו סדר</li><li>מסיימים בתוכנית</li></ol><p style="margin-top:20px;font-size:14px;color:#9FB2B8">Surgery X Academy · מצגת לדוגמה</p></section>
+<div class="foot"><button id="nx" aria-label="הבא">›</button><span id="ct"></span><button id="pv" aria-label="הקודם">‹</button></div>
+<script>
+const SL = [...document.querySelectorAll('.s')]; let I = 0;
+const show = n => { I = Math.max(0, Math.min(SL.length - 1, n)); SL.forEach((s, j) => s.classList.toggle('on', j === I)); document.getElementById('ct').textContent = (I + 1) + ' / ' + SL.length + ' · הצגת מטופל בביקור'; document.getElementById('bar').style.width = ((I + 1) / SL.length * 100) + '%'; };
+document.getElementById('nx').onclick = () => show(I + 1); document.getElementById('pv').onclick = () => show(I - 1);
+document.addEventListener('keydown', e => { if (e.key === 'ArrowLeft' || e.key === ' ' || e.key === 'PageDown') show(I + 1); if (e.key === 'ArrowRight' || e.key === 'PageUp') show(I - 1); });
+let sx = 0; document.addEventListener('touchstart', e => { sx = e.touches[0].clientX; }, { passive: true }); document.addEventListener('touchend', e => { const dx = e.changedTouches[0].clientX - sx; if (Math.abs(dx) > 50) show(I + (dx > 0 ? 1 : -1)); });
+show(0);
+</script>
+</body>
+</html>

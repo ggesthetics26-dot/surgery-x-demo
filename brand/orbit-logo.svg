@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 200" role="img" aria-label="ORBIT · Operating Room Brain for Intelligent Training">
+  <rect width="760" height="200" rx="28" fill="#0A2236"/>
+  <g transform="translate(40 28) scale(3)">
+    <circle cx="24" cy="24" r="21" fill="none" stroke="#FFFFFF" stroke-opacity=".28" stroke-width="1"/>
+    <ellipse cx="24" cy="24" rx="21" ry="8.5" transform="rotate(-32 24 24)" fill="none" stroke="#14B8A6" stroke-width="1.8"/>
+    <circle cx="24" cy="24" r="5.2" fill="#FFFFFF"/>
+    <circle cx="40.6" cy="13.8" r="3" fill="#14B8A6"/>
+  </g>
+  <text x="220" y="112" font-family="Heebo, Assistant, Arial, sans-serif" font-size="78" font-weight="800" letter-spacing="14" fill="#FFFFFF">ORBIT</text>
+  <text x="222" y="150" font-family="Heebo, Assistant, Arial, sans-serif" font-size="16.5" font-weight="500" letter-spacing="2" fill="#FFFFFF" fill-opacity=".7"><tspan fill="#14B8A6" font-weight="800">O</tspan>PERATING <tspan fill="#14B8A6" font-weight="800">R</tspan>OOM <tspan fill="#14B8A6" font-weight="800">B</tspan>RAIN <tspan fill-opacity=".6">for</tspan> <tspan fill="#14B8A6" font-weight="800">I</tspan>NTELLIGENT <tspan fill="#14B8A6" font-weight="800">T</tspan>RAINING</text>
+</svg>

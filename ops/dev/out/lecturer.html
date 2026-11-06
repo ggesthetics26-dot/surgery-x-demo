@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head><meta name="robots" content="noindex,nofollow"><script src="../../WebApp.js?v=1794007405"></script><script src="../mock.js?v=1794007405"></script><script src="../../Academy.js?v=1794007405"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0C2A35">
+<meta name="apple-mobile-web-app-title" content="Academy">
+<title>דף המרצה · Academy</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;800;900&family=Frank+Ruhl+Libre:wght@500;700;900&display=swap" rel="stylesheet">
+<script>
+const LOGO_K = 'data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20200%20108%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22s%22%20x1%3D%220%22%20y1%3D%221%22%20x2%3D%220%22%20y2%3D%220%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23C9A35E%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23B08A45%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Cg%20transform%3D%22translate%28140%2022%29%22%3E%3Ccircle%20cx%3D%2228%22%20cy%3D%2240%22%20r%3D%2224%22%20fill%3D%22url%28%23s%29%22%2F%3E%3Crect%20x%3D%220%22%20y%3D%2240%22%20width%3D%2256%22%20height%3D%2230%22%20fill%3D%22%23fff%22%2F%3E%3Crect%20x%3D%220%22%20y%3D%2242%22%20width%3D%2256%22%20height%3D%224%22%20rx%3D%222%22%20fill%3D%22%230C2A35%22%2F%3E%3Crect%20x%3D%229%22%20y%3D%2252%22%20width%3D%2238%22%20height%3D%223.5%22%20rx%3D%221.75%22%20fill%3D%22%230C2A35%22%20opacity%3D%22.55%22%2F%3E%3Crect%20x%3D%2217%22%20y%3D%2261%22%20width%3D%2222%22%20height%3D%223.5%22%20rx%3D%221.75%22%20fill%3D%22%230C2A35%22%20opacity%3D%22.3%22%2F%3E%3C%2Fg%3E%3Ctext%20x%3D%22132%22%20y%3D%2258%22%20text-anchor%3D%22end%22%20font-family%3D%22Heebo%2CArial%2Csans-serif%22%20font-size%3D%2238%22%20font-weight%3D%22800%22%20fill%3D%22%230C2A35%22%3E%D7%90%D7%95%D7%A4%D7%A7%3C%2Ftext%3E%3Ctext%20x%3D%22132%22%20y%3D%2284%22%20text-anchor%3D%22end%22%20font-family%3D%22Heebo%2CArial%2Csans-serif%22%20font-size%3D%2216%22%20font-weight%3D%22500%22%20fill%3D%22%233E5960%22%3E%D7%94%D7%9E%D7%A8%D7%9B%D7%96%20%D7%94%D7%A8%D7%A4%D7%95%D7%90%D7%99%3C%2Ftext%3E%3C%2Fsvg%3E';
+const LOGO_C = 'data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20230%20100%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23B08A45%22%2F%3E%3Cstop%20offset%3D%22.55%22%20stop-color%3D%22%23C9A35E%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23A8823F%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Ctext%20x%3D%226%22%20y%3D%2260%22%20font-family%3D%22Heebo%2CHelvetica%2CArial%2Csans-serif%22%20font-size%3D%2244%22%20font-weight%3D%22800%22%20fill%3D%22%230C2A35%22%20letter-spacing%3D%22-1%22%3ESurgery%3C%2Ftext%3E%3Cpath%20d%3D%22M172%2022%20L196%2046%20L220%2022%20L227%2029%20L203%2053%20L227%2077%20L220%2084%20L196%2060%20L172%2084%20L165%2077%20L189%2053%20L165%2029%20Z%22%20fill%3D%22url%28%23g%29%22%2F%3E%3Ctext%20x%3D%228%22%20y%3D%2284%22%20font-family%3D%22Heebo%2CHelvetica%2CArial%2Csans-serif%22%20font-size%3D%2212%22%20font-weight%3D%22600%22%20fill%3D%22%236B7B80%22%20letter-spacing%3D%222.6%22%3EDEPARTMENT%20OS%3C%2Ftext%3E%3C%2Fsvg%3E';
+const EMBLEM = 'data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20256%20256%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23E4D3A8%22%2F%3E%3Cstop%20offset%3D%22.5%22%20stop-color%3D%22%23C9A35E%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23A8823F%22%2F%3E%3C%2FlinearGradient%3E%3ClinearGradient%20id%3D%22n%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%220%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%2313353F%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23071C24%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Crect%20width%3D%22256%22%20height%3D%22256%22%20rx%3D%2256%22%20fill%3D%22url%28%23n%29%22%2F%3E%3Ccircle%20cx%3D%22128%22%20cy%3D%22128%22%20r%3D%2292%22%20fill%3D%22none%22%20stroke%3D%22rgba%28143%2C216%2C255%2C.18%29%22%20stroke-width%3D%222%22%2F%3E%3Cpath%20d%3D%22M70%2062%20L128%20120%20L186%2062%20L194%2070%20L136%20128%20L194%20186%20L186%20194%20L128%20136%20L70%20194%20L62%20186%20L120%20128%20L62%2070%20Z%22%20fill%3D%22url%28%23g%29%22%2F%3E%3Ccircle%20cx%3D%22128%22%20cy%3D%22128%22%20r%3D%229%22%20fill%3D%22%23071C24%22%20stroke%3D%22%23D9C79E%22%20stroke-width%3D%223%22%2F%3E%3C%2Fsvg%3E';
+</script>
+
+<style>
+:root{--navy:#0C2A35;--ink:#0C2A35;--ink2:#3E5960;--muted:#6B7B80;--bg:#F2F4F9;--card:#FFFFFF;--rule:#E1E6EF;--gold:#B08A45;--bronze:#9A7B4F;--slate:#2C5F6E;--red:#A3402E;--ok:#56702F;--ok-l:#EEF1E4;--amb:#8A6A2E;--amb-l:#F5EEDF;--sb:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ink:#E9EEF7;--ink2:#BAC6D6;--muted:#8D9BAF;--bg:#06141B;--card:#0E2530;--rule:#1F3B48;--ok-l:#1E2A17;--amb-l:#33291A}}
+:root[data-theme="dark"]{--ink:#E9EEF7;--ink2:#BAC6D6;--muted:#8D9BAF;--bg:#06141B;--card:#0E2530;--rule:#1F3B48;--ok-l:#1E2A17;--amb-l:#33291A}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Heebo','Segoe UI',Arial,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.5;font-size:16px}
+button,input,select,textarea{font:inherit;color:inherit}
+.wrap{max-width:720px;margin:0 auto;padding:0 14px calc(96px + var(--sb))}
+.top{position:sticky;top:0;z-index:20;background:rgba(7,28,36,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:#fff;padding:calc(8px + env(safe-area-inset-top)) 14px 8px}
+.top .bx{max-width:720px;margin:0 auto;display:flex;align-items:center;gap:10px}.top img{width:32px;height:32px;border-radius:8px}
+.brand{display:flex;flex-direction:column;line-height:1.1;min-width:0}.brand b{font-weight:900;font-size:1.05rem;color:#D9C79E;direction:ltr;text-align:right}.brand small{font-size:.7rem;color:#9FB6C6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:62vw}
+.hero{position:relative;overflow:hidden;margin:14px 0;border-radius:20px;padding:20px 18px;color:#fff;background:linear-gradient(140deg,#071C24 0%,#0C2A35 45%,#163F4D 100%)}
+.hero img{position:absolute;left:-30px;top:-10px;width:240px;opacity:.2;pointer-events:none;mix-blend-mode:screen}
+.hero small{position:relative;color:#D9C79E;font-weight:700;letter-spacing:.08em;font-size:.72rem}.hero h1{position:relative;font-family:'Frank Ruhl Libre',serif;font-size:1.65rem;margin:4px 0;line-height:1.15}.hero p{position:relative;margin:0;color:#C9D6DA;font-size:.92rem}
+.kp{position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:14px}.kp div{background:rgba(217,199,158,.1);border-radius:12px;padding:8px;text-align:center}.kp b{display:block;font-family:'Frank Ruhl Libre',serif;font-size:1.4rem;color:#D9C79E}.kp span{font-size:.75rem;color:#C9D6DA}
+.card{background:var(--card);border:1px solid var(--rule);border-radius:16px;padding:14px;margin:0 0 12px}
+.card h2{margin:0 0 8px;font-size:1.05rem;display:flex;align-items:center;gap:8px}.card h2 .sp{flex:1}.card h2 small{font-weight:500;color:var(--muted);font-size:.8rem}
+.sub{color:var(--muted);font-size:.85rem;margin:-4px 0 10px}
+.row{display:flex;align-items:center;gap:10px;padding:9px 0;border-top:1px solid var(--rule);flex-wrap:wrap}.row:first-of-type{border-top:0}
+.row .t{flex:1;min-width:180px}.row .t b{display:block;font-size:.95rem;overflow-wrap:anywhere}.row .t small{display:block;color:var(--muted);font-size:.8rem}
+.row .h{flex:none;width:52px;font-weight:800;color:var(--slate);font-size:.85rem;text-align:center;line-height:1.2}.row .h small{display:block;color:var(--muted);font-weight:500;font-size:.72rem}
+.row.me{background:var(--amb-l);border-radius:12px;padding:9px 8px;border-top-color:transparent}
+.tag{display:inline-block;font-size:.72rem;font-weight:800;border-radius:999px;padding:0 8px;background:var(--amb-l);color:var(--amb)}.tag.ok{background:var(--ok-l);color:var(--ok)}
+.btn{border:1px solid var(--rule);background:var(--card);border-radius:12px;min-height:40px;padding:0 14px;font-weight:700;cursor:pointer}
+.btn.pri{background:#0C2A35;color:#D9C79E;border-color:#0C2A35}.btn.sm{min-height:34px;padding:0 10px;font-size:.85rem}
+.acts{display:flex;gap:6px;flex-wrap:wrap;width:100%}.acts .in{flex:1;min-width:160px}
+.in{width:100%;border:1px solid var(--rule);border-radius:12px;background:var(--card);min-height:42px;padding:8px 12px;font-size:16px}
+.wks{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin:0 0 10px}.wks::-webkit-scrollbar{display:none}.wks button{flex:none;border:1px solid var(--rule);background:var(--card);border-radius:12px;min-height:40px;padding:0 12px;font-weight:700;cursor:pointer}.wks button.on{background:#0C2A35;color:#D9C79E;border-color:#0C2A35}
+.note{background:var(--amb-l);border-radius:12px;padding:10px 12px;font-size:.88rem;margin:0 0 10px}
+.tabs{position:fixed;bottom:0;left:0;right:0;z-index:30;background:rgba(7,28,36,.96);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);padding:6px 6px calc(6px + var(--sb));display:flex;justify-content:center}
+.tabs .bx{display:flex;gap:2px;max-width:720px;width:100%}.tabs button{flex:1;border:0;background:none;color:#9FB2B8;display:flex;flex-direction:column;align-items:center;gap:1px;padding:6px 2px;border-radius:12px;cursor:pointer;min-width:0}
+.tabs button i{font-style:normal;font-size:1.2rem}.tabs button span{font-size:.72rem;font-weight:700;white-space:nowrap}.tabs button.on{color:#D9C79E;background:rgba(217,199,158,.12)}
+.toast{position:fixed;bottom:calc(84px + var(--sb));left:50%;transform:translateX(-50%);background:#0C2A35;color:#fff;border-radius:999px;padding:11px 18px;font-weight:700;z-index:99;max-width:92vw;text-align:center}
+.err{max-width:460px;margin:80px auto;text-align:center;padding:24px}
+.ov{position:fixed;inset:0;z-index:60;background:#071C24;display:flex;flex-direction:column}.ov header{display:flex;align-items:center;gap:10px;padding:calc(8px + env(safe-area-inset-top)) 12px 8px;color:#EDE6D6}.ov header b{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.ov header button{border:1px solid rgba(217,199,158,.35);background:none;color:#EDE6D6;border-radius:8px;min-width:40px;height:36px;cursor:pointer}
+.ov iframe{flex:1;border:0;width:100%}.ov .sk{flex:1;padding:8vh 8vw;color:#EDE6D6;overflow:auto}.ov .sk h2{font-family:'Frank Ruhl Libre',serif;font-size:1.8rem;color:#fff;margin:6px 0 10px}.ov .sk small{color:#D9C79E;letter-spacing:.14em}
+.foot{text-align:center;color:var(--muted);font-size:.75rem;margin:18px 0}
+</style>
+</head>
+<body>
+<div id="app"><div class="err">טוען…</div></div>
+<script>
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const QS = new URLSearchParams(location.search), LTK = QS.get('l') || '';
+const call = (fn, ...a) => new Promise((ok, no) => google.script.run.withSuccessHandler(ok).withFailureHandler(no)[fn](...a));
+const LART = location.pathname.indexOf('/dev/out/') >= 0 ? new URL('../../art/', location.href).href : location.origin + '/ops/art/';
+const LDECK = location.pathname.indexOf('/dev/out/') >= 0 ? new URL('../../academy/', location.href).href : location.origin + '/ops/academy/';
+const LDS = ['ראשון', 'שני', 'שלישי', 'רביעי', 'חמישי', 'שישי', 'שבת'], LDS2 = ['א׳', 'ב׳', 'ג׳', 'ד׳', 'ה׳', 'ו׳', 'ש׳'];
+let LD = null, LTAB = QS.get('tab') || 'home', LWK = 0, LUN = null;
+const ldm = s => s ? +s.slice(8, 10) + '/' + +s.slice(5, 7) : '';
+const lpd = s => new Date(s + 'T12:00:00');
+function ltoast(x) { const e = document.createElement('div'); e.className = 'toast'; e.textContent = x; document.body.appendChild(e); setTimeout(() => e.remove(), 2600); }
+async function lload() { try { LD = await call('ops_acadLect', LTK); if (!LWK) LWK = Math.max(1, Math.min(LD.rot.weeks, LD.rot.week || 1)); LUN = LD.unav.slice(); ldraw(); } catch (e) { $('#app').innerHTML = `<div class="err"><h2>לא הצלחנו לפתוח את הקישור</h2><p>${esc(e.message || e)}</p></div>`; } }
+async function lsave(kind, x, msg) { try { LD = await call('ops_acadLectSave', LTK, kind, x); LUN = LD.unav.slice(); if (msg) ltoast(msg); ldraw(); return true; } catch (e) { ltoast(e.message || e); return false; } }
+const ldisc = k => (LD.disc.find(d => d[0] === k) || ['', ''])[1];
+function ldraw() {
+  const d = LD, tabs = [['home', '🏠', 'בית'], ['rev', '📤', 'לאישור'], ['mine', '🎓', 'המפגשים שלי'], ['sched', '🗓️', 'לו״ז'], ['unav', '🚫', 'לא מתאים']].concat(d.shifts.length ? [['eve', '🌙', 'ערב']] : []);
+  if (!tabs.some(t => t[0] === LTAB)) LTAB = 'home';
+  const top = `<header class="top"><div class="bx"><img src="${typeof EMBLEM !== 'undefined' ? EMBLEM : ''}" alt=""><div class="brand"><b>Academy</b><small>דף המרצה · ${esc(d.rot.name)}</small></div></div></header>`;
+  $('#app').innerHTML = top + `<main class="wrap">${({ home: lHome, rev: lRev, mine: lMine, sched: lSched, unav: lUnav, eve: lEve })[LTAB]()}<p class="foot">Academy · Surgery X · המרכז הרפואי אופק (בדוי)</p></main><nav class="tabs"><div class="bx">${tabs.map(([k, i, l]) => `<button data-tab="${k}" class="${LTAB === k ? 'on' : ''}"><i>${i}</i><span>${l}</span></button>`).join('')}</div></nav>`;
+  $$('[data-tab]').forEach(b => b.onclick = () => { LTAB = b.dataset.tab; ldraw(); scrollTo(0, 0); });
+  lbind();
+}
+const lSessRow = (x, opt) => `<div class="row${opt && opt.me && x.mine ? ' me' : ''}"><span class="h">${LDS2[x.day]}<small>${ldm(x.date)}</small></span><span class="t"><b>${esc(x.t)}</b><small>שבוע ${x.w} · ${x.from} · ${esc(LD.kinds[x.kind] || '')} · ${esc(ldisc(x.disc))}${opt && opt.who && !x.mine ? ' · ' + esc(x.lname || 'בלי מלמד/ת') : ''}</small></span>${opt && opt.r && x.r ? `<span class="tag ok">${x.r.n ? '⭐ ' + x.r.avg + ' · ' + x.r.n + ' דירוגים' : 'עוד אין דירוגים'}</span>` : ''}${x.deck ? `<button class="btn sm" data-deck="${x.id}">▶</button>` : ''}</div>`;
+function lHome() {
+  const d = LD, pend = d.review.filter(x => !x.pro.ok), next = d.mine.filter(x => x.date >= d.today).sort((a, b) => a.date.localeCompare(b.date))[0], hr = new Date().getHours();
+  return `<section class="hero"><img src="${LART}instr.webp" alt="" onerror="this.remove()"><small>${d.me.staff ? 'מרצה מהמערך' : 'מרצה אורח/ת'} · ${esc(d.me.title || '')}</small><h1>${hr < 12 ? 'בוקר טוב' : hr < 18 ? 'צהריים טובים' : 'ערב טוב'}, ${esc(d.me.name)}</h1><p>תודה שאת/ה מלמד/ת בסבב. כאן כל מה שקשור אליך, בלי סיסמה ובלי כניסה למערכת</p><div class="kp"><div><b>${pend.length}</b><span>מחכות לאישור שלך</span></div><div><b>${d.mine.length}</b><span>מפגשים שלך</span></div><div><b>${d.unav.length}</b><span>ימים שלא מתאימים</span></div></div></section>`
+    + (pend.length ? `<section class="card"><h2>📤 מחכות לאישור המקצועי שלך<span class="sp"></span><button class="btn sm" data-tab2="rev">לכולן</button></h2>${pend.slice(0, 3).map(x => lSessRow(x, { who: 1 })).join('')}</section>` : '')
+    + `<section class="card"><h2>🎓 המפגש הבא שלך</h2>${next ? lSessRow(next) : '<p class="sub" style="margin:0">אין מפגשים קרובים בסבב הזה</p>'}</section>`
+    + (d.shifts.length ? `<section class="card"><h2>🌙 משמרות ערב שבהן את/ה אחראי/ת<span class="sp"></span><button class="btn sm" data-tab2="eve">לכל הערבים</button></h2><p class="sub" style="margin:0">${d.shifts.filter(s => s.d >= d.today).length} ערבים קרובים</p></section>` : '')
+    + (d.lib.length ? `<section class="card"><h2>📚 חומרים בתחום שלך באקדמיה</h2>${d.lib.slice(0, 6).map(b => `<div class="row"><span class="t"><b>${esc(b.t)}</b><small>${ldm(b.d)} · ${esc(ldisc(b.disc))}</small></span></div>`).join('')}</section>` : '');
+}
+function lRev() {
+  const d = LD, L = d.review.slice().sort((a, b) => (a.pro.ok ? 1 : 0) - (b.pro.ok ? 1 : 0) || a.date.localeCompare(b.date));
+  return `<section class="card"><h2>📤 מצגות לאישור מקצועי<span class="sp"></span><small>${L.filter(x => !x.pro.ok).length} ממתינות</small></h2><p class="sub">אחראי הסטודנטים כבר עבר על המצגת. נשאר רק המבט המקצועי שלך: אישור, או הערה שתגיע אליו</p>${L.map(x => `${lSessRow(x, { who: 1 })}${x.notes.length ? `<div class="note">💬 ${x.notes.map(esc).join(' · ')}</div>` : ''}<div class="acts">${x.pro.ok ? `<span class="tag ok">✓ אישרת ${ldm(x.pro.ok.slice(0, 10))}${x.pro.note ? ' · ' + esc(x.pro.note) : ''}</span>` : `<input class="in" id="n_${x.id}" maxlength="300" placeholder="הערה (רשות)"><button class="btn pri sm" data-ok="${x.id}">✓ אישור</button><button class="btn sm" data-note="${x.id}">💬 שליחת הערה</button>`}</div>`).join('') || '<p class="sub" style="margin:0">לא נשלחו אליך מצגות</p>'}${L.filter(x => !x.pro.ok).length > 1 ? '<div class="acts" style="margin-top:12px"><button class="btn pri" id="okAll">✓ אישור של כל הממתינות</button></div>' : ''}</section>`;
+}
+function lMine() {
+  const d = LD, L = d.mine.slice().sort((a, b) => a.date.localeCompare(b.date));
+  return `<section class="card"><h2>🎓 המפגשים שלי בסבב<span class="sp"></span><small>${L.length}</small></h2><p class="sub">הדירוג של הסטודנטים אחרי כל מפגש, בלי שמות</p>${L.map(x => lSessRow(x, { r: 1 })).join('') || '<p class="sub" style="margin:0">עוד לא שובצת</p>'}</section>`;
+}
+function lSched() {
+  const d = LD, w = LWK, L = d.all.filter(x => x.w === w).sort((a, b) => a.day - b.day);
+  return `<section class="card"><h2>🗓️ הלו״ז של הסבב</h2><div class="wks">${Array.from({ length: d.rot.weeks }, (_, i) => `<button data-wk="${i + 1}" class="${i + 1 === w ? 'on' : ''}">שבוע ${i + 1}</button>`).join('')}</div>${L.map(x => lSessRow(x, { me: 1, who: 1 })).join('')}</section><p class="sub">המפגשים שלך מסומנים</p>`;
+}
+function lUnav() {
+  const d = LD, L = LUN.slice().sort((a, b) => a.d.localeCompare(b.d));
+  return `<section class="card"><h2>🚫 מתי לא מתאים לי</h2><p class="sub">ימים שבהם לא תוכל/י ללמד. אחראי הסטודנטים רואה אותם והשיבוץ האוטומטי מדלג עליהם</p>${L.map((u, i) => `<div class="row"><span class="h">${ldm(u.d)}</span><span class="t"><b>${LDS[lpd(u.d).getDay()]}</b><small>${esc(u.why || '')}</small></span><button class="btn sm" data-udel="${i}" aria-label="הסרה">✕</button></div>`).join('') || '<p class="sub">עוד לא סימנת ימים</p>'}<div class="acts" style="margin-top:10px"><input class="in" id="uD" type="date" min="${d.rot.start}" aria-label="תאריך"><input class="in" id="uW" maxlength="80" placeholder="סיבה (רשות)"><button class="btn pri" id="uAdd">הוספה</button></div></section>`;
+}
+function lEve() {
+  const d = LD;
+  return `<section class="card"><h2>🌙 משמרות הערב שלי במיון</h2><p class="sub">הערבים שבהם את/ה המתמחה האחראי/ת על הסטודנטים, עם השמות של אותו ערב בלבד</p>${d.shifts.map(s => `<div class="row${s.d === d.today ? ' me' : ''}"><span class="h">${LDS2[lpd(s.d).getDay()]}<small>${ldm(s.d)}</small></span><span class="t"><b>${s.students.length ? esc(s.students.join(' · ')) : 'עוד אין סטודנטים'}</b><small>${s.d < d.today ? 'היה' : 'בקרוב'}</small></span></div>`).join('')}</section>`;
+}
+function lDeck(x) {
+  const real = ['scrub-in', 'present'].indexOf(x.deck) >= 0, v = document.createElement('div'); v.className = 'ov';
+  v.innerHTML = `<header><b>${esc(x.t)}</b><button id="ovX" aria-label="סגירה">✕</button></header>${real ? `<iframe src="${LDECK + x.deck}.html" title="${esc(x.t)}"></iframe>` : `<div class="sk"><small>ACADEMY · שלד המצגת</small><h2>${esc(x.t)}</h2><p>כאן תעלה המצגת שלך. המערכת בנתה שלד מהסילבוס: מטרות, מבנה ושאלות לדיון.</p></div>`}`;
+  document.body.appendChild(v); v.querySelector('#ovX').onclick = () => v.remove();
+}
+function lbind() {
+  $$('[data-tab2]').forEach(b => b.onclick = () => { LTAB = b.dataset.tab2; ldraw(); });
+  $$('[data-wk]').forEach(b => b.onclick = () => { LWK = +b.dataset.wk; ldraw(); });
+  $$('[data-deck]').forEach(b => b.onclick = () => lDeck(LD.all.find(x => x.id === b.dataset.deck)));
+  $$('[data-ok]').forEach(b => b.onclick = () => lsave('ok', { id: b.dataset.ok, note: ($('#n_' + b.dataset.ok) || {}).value || '' }, '✓ אישרת. תודה!'));
+  $$('[data-note]').forEach(b => b.onclick = () => { const t = ($('#n_' + b.dataset.note) || {}).value || ''; if (!t.trim()) return ltoast('כתבו הערה קודם'); lsave('note', { id: b.dataset.note, t }, '💬 ההערה נשלחה לאחראי הסטודנטים'); });
+  if ($('#okAll')) $('#okAll').onclick = async () => { for (const x of LD.review.filter(y => !y.pro.ok)) { if (!(await lsave('ok', { id: x.id, note: '' }))) return; } ltoast('✓ אישרת את כולן. תודה!'); };
+  $$('[data-udel]').forEach(b => b.onclick = () => { LUN.splice(+b.dataset.udel, 1); lsave('unav', { list: LUN }, 'הוסר'); });
+  if ($('#uAdd')) $('#uAdd').onclick = () => { const dd = $('#uD').value; if (!dd) return ltoast('בחרו תאריך'); LUN.push({ d: dd, why: $('#uW').value }); lsave('unav', { list: LUN }, '✓ נשמר ונשלח לאחראי הסטודנטים'); };
+}
+lload();
+</script>
+</body>
+</html>

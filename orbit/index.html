@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head><meta name="robots" content="noindex,nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ORBIT · The Surgical Mentor</title>
+<meta name="description" content="ORBIT, the surgical mentor: operate a live case with James, an attending who talks you through it, an atlas of ten operations in three approaches and a skills lab. Part of Surgery X. No patient data.">
+<meta name="theme-color" content="#F5F0E7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#15120E" media="(prefers-color-scheme: dark)">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="art/icon/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="art/icon/icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="ORBIT">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/orbit.css?v=1794007405">
+</head>
+<body>
+<header class="top" id="top"></header>
+<main id="app" aria-live="polite"></main>
+<div class="present" id="presenter" hidden role="dialog" aria-label="Presentation mode"></div>
+<noscript><p style="padding:20px">ORBIT needs JavaScript.</p></noscript>
+<script src="js/core.js?v=1794007405"></script>
+<script src="js/art.js?v=1794007405"></script>
+<script src="js/scenes/wall.js?v=1794007405"></script>
+<script src="js/scenes/chole.js?v=1794007405"></script>
+<script src="js/scenes/appendix.js?v=1794007405"></script>
+<script src="js/scenes/groin.js?v=1794007405"></script>
+<!-- procedures: one file each, order = order on the home grid -->
+<script src="data/procedures/lap-chole.js?v=1794007405"></script>
+<script src="data/procedures/appendectomy.js?v=1794007405"></script>
+<script src="data/procedures/inguinal-hernia.js?v=1794007405"></script>
+<script src="data/procedures/ventral-hernia.js?v=1794007405"></script>
+<script src="data/procedures/right-hemicolectomy.js?v=1794007405"></script>
+<script src="data/procedures/sigmoid-colectomy.js?v=1794007405"></script>
+<script src="data/procedures/sleeve-gastrectomy.js?v=1794007405"></script>
+<script src="data/procedures/gastric-bypass.js?v=1794007405"></script>
+<script src="data/procedures/hiatal-hernia.js?v=1794007405"></script>
+<script src="data/procedures/adhesiolysis-sbo.js?v=1794007405"></script>
+<script src="js/refs.js?v=1794007405"></script>
+<script src="js/moves.js?v=1794007405"></script>
+<script src="js/instruments.js?v=1794007405"></script>
+<script src="js/skills.js?v=1794007405"></script>
+<script src="js/sim.js?v=1794007405"></script>
+<script src="js/live.js?v=1794007405"></script>
+<script src="data/live/lap-chole.js?v=1794007405"></script>
+<script src="data/live/appendectomy.js?v=1794007405"></script>
+<script src="data/live/tapp.js?v=1794007405"></script>
+<!-- recorded voice of James: rebuilt by tools/live-voice.py; empty until the lines are recorded -->
+<script src="audio/voice.js?v=1794007405"></script>
+<script src="js/app.js?v=1794007405"></script>
+<script>if ('serviceWorker' in navigator && location.protocol !== 'file:') navigator.serviceWorker.register('sw.js').catch(function () {});</script>
+</body>
+</html>

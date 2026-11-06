@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head><meta name="robots" content="noindex,nofollow"><script src="../../WebApp.js?v=1794007405"></script><script src="../mock.js?v=1794007405"></script><script src="../../Academy.js?v=1794007405"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0C2A35">
+<meta name="apple-mobile-web-app-title" content="Campus">
+<title>Campus · Academy</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;800;900&family=Frank+Ruhl+Libre:wght@500;700;900&display=swap" rel="stylesheet">
+<script>
+const LOGO_K = 'data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20200%20108%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22s%22%20x1%3D%220%22%20y1%3D%221%22%20x2%3D%220%22%20y2%3D%220%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23C9A35E%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23B08A45%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Cg%20transform%3D%22translate%28140%2022%29%22%3E%3Ccircle%20cx%3D%2228%22%20cy%3D%2240%22%20r%3D%2224%22%20fill%3D%22url%28%23s%29%22%2F%3E%3Crect%20x%3D%220%22%20y%3D%2240%22%20width%3D%2256%22%20height%3D%2230%22%20fill%3D%22%23fff%22%2F%3E%3Crect%20x%3D%220%22%20y%3D%2242%22%20width%3D%2256%22%20height%3D%224%22%20rx%3D%222%22%20fill%3D%22%230C2A35%22%2F%3E%3Crect%20x%3D%229%22%20y%3D%2252%22%20width%3D%2238%22%20height%3D%223.5%22%20rx%3D%221.75%22%20fill%3D%22%230C2A35%22%20opacity%3D%22.55%22%2F%3E%3Crect%20x%3D%2217%22%20y%3D%2261%22%20width%3D%2222%22%20height%3D%223.5%22%20rx%3D%221.75%22%20fill%3D%22%230C2A35%22%20opacity%3D%22.3%22%2F%3E%3C%2Fg%3E%3Ctext%20x%3D%22132%22%20y%3D%2258%22%20text-anchor%3D%22end%22%20font-family%3D%22Heebo%2CArial%2Csans-serif%22%20font-size%3D%2238%22%20font-weight%3D%22800%22%20fill%3D%22%230C2A35%22%3E%D7%90%D7%95%D7%A4%D7%A7%3C%2Ftext%3E%3Ctext%20x%3D%22132%22%20y%3D%2284%22%20text-anchor%3D%22end%22%20font-family%3D%22Heebo%2CArial%2Csans-serif%22%20font-size%3D%2216%22%20font-weight%3D%22500%22%20fill%3D%22%233E5960%22%3E%D7%94%D7%9E%D7%A8%D7%9B%D7%96%20%D7%94%D7%A8%D7%A4%D7%95%D7%90%D7%99%3C%2Ftext%3E%3C%2Fsvg%3E';
+const LOGO_C = 'data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20230%20100%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23B08A45%22%2F%3E%3Cstop%20offset%3D%22.55%22%20stop-color%3D%22%23C9A35E%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23A8823F%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Ctext%20x%3D%226%22%20y%3D%2260%22%20font-family%3D%22Heebo%2CHelvetica%2CArial%2Csans-serif%22%20font-size%3D%2244%22%20font-weight%3D%22800%22%20fill%3D%22%230C2A35%22%20letter-spacing%3D%22-1%22%3ESurgery%3C%2Ftext%3E%3Cpath%20d%3D%22M172%2022%20L196%2046%20L220%2022%20L227%2029%20L203%2053%20L227%2077%20L220%2084%20L196%2060%20L172%2084%20L165%2077%20L189%2053%20L165%2029%20Z%22%20fill%3D%22url%28%23g%29%22%2F%3E%3Ctext%20x%3D%228%22%20y%3D%2284%22%20font-family%3D%22Heebo%2CHelvetica%2CArial%2Csans-serif%22%20font-size%3D%2212%22%20font-weight%3D%22600%22%20fill%3D%22%236B7B80%22%20letter-spacing%3D%222.6%22%3EDEPARTMENT%20OS%3C%2Ftext%3E%3C%2Fsvg%3E';
+const EMBLEM = 'data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20256%20256%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23E4D3A8%22%2F%3E%3Cstop%20offset%3D%22.5%22%20stop-color%3D%22%23C9A35E%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23A8823F%22%2F%3E%3C%2FlinearGradient%3E%3ClinearGradient%20id%3D%22n%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%220%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%2313353F%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23071C24%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Crect%20width%3D%22256%22%20height%3D%22256%22%20rx%3D%2256%22%20fill%3D%22url%28%23n%29%22%2F%3E%3Ccircle%20cx%3D%22128%22%20cy%3D%22128%22%20r%3D%2292%22%20fill%3D%22none%22%20stroke%3D%22rgba%28143%2C216%2C255%2C.18%29%22%20stroke-width%3D%222%22%2F%3E%3Cpath%20d%3D%22M70%2062%20L128%20120%20L186%2062%20L194%2070%20L136%20128%20L194%20186%20L186%20194%20L128%20136%20L70%20194%20L62%20186%20L120%20128%20L62%2070%20Z%22%20fill%3D%22url%28%23g%29%22%2F%3E%3Ccircle%20cx%3D%22128%22%20cy%3D%22128%22%20r%3D%229%22%20fill%3D%22%23071C24%22%20stroke%3D%22%23D9C79E%22%20stroke-width%3D%223%22%2F%3E%3C%2Fsvg%3E';
+</script>
+
+<style>
+:root{--navy:#0C2A35;--ink:#0C2A35;--ink2:#3E5960;--muted:#6B7B80;--bg:#F2F4F9;--card:#FFFFFF;--rule:#E1E6EF;--gold:#B08A45;--champ:#D9C79E;--bronze:#9A7B4F;--slate:#2C5F6E;--red:#A3402E;--red-l:#FBEDEA;--ok:#56702F;--ok-l:#EEF1E4;--amb:#8A6A2E;--amb-l:#F5EEDF;--sb:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ink:#E9EEF7;--ink2:#BAC6D6;--muted:#8D9BAF;--bg:#06141B;--card:#0E2530;--rule:#1F3B48;--red-l:#3A1F1A;--ok-l:#1E2A17;--amb-l:#33291A}}
+:root[data-theme="dark"]{--ink:#E9EEF7;--ink2:#BAC6D6;--muted:#8D9BAF;--bg:#06141B;--card:#0E2530;--rule:#1F3B48;--red-l:#3A1F1A;--ok-l:#1E2A17;--amb-l:#33291A}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Heebo','Segoe UI',Arial,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.5;font-size:16px}
+button,input,select,textarea{font:inherit;color:inherit}
+.wrap{max-width:560px;margin:0 auto;padding:0 14px calc(96px + var(--sb))}
+.top{position:sticky;top:0;z-index:20;background:rgba(7,28,36,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:#fff;padding:calc(8px + env(safe-area-inset-top)) 14px 8px}
+.top .bx{max-width:560px;margin:0 auto;display:flex;align-items:center;gap:10px}.top img{width:32px;height:32px;border-radius:8px}
+.brand{display:flex;flex-direction:column;line-height:1.1;min-width:0}.brand b{font-weight:900;font-size:1.05rem;color:#D9C79E;direction:ltr;text-align:right}.brand small{font-size:.7rem;color:#9FB6C6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:60vw}
+.hero{position:relative;overflow:hidden;margin:14px 0;border-radius:20px;padding:20px 18px;color:#fff;background:linear-gradient(140deg,#071C24 0%,#0C2A35 45%,#163F4D 100%)}
+.hero img{position:absolute;left:-30px;top:-10px;width:230px;opacity:.22;pointer-events:none;mix-blend-mode:screen}
+.hero small{color:#D9C79E;font-weight:700;letter-spacing:.08em;font-size:.72rem;position:relative}.hero h1{position:relative;font-family:'Frank Ruhl Libre',serif;font-size:1.7rem;margin:4px 0 4px;line-height:1.15}.hero p{position:relative;margin:0;color:#C9D6DA;font-size:.92rem}
+.wkbar{position:relative;display:flex;gap:4px;margin-top:12px}.wkbar i{flex:1;height:6px;border-radius:6px;background:rgba(217,199,158,.2)}.wkbar i.on{background:#B08A45}.wkbar i.now{background:#D9C79E}
+.card{background:var(--card);border:1px solid var(--rule);border-radius:16px;padding:14px;margin:0 0 12px}
+.card h2{margin:0 0 8px;font-size:1.05rem;display:flex;align-items:center;gap:8px}.card h2 .sp{flex:1}.card h2 small{font-weight:500;color:var(--muted);font-size:.8rem}
+.sub{color:var(--muted);font-size:.85rem;margin:-4px 0 10px}
+.row{display:flex;align-items:center;gap:10px;padding:9px 0;border-top:1px solid var(--rule)}.row:first-of-type{border-top:0}
+.row .t{flex:1;min-width:0}.row .t b{display:block;font-size:.95rem;overflow-wrap:anywhere}.row .t small{display:block;color:var(--muted);font-size:.8rem}
+.row .h{flex:none;width:52px;font-weight:800;color:var(--slate);font-size:.85rem;text-align:center;line-height:1.2}.row .h small{display:block;color:var(--muted);font-weight:500;font-size:.72rem}
+.row.now{background:var(--amb-l);border-radius:12px;padding:9px 8px;border-top-color:transparent}
+.tag{display:inline-block;font-size:.72rem;font-weight:800;border-radius:999px;padding:0 8px;background:var(--amb-l);color:var(--amb)}
+.btn{border:1px solid var(--rule);background:var(--card);border-radius:12px;min-height:40px;padding:0 14px;font-weight:700;cursor:pointer}
+.btn.pri{background:#0C2A35;color:#D9C79E;border-color:#0C2A35}.btn.sm{min-height:34px;padding:0 10px;font-size:.85rem}.btn.blk{width:100%;margin-top:10px;min-height:46px}
+.seg{display:flex;gap:6px;flex-wrap:wrap}.seg button{border:1px solid var(--rule);background:var(--card);border-radius:999px;min-height:38px;padding:0 13px;font-weight:700;cursor:pointer;font-size:.9rem}.seg button.on{background:#0C2A35;color:#D9C79E;border-color:#0C2A35}
+.wks{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin:0 0 10px;padding-bottom:2px}.wks::-webkit-scrollbar{display:none}.wks button{flex:none;border:1px solid var(--rule);background:var(--card);border-radius:12px;min-height:40px;padding:0 12px;font-weight:700;cursor:pointer}.wks button.on{background:#0C2A35;color:#D9C79E;border-color:#0C2A35}.wks button.now{box-shadow:inset 0 0 0 2px #B08A45}
+label.f{display:block;font-weight:700;font-size:.85rem;margin:10px 0 4px;color:var(--ink2)}
+.in{width:100%;border:1px solid var(--rule);border-radius:12px;background:var(--card);min-height:44px;padding:8px 12px;font-size:16px}
+textarea.in{min-height:70px;resize:vertical}
+.chk{display:flex;flex-wrap:wrap;gap:6px}.chk label{display:flex;align-items:center;gap:6px;border:1px solid var(--rule);border-radius:999px;padding:5px 11px;font-size:.88rem;cursor:pointer}.chk input{accent-color:#B08A45}
+.days{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}.days button{border:1px solid var(--rule);background:var(--card);border-radius:12px;padding:7px 4px;cursor:pointer;text-align:center;min-width:0}.days button b{display:block;font-size:.8rem}.days button span{font-size:1.05rem}
+.days .v{background:var(--ok-l);border-color:transparent}.days .p{background:var(--amb-l);border-color:transparent}.days .x{background:var(--red-l);border-color:transparent}.days .m{border-style:dashed;border-color:var(--red)}.days .on{box-shadow:inset 0 0 0 2px #B08A45}.days button:disabled{opacity:.4}
+.stars{display:flex;gap:2px}.stars button{border:0;background:none;font-size:1.25rem;color:var(--rule);cursor:pointer;padding:2px}.stars button.on{color:#B08A45}
+.kp{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:0 0 10px}.kp div{background:var(--bg);border-radius:12px;padding:8px;text-align:center}.kp b{display:block;font-size:1.3rem;font-family:'Frank Ruhl Libre',serif;color:var(--bronze)}.kp span{font-size:.75rem;color:var(--muted)}
+.note{background:var(--amb-l);border-radius:12px;padding:10px 12px;font-size:.88rem;margin:0 0 10px}
+.tabs{position:fixed;bottom:0;left:0;right:0;z-index:30;background:rgba(7,28,36,.96);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);padding:6px 6px calc(6px + var(--sb));display:flex;justify-content:center}
+.tabs .bx{display:flex;gap:2px;max-width:560px;width:100%}.tabs button{flex:1;border:0;background:none;color:#9FB2B8;display:flex;flex-direction:column;align-items:center;gap:1px;padding:6px 2px;border-radius:12px;cursor:pointer;min-width:0}
+.tabs button i{font-style:normal;font-size:1.2rem}.tabs button span{font-size:.72rem;font-weight:700;white-space:nowrap}.tabs button.on{color:#D9C79E;background:rgba(217,199,158,.12)}
+.toast{position:fixed;bottom:calc(84px + var(--sb));left:50%;transform:translateX(-50%);background:#0C2A35;color:#fff;border-radius:999px;padding:11px 18px;font-weight:700;z-index:99;max-width:92vw;text-align:center}
+.err{max-width:460px;margin:80px auto;text-align:center;padding:24px}
+.ov{position:fixed;inset:0;z-index:60;background:#071C24;display:flex;flex-direction:column}.ov header{display:flex;align-items:center;gap:10px;padding:calc(8px + env(safe-area-inset-top)) 12px 8px;color:#EDE6D6}.ov header b{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.ov header button{border:1px solid rgba(217,199,158,.35);background:none;color:#EDE6D6;border-radius:8px;min-width:40px;height:36px;cursor:pointer}
+.ov iframe{flex:1;border:0;width:100%}.ov .sk{flex:1;padding:8vh 8vw;color:#EDE6D6;overflow:auto}.ov .sk h2{font-family:'Frank Ruhl Libre',serif;font-size:1.8rem;color:#fff;margin:6px 0 10px}.ov .sk small{color:#D9C79E;letter-spacing:.14em}
+.foot{text-align:center;color:var(--muted);font-size:.75rem;margin:18px 0}
+</style>
+</head>
+<body>
+<div id="app"><div class="err">טוען…</div></div>
+<script>
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const QS = new URLSearchParams(location.search), STK = QS.get('s') || '';
+const call = (fn, ...a) => new Promise((ok, no) => google.script.run.withSuccessHandler(ok).withFailureHandler(no)[fn](...a));
+const SART = location.pathname.indexOf('/dev/out/') >= 0 ? new URL('../../art/', location.href).href : location.origin + '/ops/art/';
+const SDECK = location.pathname.indexOf('/dev/out/') >= 0 ? new URL('../../academy/', location.href).href : location.origin + '/ops/academy/';
+const SDS = ['א׳', 'ב׳', 'ג׳', 'ד׳', 'ה׳', 'ו׳', 'ש׳'], SROLE = { w: 'צפייה', h: 'עזרה', d: 'ביצוע בהדרכה' };
+let SD = null, STAB = QS.get('tab') || 'today', SWK = 0, SRD = '', SREP = null, SFB = '', SFBV = { l: 4, i: 4, r: 4 };
+const sdm = s => s ? +s.slice(8, 10) + '/' + +s.slice(5, 7) : '';
+const spd = s => new Date(s + 'T12:00:00');
+const sadd = (s, n) => { const d = spd(s); d.setDate(d.getDate() + n); return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); };
+function stoast(x) { const e = document.createElement('div'); e.className = 'toast'; e.textContent = x; document.body.appendChild(e); setTimeout(() => e.remove(), 2600); }
+async function sload() { try { SD = await call('ops_acadStud', STK); if (!SWK) SWK = Math.max(1, Math.min(SD.rot.weeks, SD.rot.week || 1)); sdraw(); } catch (e) { $('#app').innerHTML = `<div class="err"><h2>לא הצלחנו לפתוח את הקישור</h2><p>${esc(e.message || e)}</p><p>אפשר לבקש קישור חדש מאחראי הסטודנטים.</p></div>`; } }
+async function ssave(kind, x, msg) { try { SD.mine = await call('ops_acadStudSave', STK, kind, x); if (msg) stoast(msg); sdraw(); return true; } catch (e) { stoast(e.message || e); return false; } }
+const sWork = () => { const L = []; let d = SD.today; for (let k = 0; k < 14 && L.length < 5; k++) { if (spd(d).getDay() <= 4 && d >= SD.rot.start) L.push(d); d = sadd(d, -1); } return L.reverse(); };
+function sdraw() {
+  const d = SD, sh = d.shifts.length > 0, tabs = [['today', '🏠', 'היום'], ['sched', '🗓️', 'לו״ז'], ['rep', '📝', 'דיווח'], ['log', '📓', 'פנקס']].concat(sh ? [['eve', '🌙', 'ערב']] : []);
+  if (!tabs.some(t => t[0] === STAB)) STAB = 'today';
+  const top = `<header class="top"><div class="bx"><img src="${typeof EMBLEM !== 'undefined' ? EMBLEM : ''}" alt=""><div class="brand"><b>Campus</b><small>${esc(d.rot.name)} · ${esc(d.me.gname)}</small></div></div></header>`;
+  const body = ({ today: sToday, sched: sSched, rep: sRep, log: sLog, eve: sEve })[STAB]();
+  $('#app').innerHTML = top + `<main class="wrap">${body}<p class="foot">Campus · Surgery X Academy · המרכז הרפואי אופק (בדוי)</p></main><nav class="tabs"><div class="bx">${tabs.map(([k, i, l]) => `<button data-tab="${k}" class="${STAB === k ? 'on' : ''}"><i>${i}</i><span>${l}</span></button>`).join('')}</div></nav>`;
+  $$('[data-tab]').forEach(b => b.onclick = () => { STAB = b.dataset.tab; sdraw(); scrollTo(0, 0); });
+  sbind();
+}
+const sToday1 = () => SD.syl.filter(x => x.date === SD.today);
+function sRepForm(day) {
+  const r = SREP && SREP.day === day ? SREP : SD.mine.rep[day] || { st: '', act: [], learn: '', why: '' };
+  return `<div class="seg" role="group" aria-label="האם היית">${[['v', 'הייתי'], ['p', 'חלקית'], ['x', 'לא הייתי']].map(([k, l]) => `<button data-rst="${k}" class="${r.st === k ? 'on' : ''}">${l}</button>`).join('')}</div>${r.st && r.st !== 'v' ? `<label class="f">סיבה</label><input class="in" id="rWhy" maxlength="120" value="${esc(r.why || '')}">` : ''}${r.st && r.st !== 'x' ? `<label class="f">מה עשיתי היום</label><div class="chk">${SD.acts.map(a => `<label><input type="checkbox" data-ract="${esc(a)}"${(r.act || []).indexOf(a) >= 0 ? ' checked' : ''}> ${esc(a)}</label>`).join('')}</div><label class="f">מה למדתי (שורה אחת)</label><input class="in" id="rLearn" maxlength="160" value="${esc(r.learn || '')}" placeholder="למשל: איך בודקים בטן בצורה מסודרת">` : ''}<button class="btn pri blk" id="rSave" data-rd="${day}">${SD.mine.rep[day] ? 'עדכון הדיווח' : 'שליחת הדיווח'}</button>`;
+}
+function sToday() {
+  const d = SD, hr = new Date().getHours(), hi = hr < 12 ? 'בוקר טוב' : hr < 18 ? 'צהריים טובים' : 'ערב טוב', td = sToday1(), wd = spd(d.today).getDay() <= 4, done = d.mine.rep[d.today];
+  const fixed = wd ? [['07:30', 'ישיבת בוקר', 'חדר הישיבות של המערך'], ['08:15', 'ביקור, חדר ניתוח או מרפאה', 'לפי השיבוץ של הקבוצה']] : [];
+  const eve = d.shifts.find(s => s.d === d.today), nm = new Date().toTimeString().slice(0, 5);
+  const rows = fixed.map(f => ({ h: f[0], t: f[1], s: f[2] })).concat(td.map(x => ({ h: x.from, t: x.t, s: (x.lname || 'המלמד/ת יעודכנו בהמשך') + ' · ' + (d.kinds[x.kind] || ''), x }))).concat(eve ? [{ h: d.shcfg.from || '16:00', t: '🌙 משמרת ערב במיון', s: eve.res ? 'עם ' + eve.res : '' }] : []);
+  return `<section class="hero"><img src="${SART}cavity.webp" alt="" onerror="this.remove()"><small>שבוע ${Math.max(1, d.rot.week)} מתוך ${d.rot.weeks}</small><h1>${hi}, ${esc(d.me.first)}</h1><p>${SDS[spd(d.today).getDay()]} ${sdm(d.today)} · ${esc(d.me.gname)}</p><div class="wkbar">${Array.from({ length: d.rot.weeks }, (_, i) => `<i class="${i + 1 < d.rot.week ? 'on' : i + 1 === d.rot.week ? 'now' : ''}"></i>`).join('')}</div></section>`
+    + `<section class="card"><h2>🗓️ היום<span class="sp"></span><small>${d.att[d.today] === 'v' ? '✓ נוכחות נרשמה' : ''}</small></h2>${rows.length ? rows.map(r => `<div class="row${r.x && r.h <= nm && (r.x.to || '') > nm ? ' now' : ''}"><span class="h">${r.h}</span><span class="t"><b>${esc(r.t)}</b><small>${esc(r.s)}</small></span>${r.x && r.x.deck ? `<button class="btn sm" data-deck="${r.x.id}">▶ מצגת</button>` : ''}</div>`).join('') : '<p class="sub" style="margin:0">היום אין סבב. סוף שבוע נעים</p>'}</section>`
+    + (wd && d.today >= d.rot.start ? `<section class="card"><h2>📝 הדיווח היומי<span class="sp"></span><small>${done ? '✓ נשלח' : 'עד סוף היום'}</small></h2><p class="sub">שתי דקות, בלי דירוגים ובלי פרטי מטופלים</p>${sRepForm(d.today)}</section>` : '')
+    + (d.files.length ? `<section class="card"><h2>📎 נספחים וקבצים</h2>${d.files.map(f => `<div class="row"><span class="t"><b>${esc(f.t)}</b><small>${f.sec === 'intro' ? 'פתיחת הסבב' : 'לקריאה'}</small></span>${f.deck ? `<button class="btn sm" data-fdeck="${f.id}">פתיחה</button>` : '<span class="tag">בקרוב</span>'}</div>`).join('')}</section>` : '')
+    + (d.contact ? `<section class="card"><h2>☎️ אחראי הסטודנטים</h2><p class="sub" style="margin:0">${esc(d.contact)}</p></section>` : '');
+}
+function sSched() {
+  const d = SD, w = SWK, days = [0, 1, 2, 3, 4].map(i => sadd(d.rot.start, (w - 1) * 7 + i));
+  return `<section class="card"><h2>🗓️ הלו״ז של הסבב</h2><div class="wks">${Array.from({ length: d.rot.weeks }, (_, i) => `<button data-wk="${i + 1}" class="${i + 1 === w ? 'on' : ''}${i + 1 === d.rot.week ? ' now' : ''}">שבוע ${i + 1}</button>`).join('')}</div>${days.map((dd, i) => { const L = d.syl.filter(x => x.date === dd); return `<div class="row"><span class="h">${SDS[i]}<small>${sdm(dd)}</small></span><span class="t">${L.map(x => `<b>${esc(x.t)}</b><small>${x.from} · ${esc(x.lname || 'המלמד/ת יעודכנו בהמשך')} · ${esc(d.kinds[x.kind] || '')}</small>${dd < d.today && x.kind !== 'exam' ? `<div class="stars" aria-label="דירוג המפגש">${[1, 2, 3, 4, 5].map(n => `<button data-rate="${x.id}|${n}" class="${(d.mine.rate[x.id] || 0) >= n ? 'on' : ''}" aria-label="${n}">★</button>`).join('')}</div>` : ''}`).join('') || '<small>ביקור, חדר ניתוח ומרפאות</small>'}</span>${L.filter(x => x.deck).map(x => `<button class="btn sm" data-deck="${x.id}">▶</button>`).join('')}</div>`; }).join('')}</section><p class="sub">⭐ אחרי שמפגש היה אפשר לדרג אותו. הדירוג אנונימי למרצה</p>`;
+}
+function sRep() {
+  const d = SD, L = sWork(), day = SRD && L.indexOf(SRD) >= 0 ? SRD : L[L.length - 1], ic = { v: '✓', p: '½', x: '✗' }, all = Object.keys(d.mine.rep).length;
+  return `<section class="card"><h2>📝 הדיווחים שלי<span class="sp"></span><small>${all} ימים</small></h2><p class="sub">חמשת ימי העבודה האחרונים. אפשר להשלים עד 5 ימים אחורה</p><div class="days">${L.map(x => { const r = d.mine.rep[x]; return `<button data-rd2="${x}" class="${r ? r.st : 'm'}${x === day ? ' on' : ''}"><b>${SDS[spd(x).getDay()]} ${sdm(x)}</b><span>${r ? ic[r.st] : '!'}</span></button>`; }).join('')}</div></section>`
+    + (day ? `<section class="card"><h2>${SDS[spd(day).getDay()]} ${sdm(day)}</h2>${sRepForm(day)}</section>` : '<p class="sub">הסבב עוד לא התחיל</p>');
+}
+function sLog() {
+  const d = SD, L = d.mine.log.slice().sort((a, b) => b.d.localeCompare(a.d)), cnt = k => L.filter(l => l.role === k).length;
+  return `<section class="card"><h2>📓 הפנקס שלי<span class="sp"></span><small>${L.length} רשומות</small></h2><div class="kp"><div><b>${cnt('w')}</b><span>צפייה</span></div><div><b>${cnt('h')}</b><span>עזרה</span></div><div><b>${cnt('d')}</b><span>ביצוע בהדרכה</span></div></div><div class="note">רק הניתוח או הפעולה, התאריך ומי לימד. בלי שם מטופל ובלי פרטים מזהים.</div>
+    <label class="f">מה</label><input class="in" id="lT" list="lProcs" maxlength="80" placeholder="ניתוח או פעולה"><datalist id="lProcs">${d.procs.map(p => `<option value="${esc(p)}">`).join('')}</datalist>
+    <label class="f">התפקיד שלי</label><div class="seg" id="lRole">${Object.keys(SROLE).map((k, i) => `<button data-lr="${k}" class="${i ? '' : 'on'}">${SROLE[k]}</button>`).join('')}</div>
+    <label class="f">תאריך</label><input class="in" id="lD" type="date" value="${d.today}" min="${d.rot.start}" max="${d.today}"><label class="f">עם מי</label><input class="in" id="lW" maxlength="60" placeholder="ד״ר ..."><button class="btn pri blk" id="lAdd">הוספה לפנקס</button></section>`
+    + `<section class="card"><h2>הרשומות</h2>${L.map(l => `<div class="row"><span class="h">${sdm(l.d)}</span><span class="t"><b>${esc(l.t)}</b><small>${SROLE[l.role] || ''}${l.with ? ' · ' + esc(l.with) : ''}</small></span><button class="btn sm" data-ldel="${l.id}" aria-label="מחיקה">🗑</button></div>`).join('') || '<p class="sub" style="margin:0">עוד אין רשומות</p>'}</section>`;
+}
+function sEve() {
+  const d = SD, c = d.shcfg || {}, up = d.shifts.filter(s => s.d >= d.today), past = d.shifts.filter(s => s.d < d.today).reverse();
+  return `<section class="card"><h2>🌙 משמרות ערב במיון</h2><p class="sub">${esc(c.from || '16:00')}–${esc(c.to || '22:00')} · ${esc(c.where || '')}</p>${c.bring ? `<div class="note">🎒 להביא: ${esc(c.bring)}</div>` : ''}${up.map(s => `<div class="row"><span class="h">${SDS[spd(s.d).getDay()]}<small>${sdm(s.d)}</small></span><span class="t"><b>${s.res ? '🩺 ' + esc(s.res) : 'המתמחה האחראי/ת יעודכנו בהמשך'}</b><small>${s.with.length ? 'איתך: ' + esc(s.with.join(', ')) : 'לבד בערב הזה'}</small></span></div>`).join('') || '<p class="sub" style="margin:0">אין משמרות קרובות</p>'}</section>`
+    + (past.length ? `<section class="card"><h2>המשמרות שהיו</h2>${past.map(s => { const f = d.mine.shfb[s.d]; return `<div class="row"><span class="h">${sdm(s.d)}</span><span class="t"><b>${s.res ? esc(s.res) : 'משמרת ערב'}</b><small>${s.att === 'x' ? 'לא נכחת' : f ? `✓ משוב: למידה ${f.l} · יחס ${f.i}${f.t ? ' · ' + esc(f.t) : ''}` : 'עוד לא מילאת משוב'}</small></span>${s.att !== 'x' && !f ? `<button class="btn sm" data-shfb="${s.d}">משוב</button>` : ''}</div>${SFB === s.d ? `<div class="note">${[['l', 'כמה למדתי'], ['i', 'יחס הצוות'], ['r', 'הייתי חוזר/ת']].map(([k, l]) => `<label class="f">${l}</label><div class="stars">${[1, 2, 3, 4, 5].map(n => `<button data-fbv="${k}|${n}" class="${SFBV[k] >= n ? 'on' : ''}" aria-label="${l} ${n}">★</button>`).join('')}</div>`).join('')}<label class="f">מה למדתי בערב הזה</label><input class="in" id="fbT" maxlength="160"><button class="btn pri blk" id="fbOk">שליחת המשוב</button></div>` : ''}`; }).join('')}</section>` : '');
+}
+function sDeck(x) {
+  const real = ['scrub-in', 'present'].indexOf(x.deck) >= 0, v = document.createElement('div'); v.className = 'ov';
+  v.innerHTML = `<header><b>${esc(x.t)}</b><button id="ovX" aria-label="סגירה">✕</button></header>${real ? `<iframe src="${SDECK + x.deck}.html" title="${esc(x.t)}"></iframe>` : `<div class="sk"><small>CAMPUS · ACADEMY</small><h2>${esc(x.t)}</h2><p>${esc(x.lname || '')}</p><p>המצגת המלאה תופיע כאן אחרי שהמרצה יעלה אותה והיא תעבור אישור.</p></div>`}`;
+  document.body.appendChild(v); v.querySelector('#ovX').onclick = () => v.remove();
+}
+function sbind() {
+  $$('[data-wk]').forEach(b => b.onclick = () => { SWK = +b.dataset.wk; sdraw(); });
+  $$('[data-deck]').forEach(b => b.onclick = () => sDeck(SD.syl.find(x => x.id === b.dataset.deck)));
+  $$('[data-fdeck]').forEach(b => b.onclick = () => sDeck(SD.files.find(x => x.id === b.dataset.fdeck)));
+  $$('[data-rate]').forEach(b => b.onclick = () => { const [id, n] = b.dataset.rate.split('|'); ssave('rate', { id, n: +n }, '⭐ תודה על הדירוג'); });
+  $$('[data-rd2]').forEach(b => b.onclick = () => { SRD = b.dataset.rd2; SREP = null; sdraw(); });
+  const keep = () => { const day = $('#rSave') ? $('#rSave').dataset.rd : ''; const r = SREP && SREP.day === day ? SREP : Object.assign({ st: '', act: [], learn: '', why: '', day: day }, SD.mine.rep[day] || {}, { day: day }); if ($('#rWhy')) r.why = $('#rWhy').value; if ($('#rLearn')) r.learn = $('#rLearn').value; if ($('[data-ract]')) r.act = $$('[data-ract]:checked').map(c => c.dataset.ract); SREP = r; return r; };
+  $$('[data-rst]').forEach(b => b.onclick = () => { const r = keep(); r.st = b.dataset.rst; sdraw(); });
+  if ($('#rSave')) $('#rSave').onclick = async () => { const r = keep(), day = $('#rSave').dataset.rd; if (!r.st) return stoast('בחרו: הייתי, חלקית או לא הייתי'); if (await ssave('rep', { d: day, st: r.st, why: r.why, act: r.act, learn: r.learn }, '✓ הדיווח נשלח. תודה!')) SREP = null; };
+  $$('[data-lr]').forEach(b => b.onclick = () => { $$('[data-lr]').forEach(x => x.classList.toggle('on', x === b)); });
+  if ($('#lAdd')) $('#lAdd').onclick = () => { const r = ($('[data-lr].on') || {}).dataset; ssave('log', { t: $('#lT').value, role: r ? r.lr : 'w', d: $('#lD').value, with: $('#lW').value }, '📓 נוסף לפנקס'); };
+  $$('[data-ldel]').forEach(b => b.onclick = () => { if (confirm('למחוק את הרשומה?')) ssave('logdel', { id: b.dataset.ldel }, 'נמחק'); });
+  $$('[data-shfb]').forEach(b => b.onclick = () => { SFB = b.dataset.shfb; SFBV = { l: 4, i: 4, r: 4 }; sdraw(); });
+  $$('[data-fbv]').forEach(b => b.onclick = () => { const [k, n] = b.dataset.fbv.split('|'), t = $('#fbT') ? $('#fbT').value : ''; SFBV[k] = +n; sdraw(); if ($('#fbT')) $('#fbT').value = t; });
+  if ($('#fbOk')) $('#fbOk').onclick = async () => { if (await ssave('shfb', Object.assign({ d: SFB, t: $('#fbT').value }, SFBV), '✓ תודה על המשוב')) { SFB = ''; sdraw(); } };
+}
+sload();
+</script>
+</body>
+</html>
